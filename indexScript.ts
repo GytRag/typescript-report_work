@@ -13,13 +13,16 @@ interface MonopolyCardInterface {
     rentMultiplier?: number[],
     id?: number
 }
-interface PlayerMoveInterface {
+interface PlayerDataInterface {
     player: string,
     turn: boolean,
     boxId: number,
     cash: number,
-    img: string
+    img: string,
+    property: string[]
 }
+
+
 
 let monopolyBoardArr:MonopolyCardInterface[] = [
     {
@@ -317,23 +320,26 @@ const gameBoardArr = [
     28,27,26,25,24,23,22,21,20,19,18
 ]
 
-let playersData:PlayerMoveInterface[] = [
+let playersData:PlayerDataInterface[] = [
     {
         player: 'car',
-        turn: false,
+        turn: true,
         boxId: 0,
         cash: 500,
-        img: './image/car.png'
+        img: './image/car.png',
+        property: []
     },
     {
         player: 'hat',
         turn: false,
         boxId: 0,
         cash: 500,
-        img: './image/hat.png'
+        img: './image/hat.png',
+        property: []
     },
 ]
 
+const rndCeil = (num:number) => Math.ceil(Math.random() * num)
 
 gameBoardArr.map((box, index) => {
 
@@ -361,11 +367,19 @@ gameBoardArr.map((box, index) => {
         }
 
         const startField = document.querySelector('.start') as HTMLElement;
+        const gameLine = document.querySelector('.gameLine') as HTMLElement;
+        const whichPlayer = document.querySelector('.whichPlayer > div') as HTMLElement;
+
         const cardPlayer1 = document.querySelector('.cardPlayer1') as HTMLElement;
         const cardPlayer2 = document.querySelector('.cardPlayer2') as HTMLElement;
+        const playerMoney1 = document.querySelector('.cardPlayer1 h5') as HTMLElement;
+        const playerMoney2 = document.querySelector('.cardPlayer2 h5') as HTMLElement;
+
 
         const startBtn = document.querySelector('.startBtn') as HTMLButtonElement;
         startBtn.onclick = () => {
+            const rollDiceBtn = document.querySelector('.rollDiceBtn') as HTMLButtonElement;
+
             gameBox[0].innerHTML += `
                 <div class="player player1">
                     <img src="${playersData[0].img}" alt="">
@@ -373,19 +387,34 @@ gameBoardArr.map((box, index) => {
                 <div class="player player2">
                     <img src="${playersData[1].img}" alt="">
                 </div>
-            `
-            startBtn.style.display = 'none'
-            startField.style.opacity = '0.2'
+            `;
+
+            startBtn.style.display = 'none';
+            startField.style.opacity = '0.2';
+            gameLine.style.display = 'flex';
             //@ts-ignore
-            cardPlayer1.parentElement.style.display = 'block'
+            cardPlayer1.parentElement.style.display = 'block';
             //@ts-ignore
-            cardPlayer1.parentElement.style.zIndex = '999'
-            cardPlayer1.style.opacity = '1'
-            cardPlayer2.style.opacity = '1'
+            cardPlayer1.parentElement.style.zIndex = '999';
+            cardPlayer1.style.opacity = '1';
+            cardPlayer2.style.opacity = '1';
+
+            playerTurn()
+            function playerTurn() {
+                playersData.map(item => {
+                    if(item.turn){whichPlayer.innerHTML = `<img src="${item.img}" alt="">`}
+                })
+            }
+
+
+            rollDiceBtn.onclick = () => {
+                console.log(rndCeil(6))
+
+            }
+
+
 
         }
-
-
     })
 })
 

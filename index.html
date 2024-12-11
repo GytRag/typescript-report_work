@@ -17,9 +17,34 @@
                 <h4>GAME START</h4>
             </div>
         </div>
-        <div class="game d-flex gap-2 p-2">
-            <div class="cardPlayer1"></div>
-            <div class="cardPlayer2"></div>
+        <div class="game d-flex flex-column p-2 gap-2">
+
+            <div class="gameTop d-flex gap-2">
+                <div class="cardPlayer1">
+                    <div class="d-flex align-items-center gap-2">
+                        <img src="./image/car.png" alt="">
+                        <h5>Money: 1000</h5>
+                    </div>
+                </div>
+
+                <div class="cardPlayer2">
+                    <div class="d-flex align-items-center gap-2">
+                        <img src="./image/hat.png" alt="">
+                        <h5>Money: 1000</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gameLine p-2 gap-2 justify-content-between">
+                <div class="whichPlayer">
+                    <h6 class="mb-0">Player's turn</h6>
+                    <div class="d-flex justify-content-center"></div>
+                </div>
+                <div><button class="rollDiceBtn">ROLL DICE</button></div>
+                <div>Chance card (maybe roll chance)</div>
+                <div>Game play comment</div>
+            </div>
+
         </div>
 
     </div>

@@ -297,19 +297,22 @@ const gameBoardArr = [
 let playersData = [
     {
         player: 'car',
-        turn: false,
+        turn: true,
         boxId: 0,
         cash: 500,
-        img: './image/car.png'
+        img: './image/car.png',
+        property: []
     },
     {
         player: 'hat',
         turn: false,
         boxId: 0,
         cash: 500,
-        img: './image/hat.png'
+        img: './image/hat.png',
+        property: []
     },
 ];
+const rndCeil = (num) => Math.ceil(Math.random() * num);
 gameBoardArr.map((box, index) => {
     gameBoard.innerHTML += `<div class="box empty"></div> `;
     const gameBox = document.querySelectorAll('.box');
@@ -332,10 +335,15 @@ gameBoardArr.map((box, index) => {
             }
         }
         const startField = document.querySelector('.start');
+        const gameLine = document.querySelector('.gameLine');
+        const whichPlayer = document.querySelector('.whichPlayer > div');
         const cardPlayer1 = document.querySelector('.cardPlayer1');
         const cardPlayer2 = document.querySelector('.cardPlayer2');
+        const playerMoney1 = document.querySelector('.cardPlayer1 h5');
+        const playerMoney2 = document.querySelector('.cardPlayer2 h5');
         const startBtn = document.querySelector('.startBtn');
         startBtn.onclick = () => {
+            const rollDiceBtn = document.querySelector('.rollDiceBtn');
             gameBox[0].innerHTML += `
                 <div class="player player1">
                     <img src="${playersData[0].img}" alt="">
@@ -346,12 +354,24 @@ gameBoardArr.map((box, index) => {
             `;
             startBtn.style.display = 'none';
             startField.style.opacity = '0.2';
+            gameLine.style.display = 'flex';
             //@ts-ignore
             cardPlayer1.parentElement.style.display = 'block';
             //@ts-ignore
             cardPlayer1.parentElement.style.zIndex = '999';
             cardPlayer1.style.opacity = '1';
             cardPlayer2.style.opacity = '1';
+            playerTurn();
+            function playerTurn() {
+                playersData.map(item => {
+                    if (item.turn) {
+                        whichPlayer.innerHTML = `<img src="${item.img}" alt="">`;
+                    }
+                });
+            }
+            rollDiceBtn.onclick = () => {
+                console.log(rndCeil(6));
+            };
         };
     });
 });
