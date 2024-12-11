@@ -1,4 +1,12 @@
 
+*{
+    font-family: "Dancing Script", cursive;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+
 .gameBoard {
     width: 1100px;
     height: 900px;
@@ -14,11 +22,14 @@
 .box {
     width: 100px;
     height: 100px;
+    position: relative;
+    z-index: -1;
 }
 
 .empty {
     width: 100%;
     height: 100%;
+    z-index: -1;
 }
 
 .gameCard {
@@ -34,7 +45,7 @@
     width: 900px;
     height: 700px;
     position: absolute;
-    top:100px;
+    top: 100px;
     left: 100px;
     border: 1px solid black;
 }
@@ -46,4 +57,61 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    position: relative;
+}
+
+.startBtn {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    z-index: 999;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+
+.startBtn img {
+    width: 100%;
+    height: 100%;
+}
+
+.startBtn h4 {
+    position: absolute;
+    top: 150px;
+    left: 0;
+    transition: 1s ease-in-out;
+    opacity: 0;
+    color: #4e0404;
+}
+
+
+.startBtn:hover {
+    transform: scale(1.2);
+}
+
+.startBtn:hover h4 {
+    opacity: 1;
+}
+
+/*---------PLAYER---------*/
+.player {
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    top: 45px;
+    pointer-events: none;
+}
+
+.player img {
+    width: 100%;
+    height: 100%;
+}
+
+.player1 {
+    left: 0;
+}
+.player2 {
+    left: 65px;
 }

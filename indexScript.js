@@ -315,5 +315,19 @@ gameBoardArr.map((box, index) => {
                  `;
             }
         }
+        const startField = document.querySelector('.start');
+        const startBtn = document.querySelector('.startBtn');
+        startBtn.onclick = () => {
+            gameBox[0].innerHTML += `
+                <div class="player player1">
+                    <img src="./image/car.png" alt="">
+                </div>
+                <div class="player player2">
+                    <img src="./image/hat.png" alt="">
+                </div>
+            `;
+            startBtn.style.display = 'none';
+            startField.style.opacity = '0.2';
+        };
     });
 });
