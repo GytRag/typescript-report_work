@@ -13,6 +13,7 @@ interface MonopolyCardInterface {
     rentMultiplier?: number[],
     id?: number
 }
+
 interface PlayerDataInterface {
     player: string,
     turn: boolean,
@@ -23,8 +24,7 @@ interface PlayerDataInterface {
 }
 
 
-
-let monopolyBoardArr:MonopolyCardInterface[] = [
+let monopolyBoardArr: MonopolyCardInterface[] = [
     {
         "name": "GO",
         "type": "special",
@@ -301,31 +301,31 @@ let monopolyBoardArr:MonopolyCardInterface[] = [
 ]
 monopolyBoardArr.map((item, index) => {
     item.id = index
-    if(item.color?.includes(' ')){
-        item.color = item.color.replace(' ','')
+    if (item.color?.includes(' ')) {
+        item.color = item.color.replace(' ', '')
     }
 })
 
 console.log(monopolyBoardArr)
 
 const gameBoardArr = [
-    0,1,2,3,4,5,6,7,8,9,10,
-    35,-1,-1,-1,-1,-1,-1,-1,-1,-1,11,
-    34,-1,-1,-1,-1,-1,-1,-1,-1,-1,12,
-    33,-1,-1,-1,-1,-1,-1,-1,-1,-1,13,
-    32,-1,-1,-1,-1,-1,-1,-1,-1,-1,14,
-    31,-1,-1,-1,-1,-1,-1,-1,-1,-1,15,
-    30,-1,-1,-1,-1,-1,-1,-1,-1,-1,16,
-    29,-1,-1,-1,-1,-1,-1,-1,-1,-1,17,
-    28,27,26,25,24,23,22,21,20,19,18
+    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+    35, -1, -1, -1, -1, -1, -1, -1, -1, -1, 11,
+    34, -1, -1, -1, -1, -1, -1, -1, -1, -1, 12,
+    33, -1, -1, -1, -1, -1, -1, -1, -1, -1, 13,
+    32, -1, -1, -1, -1, -1, -1, -1, -1, -1, 14,
+    31, -1, -1, -1, -1, -1, -1, -1, -1, -1, 15,
+    30, -1, -1, -1, -1, -1, -1, -1, -1, -1, 16,
+    29, -1, -1, -1, -1, -1, -1, -1, -1, -1, 17,
+    28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18
 ]
 
-let playersData:PlayerDataInterface[] = [
+let playersData: PlayerDataInterface[] = [
     {
         player: 'car',
         turn: true,
         boxId: 0,
-        cash: 500,
+        cash: 1000,
         img: './image/car.png',
         property: []
     },
@@ -333,13 +333,13 @@ let playersData:PlayerDataInterface[] = [
         player: 'hat',
         turn: false,
         boxId: 0,
-        cash: 500,
+        cash: 1000,
         img: './image/hat.png',
         property: []
     },
 ]
 
-const rndCeil = (num:number) => Math.ceil(Math.random() * num)
+const rndCeil = (num: number) => Math.ceil(Math.random() * num)
 
 gameBoardArr.map((box, index) => {
 
@@ -347,7 +347,7 @@ gameBoardArr.map((box, index) => {
     const gameBox = document.querySelectorAll('.box') as NodeListOf<HTMLElement>
 
     monopolyBoardArr.map(item => {
-        if(box === item.id){
+        if (box === item.id) {
             gameBox[index].classList.remove('empty')
             gameBox[index].classList.add('gameCard')
 
@@ -357,7 +357,7 @@ gameBoardArr.map((box, index) => {
             <div class="text-center">${item.name}</div>
             </div>
             `
-            if(item.price){
+            if (item.price) {
                 gameBox[index].innerHTML += `
                     <div class="d-flex align-items-end h-50">
                       <div>$${item.price}</div>
@@ -374,7 +374,10 @@ gameBoardArr.map((box, index) => {
         const cardPlayer2 = document.querySelector('.cardPlayer2') as HTMLElement;
         const playerMoney1 = document.querySelector('.cardPlayer1 h5') as HTMLElement;
         const playerMoney2 = document.querySelector('.cardPlayer2 h5') as HTMLElement;
-
+        function updatePlayerMoney() {
+            playerMoney1.innerText = `Money: ${playersData[0].cash}`;
+            playerMoney2.innerText = `Money: ${playersData[1].cash}`;
+        }
 
         const startBtn = document.querySelector('.startBtn') as HTMLButtonElement;
         startBtn.onclick = () => {
@@ -398,23 +401,104 @@ gameBoardArr.map((box, index) => {
             cardPlayer1.parentElement.style.zIndex = '999';
             cardPlayer1.style.opacity = '1';
             cardPlayer2.style.opacity = '1';
-
+            updatePlayerMoney()
             playerTurn()
+
             function playerTurn() {
-                playersData.map(item => {
-                    if(item.turn){whichPlayer.innerHTML = `<img src="${item.img}" alt="">`}
+                playersData.map((item, index) => {
+                    if (item.turn) {
+                        whichPlayer.innerHTML = `<img src="${item.img}" alt="">`
+                        rollDiceBtn.onclick = () => {
+
+                            gameBoardArr.map((box, i) => {
+                                monopolyBoardArr.map((e) => {
+                                    if (box === e.id) {
+                                        if(box === item.boxId){
+                                            if (index === 0) {
+                                                gameBox[i].innerHTML = `
+                                                    <div class="h-50">
+                                                        <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
+                                                        <div class="text-center">${e.name}</div>
+                                                    </div>
+                                                `;
+                                                if(box === playersData[1].boxId){
+                                                    gameBox[i].innerHTML += `
+                                                        <div class="player player2">
+                                                            <img src="${playersData[1].img}" alt="">
+                                                        </div>
+                                                    `;
+                                                }
+                                            }
+                                            else if (index === 1) {
+                                                gameBox[i].innerHTML = `
+                                                    <div class="h-50">
+                                                        <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
+                                                        <div class="text-center">${e.name}</div>
+                                                    </div>
+                                                `;
+                                                if(box === playersData[0].boxId){
+                                                    gameBox[i].innerHTML += `
+                                                        <div class="player player2">
+                                                            <img src="${playersData[0].img}" alt="">
+                                                        </div>
+                                                    `;
+                                                }
+                                            }
+                                        }
+                                    }
+                                })
+                            })
+
+
+
+                            item.boxId += rndCeil(6)
+                            if(item.boxId > 35) {
+                                item.boxId -= 35;
+                                item.cash += 200;
+                                updatePlayerMoney()
+                            }
+                            console.log(item.boxId)
+
+                            gameBoardArr.map((box, i) => {
+
+                                if (box === item.boxId) {
+                                    if (index === 0) {
+                                        item.turn = false;
+                                        playersData[1].turn = true;
+
+                                        gameBox[i].innerHTML += `
+                                            <div class="player player1">
+                                                <img src="${playersData[0].img}" alt="">
+                                            </div>
+                                          `;
+                                        playerTurn()
+                                    }
+                                    else if (index === 1) {
+
+                                        item.turn = false;
+                                        playersData[0].turn = true;
+
+                                        gameBox[i].innerHTML += `
+                                            <div class="player player2">
+                                                <img src="${playersData[1].img}" alt="">
+                                            </div>
+                                         `;
+                                        playerTurn()
+                                    }
+                                }
+                            })
+
+                        }
+
+                    }
                 })
             }
 
 
-            rollDiceBtn.onclick = () => {
-                console.log(rndCeil(6))
-
-            }
-
-
-
         }
-    })
-})
 
+
+    })
+
+
+})

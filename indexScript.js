@@ -299,7 +299,7 @@ let playersData = [
         player: 'car',
         turn: true,
         boxId: 0,
-        cash: 500,
+        cash: 1000,
         img: './image/car.png',
         property: []
     },
@@ -307,7 +307,7 @@ let playersData = [
         player: 'hat',
         turn: false,
         boxId: 0,
-        cash: 500,
+        cash: 1000,
         img: './image/hat.png',
         property: []
     },
@@ -341,6 +341,10 @@ gameBoardArr.map((box, index) => {
         const cardPlayer2 = document.querySelector('.cardPlayer2');
         const playerMoney1 = document.querySelector('.cardPlayer1 h5');
         const playerMoney2 = document.querySelector('.cardPlayer2 h5');
+        function updatePlayerMoney() {
+            playerMoney1.innerText = `Money: ${playersData[0].cash}`;
+            playerMoney2.innerText = `Money: ${playersData[1].cash}`;
+        }
         const startBtn = document.querySelector('.startBtn');
         startBtn.onclick = () => {
             const rollDiceBtn = document.querySelector('.rollDiceBtn');
@@ -361,17 +365,86 @@ gameBoardArr.map((box, index) => {
             cardPlayer1.parentElement.style.zIndex = '999';
             cardPlayer1.style.opacity = '1';
             cardPlayer2.style.opacity = '1';
+            updatePlayerMoney();
             playerTurn();
             function playerTurn() {
-                playersData.map(item => {
+                playersData.map((item, index) => {
                     if (item.turn) {
                         whichPlayer.innerHTML = `<img src="${item.img}" alt="">`;
+                        rollDiceBtn.onclick = () => {
+                            gameBoardArr.map((box, i) => {
+                                monopolyBoardArr.map((e) => {
+                                    if (box === e.id) {
+                                        if (box === item.boxId) {
+                                            if (index === 0) {
+                                                gameBox[i].innerHTML = `
+                                                    <div class="h-50">
+                                                        <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
+                                                        <div class="text-center">${e.name}</div>
+                                                    </div>
+                                                `;
+                                                if (box === playersData[1].boxId) {
+                                                    gameBox[i].innerHTML += `
+                                                        <div class="player player2">
+                                                            <img src="${playersData[1].img}" alt="">
+                                                        </div>
+                                                    `;
+                                                }
+                                            }
+                                            else if (index === 1) {
+                                                gameBox[i].innerHTML = `
+                                                    <div class="h-50">
+                                                        <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
+                                                        <div class="text-center">${e.name}</div>
+                                                    </div>
+                                                `;
+                                                if (box === playersData[0].boxId) {
+                                                    gameBox[i].innerHTML += `
+                                                        <div class="player player2">
+                                                            <img src="${playersData[0].img}" alt="">
+                                                        </div>
+                                                    `;
+                                                }
+                                            }
+                                        }
+                                    }
+                                });
+                            });
+                            item.boxId += rndCeil(6);
+                            if (item.boxId > 35) {
+                                item.boxId -= 35;
+                                item.cash += 200;
+                                updatePlayerMoney();
+                            }
+                            console.log(item.boxId);
+                            gameBoardArr.map((box, i) => {
+                                if (box === item.boxId) {
+                                    if (index === 0) {
+                                        item.turn = false;
+                                        playersData[1].turn = true;
+                                        gameBox[i].innerHTML += `
+                                            <div class="player player1">
+                                                <img src="${playersData[0].img}" alt="">
+                                            </div>
+                                          `;
+                                        playerTurn();
+                                    }
+                                    else if (index === 1) {
+                                        item.turn = false;
+                                        playersData[0].turn = true;
+                                        gameBox[i].innerHTML += `
+                                            <div class="player player2">
+                                                <img src="${playersData[1].img}" alt="">
+                                            </div>
+                                         `;
+                                        playerTurn();
+                                    }
+                                }
+                            });
+                        };
                     }
                 });
             }
-            rollDiceBtn.onclick = () => {
-                console.log(rndCeil(6));
-            };
         };
     });
 });
