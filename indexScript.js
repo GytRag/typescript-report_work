@@ -294,6 +294,22 @@ const gameBoardArr = [
     29, -1, -1, -1, -1, -1, -1, -1, -1, -1, 17,
     28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18
 ];
+let playersData = [
+    {
+        player: 'car',
+        turn: false,
+        boxId: 0,
+        cash: 500,
+        img: './image/car.png'
+    },
+    {
+        player: 'hat',
+        turn: false,
+        boxId: 0,
+        cash: 500,
+        img: './image/hat.png'
+    },
+];
 gameBoardArr.map((box, index) => {
     gameBoard.innerHTML += `<div class="box empty"></div> `;
     const gameBox = document.querySelectorAll('.box');
@@ -316,18 +332,26 @@ gameBoardArr.map((box, index) => {
             }
         }
         const startField = document.querySelector('.start');
+        const cardPlayer1 = document.querySelector('.cardPlayer1');
+        const cardPlayer2 = document.querySelector('.cardPlayer2');
         const startBtn = document.querySelector('.startBtn');
         startBtn.onclick = () => {
             gameBox[0].innerHTML += `
                 <div class="player player1">
-                    <img src="./image/car.png" alt="">
+                    <img src="${playersData[0].img}" alt="">
                 </div>
                 <div class="player player2">
-                    <img src="./image/hat.png" alt="">
+                    <img src="${playersData[1].img}" alt="">
                 </div>
             `;
             startBtn.style.display = 'none';
             startField.style.opacity = '0.2';
+            //@ts-ignore
+            cardPlayer1.parentElement.style.display = 'block';
+            //@ts-ignore
+            cardPlayer1.parentElement.style.zIndex = '999';
+            cardPlayer1.style.opacity = '1';
+            cardPlayer2.style.opacity = '1';
         };
     });
 });
