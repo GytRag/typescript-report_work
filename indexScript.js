@@ -90,7 +90,7 @@ let monopolyBoardArr = [
         "name": "Electric Company",
         "type": "utility",
         "price": 150,
-        "rentMultiplier": [4, 10]
+        "rent": [4, 10]
     },
     {
         "name": "States Avenue",
@@ -202,7 +202,7 @@ let monopolyBoardArr = [
         "name": "Water Works",
         "type": "utility",
         "price": 150,
-        "rentMultiplier": [4, 10]
+        "rent": [4, 10]
     },
     {
         "name": "Marvin Gardens",
@@ -381,6 +381,51 @@ gameBoardArr.map((box, index) => {
                     if (item.turn) {
                         whichPlayer.innerHTML = `<img src="${item.img}" alt="">`;
                         rollDiceBtn.onclick = () => {
+                            // if item.turn = false, innerHTML without button
+                            playersData.map((item, index) => {
+                                if (!item.turn) {
+                                    gameBoardArr.map((prev, i) => {
+                                        monopolyBoardArr.map((e) => {
+                                            if (prev === e.id) {
+                                                if (prev === item.boxId) {
+                                                    if (index === 1) {
+                                                        gameBox[i].innerHTML = `
+                                                    <div class="h-50">
+                                                        <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
+                                                        <div class="text-center">${e.name}</div>
+                                                    </div>
+                                                `;
+                                                        if (prev === playersData[1].boxId) {
+                                                            gameBox[i].innerHTML += `
+                                                        <div class="player player2">
+                                                            <img src="${playersData[1].img}" alt="">
+                                                        </div>
+                                                    `;
+                                                        }
+                                                    }
+                                                    else if (index === 0) {
+                                                        gameBox[i].innerHTML = `
+                                                    <div class="h-50">
+                                                        <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
+                                                        <div class="text-center">${e.name}</div>
+                                                    </div>
+                                                `;
+                                                        if (prev === playersData[0].boxId) {
+                                                            gameBox[i].innerHTML += `
+                                                        <div class="player player1">
+                                                            <img src="${playersData[0].img}" alt="">
+                                                        </div>
+                                                    `;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    });
+                                }
+                            });
+                            console.log(item.turn);
+                            console.log(item.player);
                             // UPDATE PREVIOUS BOX
                             function updatePreviousBox() {
                                 gameBoardArr.map((box, i) => {
@@ -411,7 +456,7 @@ gameBoardArr.map((box, index) => {
                                                 `;
                                                     if (box === playersData[0].boxId) {
                                                         gameBox[i].innerHTML += `
-                                                        <div class="player player2">
+                                                        <div class="player player1">
                                                             <img src="${playersData[0].img}" alt="">
                                                         </div>
                                                     `;
@@ -575,13 +620,11 @@ gameBoardArr.map((box, index) => {
                                             //@ts-ignore
                                             if (!item.property.includes(box)) {
                                                 console.log('----------');
-                                                console.log('gggggg');
-                                                console.log(box);
-                                                console.log(item.player);
-                                                console.log(item.cash);
+                                                console.log('pay for enemy!');
                                                 console.log('----------');
                                                 monopolyBoardArr.map((box11) => {
                                                     if (box11.id === box) {
+                                                        console.log(box11);
                                                         //@ts-ignore
                                                         item.cash -= box11.rent[0];
                                                         updatePlayerMoney();
@@ -592,14 +635,13 @@ gameBoardArr.map((box, index) => {
                                             // check if I can build house
                                             //@ts-ignore
                                             if (item.property.includes(box)) {
-                                                console.log(box);
-                                                console.log('aaaaaa');
-                                                console.log(item.player);
-                                                console.log(item.turn);
+                                                console.log('----------');
+                                                console.log(`my box ${item.cash}`);
+                                                console.log('----------');
                                             }
-                                            // BUGGAI LIKO: galima ta pati du kartus pirkt > update previous button to display none in "updatePreviuosFunction"
                                             //     // pinigai i minusa
-                                            //
+                                            //reikia tikrinti kiek kokiu koreteliu turi ar
+                                            // galima pirkti namus ir kompaniju ar turi
                                         }
                                     }
                                     else {
