@@ -17,6 +17,7 @@
     grid-template-columns: repeat(11, 100px);
     grid-template-rows: repeat(9, 100px);
     position: relative;
+    z-index: 5;
 }
 
 .box {
@@ -118,6 +119,13 @@
 .player2 {
     left: 65px;
 }
+
+.buyBtn {
+    z-index: 10;
+    cursor: pointer;
+}
+
+
 /*---players game cards--*/
 .game {
     width: 100%;

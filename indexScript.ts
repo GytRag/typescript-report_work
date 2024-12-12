@@ -20,7 +20,10 @@ interface PlayerDataInterface {
     boxId: number,
     cash: number,
     img: string,
-    property: string[]
+    property: {
+        propertyId: number,
+        rentQuantity: number
+    }[]
 }
 
 
@@ -339,28 +342,30 @@ let playersData: PlayerDataInterface[] = [
     },
 ]
 
-const rndCeil = (num: number) => Math.ceil(Math.random() * num)
 
+const rndCeil = (num: number) => Math.ceil(Math.random() * num)
+//     MAKE BOARD OF GAME
 gameBoardArr.map((box, index) => {
 
     gameBoard.innerHTML += `<div class="box empty"></div> `
     const gameBox = document.querySelectorAll('.box') as NodeListOf<HTMLElement>
 
-    monopolyBoardArr.map(item => {
-        if (box === item.id) {
+    //MAKE GAME BOXES
+    monopolyBoardArr.map(field => {
+        if (box === field.id) {
             gameBox[index].classList.remove('empty')
             gameBox[index].classList.add('gameCard')
 
             gameBox[index].innerHTML = `
             <div class="h-50">
-            <div class="rounded-1 w-100" style="background-color: ${item.color}; height: 10px"></div>
-            <div class="text-center">${item.name}</div>
+            <div class="rounded-1 w-100" style="background-color: ${field.color}; height: 10px"></div>
+            <div class="text-center">${field.name}</div>
             </div>
             `
-            if (item.price) {
+            if (field.price) {
                 gameBox[index].innerHTML += `
                     <div class="d-flex align-items-end h-50">
-                      <div>$${item.price}</div>
+                      <div>$${field.price}</div>
                     </div>
                  `
             }
@@ -374,12 +379,16 @@ gameBoardArr.map((box, index) => {
         const cardPlayer2 = document.querySelector('.cardPlayer2') as HTMLElement;
         const playerMoney1 = document.querySelector('.cardPlayer1 h5') as HTMLElement;
         const playerMoney2 = document.querySelector('.cardPlayer2 h5') as HTMLElement;
+
+        // FUNCTION UPDATE PLAYERS MONEY
         function updatePlayerMoney() {
             playerMoney1.innerText = `Money: ${playersData[0].cash}`;
             playerMoney2.innerText = `Money: ${playersData[1].cash}`;
         }
 
         const startBtn = document.querySelector('.startBtn') as HTMLButtonElement;
+
+        // START GAME, UPDATE BOARD
         startBtn.onclick = () => {
             const rollDiceBtn = document.querySelector('.rollDiceBtn') as HTMLButtonElement;
 
@@ -404,62 +413,155 @@ gameBoardArr.map((box, index) => {
             updatePlayerMoney()
             playerTurn()
 
+            // FUNCTION MOVE PLAYERS, UPDATE BOXES
             function playerTurn() {
                 playersData.map((item, index) => {
+
                     if (item.turn) {
                         whichPlayer.innerHTML = `<img src="${item.img}" alt="">`
                         rollDiceBtn.onclick = () => {
 
-                            gameBoardArr.map((box, i) => {
-                                monopolyBoardArr.map((e) => {
-                                    if (box === e.id) {
-                                        if(box === item.boxId){
-                                            if (index === 0) {
-                                                gameBox[i].innerHTML = `
+                            // UPDATE PREVIOUS BOX
+                            function updatePreviousBox() {
+                                gameBoardArr.map((box, i) => {
+                                    monopolyBoardArr.map((e) => {
+                                        if (box === e.id) {
+                                            if (box === item.boxId) {
+                                                if (index === 0) {
+                                                    gameBox[i].innerHTML = `
                                                     <div class="h-50">
                                                         <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
                                                         <div class="text-center">${e.name}</div>
                                                     </div>
                                                 `;
-                                                if(box === playersData[1].boxId){
-                                                    gameBox[i].innerHTML += `
+                                                    if (box === playersData[1].boxId) {
+                                                        gameBox[i].innerHTML += `
                                                         <div class="player player2">
                                                             <img src="${playersData[1].img}" alt="">
                                                         </div>
                                                     `;
-                                                }
-                                            }
-                                            else if (index === 1) {
-                                                gameBox[i].innerHTML = `
+                                                    }
+                                                } else if (index === 1) {
+                                                    gameBox[i].innerHTML = `
                                                     <div class="h-50">
                                                         <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
                                                         <div class="text-center">${e.name}</div>
                                                     </div>
                                                 `;
-                                                if(box === playersData[0].boxId){
-                                                    gameBox[i].innerHTML += `
+                                                    if (box === playersData[0].boxId) {
+                                                        gameBox[i].innerHTML += `
                                                         <div class="player player2">
                                                             <img src="${playersData[0].img}" alt="">
                                                         </div>
                                                     `;
+                                                    }
                                                 }
                                             }
                                         }
-                                    }
+                                    })
                                 })
-                            })
+                            }
+                            updatePreviousBox()
 
-
-
+                            // DICE ROLLED NUMBER, UPDATE MONEY IF MOVES THROUGH "GO"
                             item.boxId += rndCeil(6)
-                            if(item.boxId > 35) {
+                            if (item.boxId > 35) {
                                 item.boxId -= 35;
                                 item.cash += 200;
                                 updatePlayerMoney()
                             }
-                            console.log(item.boxId)
 
+                            // UPDATE BOX WHERE PLAYER MOVE (SHOW PLAYER ON NEW BOX)
                             gameBoardArr.map((box, i) => {
+
+                                //     need to check, if any player has bought this box
+                                function checkIfAnyHasBox(playerNum: number) {
+
+                                    if (item.property.length > 0 || playersData[playerNum].property.length > 0) {
+                                        console.log('playerNum')
+                                        item.property.map((property) => {
+                                            console.log(item)
+                                            playersData[playerNum].property.map((prop) => {
+                                                if (prop.propertyId === property.propertyId) {
+                                                    console.log('oponent have this property');
+                                                } else if (box === property.propertyId) {
+                                                    console.log('I have this property');
+                                                }
+                                                console.log(`property ${property}; num ${playersData[playerNum]}; prop ${prop}`)
+                                            })
+
+                                        })
+                                    } else {
+                                        // ------UPDATE IF NO ONE HAVE THIS BOX
+                                        gameBoardArr.map((box, i) => {
+                                            let playerClass = '';
+
+                                            monopolyBoardArr.map((e) => {
+                                                if(e.type ==='property' || e.type === 'railroad' || e.type === 'utility'){
+                                                    if (box === e.id) {
+                                                        if (box === item.boxId) {
+                                                            if(index === 0) {
+                                                                playerClass = 'player1'
+                                                            }else {
+                                                                playerClass = 'player2'
+                                                            }
+                                                            gameBox[i].innerHTML = `
+                                                                <div class="h-50">
+                                                                    <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
+                                                                     <div class="text-center">${e.name}</div>
+                                                                </div>
+                                                                 <div class="d-flex align-items-end h-50 justify-content-around">
+                                                                  <div>$${e.price}</div>
+                                                                  <div><button class="buyBtn">Buy</button></div>
+                                                                </div>
+                                                                <div class="player ${playerClass}">
+                                                                    <img src="${playersData[index].img}" alt="">
+                                                                </div>
+                                                              `;
+                                                            if(index === 0 && playersData[1].boxId === item.boxId){
+                                                                gameBox[i].innerHTML += `
+                                                                    <div class="player player2">
+                                                                        <img src="${playersData[1].img}" alt="">
+                                                                    </div>
+                                                                `
+                                                            }else if(index === 1 && playersData[0].boxId === item.boxId){
+                                                                gameBox[i].innerHTML += `
+                                                                    <div class="player player1">
+                                                                        <img src="${playersData[0].img}" alt="">
+                                                                    </div>
+                                                                `
+                                                            }
+
+                                                        //--------------- BUY BUTTON LOGIC-------------
+
+                                                            const buyBtn = document.querySelectorAll('.buyBtn') as NodeListOf<HTMLButtonElement>;
+
+                                                            buyBtn.forEach((btn) => {
+                                                                if(index === 0 && !playersData[0].turn) {
+                                                                    btn.onclick = () => {
+                                                                        // if I buy box, update boxes and players cards
+                                                                        console.log('first buy');
+                                                                    }
+                                                                }else if(index === 1 && !playersData[1].turn) {
+                                                                    btn.onclick = () => {
+                                                                        console.log('second buy');
+                                                                    }
+                                                                }
+
+                                                            })
+
+                                                        }
+                                                    }
+                                                }
+
+                                            })
+                                        })
+
+                                    }
+
+                                }
+
+                                // -----------------------------------------------------
 
                                 if (box === item.boxId) {
                                     if (index === 0) {
@@ -467,13 +569,13 @@ gameBoardArr.map((box, index) => {
                                         playersData[1].turn = true;
 
                                         gameBox[i].innerHTML += `
-                                            <div class="player player1">
+                                             <div class="player player1">
                                                 <img src="${playersData[0].img}" alt="">
                                             </div>
                                           `;
+                                        checkIfAnyHasBox(1)
                                         playerTurn()
-                                    }
-                                    else if (index === 1) {
+                                    } else if (index === 1) {
 
                                         item.turn = false;
                                         playersData[0].turn = true;
@@ -483,6 +585,7 @@ gameBoardArr.map((box, index) => {
                                                 <img src="${playersData[1].img}" alt="">
                                             </div>
                                          `;
+                                        checkIfAnyHasBox(0)
                                         playerTurn()
                                     }
                                 }
