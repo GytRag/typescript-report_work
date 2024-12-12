@@ -466,6 +466,7 @@ gameBoardArr.map((box, index) => {
                                     })
                                 })
                             }
+
                             updatePreviousBox()
 
                             // DICE ROLLED NUMBER, UPDATE MONEY IF MOVES THROUGH "GO"
@@ -474,6 +475,7 @@ gameBoardArr.map((box, index) => {
                                 item.boxId -= 35;
                                 item.cash += 200;
                                 updatePlayerMoney()
+
                             }
 
                             // UPDATE BOX WHERE PLAYER MOVE (SHOW PLAYER ON NEW BOX)
@@ -482,17 +484,17 @@ gameBoardArr.map((box, index) => {
                                 //     need to check, if any player has bought this box
                                 function checkIfAnyHasBox(playerNum: number) {
 
-                                    function buyAndUpdate(){
+                                    function buyAndUpdate() {
                                         gameBoardArr.map((box, i) => {
                                             let playerClass = '';
 
                                             monopolyBoardArr.map((e) => {
-                                                if(e.type ==='property' || e.type === 'railroad' || e.type === 'utility'){
+                                                if (e.type === 'property' || e.type === 'railroad' || e.type === 'utility') {
                                                     if (box === e.id) {
                                                         if (box === item.boxId) {
-                                                            if(index === 0) {
+                                                            if (index === 0) {
                                                                 playerClass = 'player1'
-                                                            }else {
+                                                            } else {
                                                                 playerClass = 'player2'
                                                             }
                                                             const innerGameBoxNoButton = () => {
@@ -524,13 +526,13 @@ gameBoardArr.map((box, index) => {
                                                                 `
                                                             }
                                                             const innerOnotherPlayerIfNeed = () => {
-                                                                if(index === 0 && playersData[1].boxId === item.boxId){
+                                                                if (index === 0 && playersData[1].boxId === item.boxId) {
                                                                     gameBox[i].innerHTML += `
                                                                     <div class="player player2">
                                                                         <img src="${playersData[1].img}" alt="">
                                                                     </div>
                                                                 `
-                                                                }else if(index === 1 && playersData[0].boxId === item.boxId){
+                                                                } else if (index === 1 && playersData[0].boxId === item.boxId) {
                                                                     gameBox[i].innerHTML += `
                                                                     <div class="player player1">
                                                                         <img src="${playersData[0].img}" alt="">
@@ -543,10 +545,11 @@ gameBoardArr.map((box, index) => {
                                                             innerOnotherPlayerIfNeed()
 
                                                             //--------------- BUY BUTTON LOGIC------------
-                                                            const buyBtn = document.querySelectorAll('.buyBtn') as NodeListOf<HTMLButtonElement>;
+
+                                                            let buyBtn = document.querySelectorAll('.buyBtn') as NodeListOf<HTMLButtonElement>;
                                                             // FUNCTION TO BUY BOX AND UPDATE PLAYER FIELD
-                                                            function innerPlayerField(playerField:string){
-                                                                if (e.type === 'property'){
+                                                            function innerPlayerField(playerField: string) {
+                                                                if (e.type === 'property') {
                                                                     //@ts-ignore
                                                                     playerField.innerHTML += `
                                                                             <div class="box gameCard">
@@ -560,8 +563,7 @@ gameBoardArr.map((box, index) => {
                                                                                 </div>
                                                                            </div>
                                                                           `;
-                                                                }
-                                                                else {
+                                                                } else {
                                                                     //@ts-ignore
                                                                     playerField.innerHTML += `
                                                                             <div class="box gameCard">
@@ -575,8 +577,9 @@ gameBoardArr.map((box, index) => {
                                                                           `;
                                                                 }
                                                             }
+
                                                             buyBtn.forEach((btn) => {
-                                                                if(index === 0 && !playersData[0].turn) {
+                                                                if (index === 0 && !playersData[0].turn) {
                                                                     btn.onclick = () => {
                                                                         //@ts-ignore
                                                                         playersData[0].cash -= e.price;
@@ -590,8 +593,7 @@ gameBoardArr.map((box, index) => {
                                                                         //@ts-ignore
                                                                         innerPlayerField(cardPlayer1Boxes)
                                                                     }
-                                                                }
-                                                                else if(index === 1 && !playersData[1].turn) {
+                                                                } else if (index === 1 && !playersData[1].turn) {
                                                                     btn.onclick = () => {
                                                                         //@ts-ignore
                                                                         playersData[1].cash -= e.price;
@@ -615,51 +617,54 @@ gameBoardArr.map((box, index) => {
                                         })
                                     }
 
-                                    if (item.property.length > 0 || playersData[playerNum].property.length > 0) {
+                                    if (boughtBoxesArr.length > 0) {
 
                                         //@ts-ignore
-                                        if(!boughtBoxesArr.includes(item.boxId)){
+                                        if (!boughtBoxesArr.includes(item.boxId)) {
                                             // if one have some box, add BUY button to other
                                             buyAndUpdate()
-                                            // if(item.property.length === 0){
-                                            //
-                                            // }
-                                            // else {
-                                            //    console.log('')
-                                            // }
+
+                                        } else {
+
+                                            // if it is not my
+                                            // pay rent
+                                            //@ts-ignore
+                                            if(!item.property.includes(box)) {
+                                                console.log('----------')
+                                                console.log('gggggg')
+                                                console.log(box)
+                                                console.log(item.player)
+                                                console.log(item.cash)
+                                                console.log('----------')
+
+                                                monopolyBoardArr.map((box11) => {
+                                                    if(box11.id === box){
+                                                        //@ts-ignore
+                                                        item.cash -= box11.rent[0]
+                                                        updatePlayerMoney()
+                                                    }
+                                                })
+
+
+                                            }
+
+
+                                            // if it is my?
+                                            // check if I can build house
+                                            //@ts-ignore
+                                            if(item.property.includes(box)) {
+                                                console.log(box)
+                                                console.log('aaaaaa')
+                                                console.log(item.player)
+                                                console.log(item.turn)
+                                            }
+                                            // BUGGAI LIKO: galima ta pati du kartus pirkt > update previous button to display none in "updatePreviuosFunction"
+                                            //     // pinigai i minusa
+                                        //
+
                                         }
-                                        else {
-                                            // if both have boxes
-                                            item.property.forEach((property) => {
 
-                                                // console.log(property)
-                                                //@ts-ignore
-                                                if(boughtBoxesArr.includes(property)){
-                                                    console.log(boughtBoxesArr)
-                                                    console.log(item.player)
-
-                                                }
-                                                else {
-                                                    console.log('asdasdsd' + property)
-                                                }
-
-
-                                                // BUGGAI LIKO: galima ta pati du kartus pirkt,
-                                                // pinigai i minusa
-
-                                                // playersData[playerNum].property.forEach((prop) => {
-                                                //     if (prop.propertyId === property.propertyId) {
-                                                //         console.log('oponent have this property');
-                                                //     } else if (box === property.propertyId) {
-                                                //         console.log('I have this property');
-                                                //     }
-                                                // })
-
-                                            })
-                                        }
-
-                                    }
-                                    else {
+                                    } else {
                                         // ------UPDATE IF NO ONE HAVE THIS BOX
 
                                         buyAndUpdate()

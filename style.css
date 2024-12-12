@@ -158,6 +158,7 @@
     transition: 1s ease-in-out;
     opacity: 0;
     padding: 5px;
+    overflow: auto;
 }
 .cardPlayer1 img, .cardPlayer2 img {
     width: 100px;

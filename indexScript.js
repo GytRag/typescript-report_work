@@ -493,7 +493,7 @@ gameBoardArr.map((box, index) => {
                                                             innerGameBoxWithButton();
                                                             innerOnotherPlayerIfNeed();
                                                             //--------------- BUY BUTTON LOGIC------------
-                                                            const buyBtn = document.querySelectorAll('.buyBtn');
+                                                            let buyBtn = document.querySelectorAll('.buyBtn');
                                                             // FUNCTION TO BUY BOX AND UPDATE PLAYER FIELD
                                                             function innerPlayerField(playerField) {
                                                                 if (e.type === 'property') {
@@ -563,40 +563,43 @@ gameBoardArr.map((box, index) => {
                                             });
                                         });
                                     }
-                                    if (item.property.length > 0 || playersData[playerNum].property.length > 0) {
+                                    if (boughtBoxesArr.length > 0) {
                                         //@ts-ignore
                                         if (!boughtBoxesArr.includes(item.boxId)) {
                                             // if one have some box, add BUY button to other
                                             buyAndUpdate();
-                                            // if(item.property.length === 0){
-                                            //
-                                            // }
-                                            // else {
-                                            //    console.log('')
-                                            // }
                                         }
                                         else {
-                                            // if both have boxes
-                                            item.property.forEach((property) => {
-                                                // console.log(property)
-                                                //@ts-ignore
-                                                if (boughtBoxesArr.includes(property)) {
-                                                    console.log(boughtBoxesArr);
-                                                    console.log(item.player);
-                                                }
-                                                else {
-                                                    console.log('asdasdsd' + property);
-                                                }
-                                                // BUGGAI LIKO: galima ta pati du kartus pirkt,
-                                                // pinigai i minusa
-                                                // playersData[playerNum].property.forEach((prop) => {
-                                                //     if (prop.propertyId === property.propertyId) {
-                                                //         console.log('oponent have this property');
-                                                //     } else if (box === property.propertyId) {
-                                                //         console.log('I have this property');
-                                                //     }
-                                                // })
-                                            });
+                                            // if it is not my
+                                            // pay rent
+                                            //@ts-ignore
+                                            if (!item.property.includes(box)) {
+                                                console.log('----------');
+                                                console.log('gggggg');
+                                                console.log(box);
+                                                console.log(item.player);
+                                                console.log(item.cash);
+                                                console.log('----------');
+                                                monopolyBoardArr.map((box11) => {
+                                                    if (box11.id === box) {
+                                                        //@ts-ignore
+                                                        item.cash -= box11.rent[0];
+                                                        updatePlayerMoney();
+                                                    }
+                                                });
+                                            }
+                                            // if it is my?
+                                            // check if I can build house
+                                            //@ts-ignore
+                                            if (item.property.includes(box)) {
+                                                console.log(box);
+                                                console.log('aaaaaa');
+                                                console.log(item.player);
+                                                console.log(item.turn);
+                                            }
+                                            // BUGGAI LIKO: galima ta pati du kartus pirkt > update previous button to display none in "updatePreviuosFunction"
+                                            //     // pinigai i minusa
+                                            //
                                         }
                                     }
                                     else {
