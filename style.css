@@ -6,6 +6,15 @@
     font-style: normal;
 }
 
+.h33 {
+    height: 33%;
+}
+.h40 {
+    height: 40%;
+}
+
+
+
 
 .gameBoard {
     width: 1100px;
@@ -148,6 +157,7 @@
     border: 1px solid black;
     transition: 1s ease-in-out;
     opacity: 0;
+    padding: 5px;
 }
 .cardPlayer1 img, .cardPlayer2 img {
     width: 100px;

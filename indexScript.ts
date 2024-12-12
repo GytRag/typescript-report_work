@@ -342,6 +342,9 @@ let playersData: PlayerDataInterface[] = [
     },
 ]
 
+// array of bought boxes
+let boughtBoxesArr: number[] = [];
+
 
 const rndCeil = (num: number) => Math.ceil(Math.random() * num)
 //     MAKE BOARD OF GAME
@@ -477,22 +480,7 @@ gameBoardArr.map((box, index) => {
                                 //     need to check, if any player has bought this box
                                 function checkIfAnyHasBox(playerNum: number) {
 
-                                    if (item.property.length > 0 || playersData[playerNum].property.length > 0) {
-                                        console.log('playerNum')
-                                        item.property.map((property) => {
-                                            console.log(item)
-                                            playersData[playerNum].property.map((prop) => {
-                                                if (prop.propertyId === property.propertyId) {
-                                                    console.log('oponent have this property');
-                                                } else if (box === property.propertyId) {
-                                                    console.log('I have this property');
-                                                }
-                                                console.log(`property ${property}; num ${playersData[playerNum]}; prop ${prop}`)
-                                            })
-
-                                        })
-                                    } else {
-                                        // ------UPDATE IF NO ONE HAVE THIS BOX
+                                    function buyAndUpdate(){
                                         gameBoardArr.map((box, i) => {
                                             let playerClass = '';
 
@@ -505,60 +493,155 @@ gameBoardArr.map((box, index) => {
                                                             }else {
                                                                 playerClass = 'player2'
                                                             }
-                                                            gameBox[i].innerHTML = `
+                                                            const innerGameBoxNoButton = () => {
+                                                                gameBox[i].innerHTML = `
                                                                 <div class="h-50">
                                                                     <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
                                                                      <div class="text-center">${e.name}</div>
                                                                 </div>
-                                                                 <div class="d-flex align-items-end h-50 justify-content-around">
-                                                                  <div>$${e.price}</div>
-                                                                  <div><button class="buyBtn">Buy</button></div>
-                                                                </div>
+                                                                 
                                                                 <div class="player ${playerClass}">
                                                                     <img src="${playersData[index].img}" alt="">
                                                                 </div>
                                                               `;
-                                                            if(index === 0 && playersData[1].boxId === item.boxId){
-                                                                gameBox[i].innerHTML += `
+
+                                                            }
+                                                            const innerGameBoxWithButton = () => {
+                                                                gameBox[i].innerHTML = `
+                                                                    <div class="h-50">
+                                                                        <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
+                                                                         <div class="text-center">${e.name}</div>
+                                                                    </div>
+                                                                     <div class="d-flex align-items-end h-50 justify-content-around">
+                                                                      <div>$${e.price}</div>
+                                                                      <div><button class="buyBtn">Buy</button></div>
+                                                                    </div>
+                                                                    <div class="player ${playerClass}">
+                                                                        <img src="${playersData[index].img}" alt="">
+                                                                    </div>
+                                                                `
+                                                            }
+                                                            const innerOnotherPlayerIfNeed = () => {
+                                                                if(index === 0 && playersData[1].boxId === item.boxId){
+                                                                    gameBox[i].innerHTML += `
                                                                     <div class="player player2">
                                                                         <img src="${playersData[1].img}" alt="">
                                                                     </div>
                                                                 `
-                                                            }else if(index === 1 && playersData[0].boxId === item.boxId){
-                                                                gameBox[i].innerHTML += `
+                                                                }else if(index === 1 && playersData[0].boxId === item.boxId){
+                                                                    gameBox[i].innerHTML += `
                                                                     <div class="player player1">
                                                                         <img src="${playersData[0].img}" alt="">
                                                                     </div>
                                                                 `
+                                                                }
                                                             }
 
-                                                        //--------------- BUY BUTTON LOGIC-------------
+                                                            innerGameBoxWithButton();
+                                                            innerOnotherPlayerIfNeed()
 
+                                                            //--------------- BUY BUTTON LOGIC------------
                                                             const buyBtn = document.querySelectorAll('.buyBtn') as NodeListOf<HTMLButtonElement>;
-
+                                                            // FUNCTION TO BUY BOX AND UPDATE PLAYER FIELD
+                                                            function innerPlayerField(playerField:string){
+                                                                if (e.type === 'property'){
+                                                                    //@ts-ignore
+                                                                    playerField.innerHTML += `
+                                                                            <div class="box gameCard">
+                                                                                <div class="h40">
+                                                                                    <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
+                                                                                     <div class="text-center" style="font-size: 10px" >${e.name}</div>
+                                                                                </div>
+                                                                                 <div class="h33">
+                                                                                  <div style="font-size: 10px">House cost: $${e.houseCost}</div>
+                                                                                  <div style="font-size: 10px">Hotel cost: $${e.hotelCost}</div>
+                                                                                </div>
+                                                                           </div>
+                                                                          `;
+                                                                }
+                                                                else {
+                                                                    //@ts-ignore
+                                                                    playerField.innerHTML += `
+                                                                            <div class="box gameCard">
+                                                                                <div class="h40">
+                                                                                    <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
+                                                                                     <div class="text-center" style="font-size: 10px" >${e.name}</div>
+                                                                                </div>
+                                                                                 <div class="h33">
+                                                                                </div>
+                                                                           </div>
+                                                                          `;
+                                                                }
+                                                            }
                                                             buyBtn.forEach((btn) => {
                                                                 if(index === 0 && !playersData[0].turn) {
                                                                     btn.onclick = () => {
-                                                                        // if I buy box, update boxes and players cards
-                                                                        console.log('first buy');
-                                                                    }
-                                                                }else if(index === 1 && !playersData[1].turn) {
-                                                                    btn.onclick = () => {
-                                                                        console.log('second buy');
+                                                                        //@ts-ignore
+                                                                        playersData[0].cash -= e.price;
+                                                                        //@ts-ignore
+                                                                        playersData[0].property.push(e.id);
+                                                                        // @ts-ignore
+                                                                        boughtBoxesArr.push(e.id)
+                                                                        updatePlayerMoney()
+                                                                        innerGameBoxNoButton()
+                                                                        innerOnotherPlayerIfNeed()
+                                                                        //@ts-ignore
+                                                                        innerPlayerField(cardPlayer1)
                                                                     }
                                                                 }
-
+                                                                else if(index === 1 && !playersData[1].turn) {
+                                                                    btn.onclick = () => {
+                                                                        //@ts-ignore
+                                                                        playersData[1].cash -= e.price;
+                                                                        //@ts-ignore
+                                                                        playersData[1].property.push(e.id);
+                                                                        // @ts-ignore
+                                                                        boughtBoxesArr.push(e.id)
+                                                                        updatePlayerMoney()
+                                                                        innerGameBoxNoButton()
+                                                                        innerOnotherPlayerIfNeed()
+                                                                        //@ts-ignore
+                                                                        innerPlayerField(cardPlayer2)
+                                                                    }
+                                                                }
                                                             })
-
                                                         }
                                                     }
                                                 }
 
                                             })
                                         })
-
                                     }
 
+                                    if (item.property.length > 0 || playersData[playerNum].property.length > 0) {
+
+                                        //@ts-ignore
+                                        if(!boughtBoxesArr.includes(item.boxId)){
+                                            // if one have some box, add BUY button to other
+                                            if(item.property.length === 0){
+                                                buyAndUpdate()
+                                            }
+                                            else {
+                                                item.property.forEach((property) => {
+
+                                                    playersData[playerNum].property.forEach((prop) => {
+                                                        if (prop.propertyId === property.propertyId) {
+                                                            console.log('oponent have this property');
+                                                        } else if (box === property.propertyId) {
+                                                            console.log('I have this property');
+                                                        }
+                                                    })
+
+                                                })
+                                            }
+                                        }
+
+                                    }
+                                    else {
+                                        // ------UPDATE IF NO ONE HAVE THIS BOX
+
+                                        buyAndUpdate()
+                                    }
                                 }
 
                                 // -----------------------------------------------------
