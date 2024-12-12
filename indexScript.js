@@ -301,7 +301,17 @@ let playersData = [
         boxId: 0,
         cash: 1000,
         img: './image/car.png',
-        property: []
+        property: [],
+        brownArr: [],
+        lightblueArr: [],
+        pinkArr: [],
+        orangeArr: [],
+        redArr: [],
+        yellowArr: [],
+        greenArr: [],
+        darkblueArr: [],
+        railroadArr: [],
+        utilityArr: []
     },
     {
         player: 'hat',
@@ -309,9 +319,30 @@ let playersData = [
         boxId: 0,
         cash: 1000,
         img: './image/hat.png',
-        property: []
+        property: [],
+        brownArr: [],
+        lightblueArr: [],
+        pinkArr: [],
+        orangeArr: [],
+        redArr: [],
+        yellowArr: [],
+        greenArr: [],
+        darkblueArr: [],
+        railroadArr: [],
+        utilityArr: []
     },
 ];
+// // array of color street id
+// const brownArr: number[] = [1, 3];
+// const lightblueArr: number[] = [6, 8, 9];
+// const pinkArr: number[] = [11, 13, 14];
+// const orangeArr: number[] = [15, 16, 17];
+// const redArr: number[] = [19, 21, 22];
+// const yellowArr: number[] = [24, 25, 27];
+// const greenArr: number[] = [29, 30, 31];
+// const darkblueArr: number[] = [33, 35];
+// const railroadArr: number[] = [5, 23, 32];
+// const utilityArr: number[] = [12, 26];
 // array of bought boxes
 let boughtBoxesArr = [];
 const rndCeil = (num) => Math.ceil(Math.random() * num);
@@ -390,26 +421,40 @@ gameBoardArr.map((box, index) => {
                                                 if (prev === item.boxId) {
                                                     if (index === 1) {
                                                         gameBox[i].innerHTML = `
-                                                    <div class="h-50">
-                                                        <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
-                                                        <div class="text-center">${e.name}</div>
-                                                    </div>
-                                                `;
+                                                            <div class="h-50">
+                                                                <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
+                                                                <div class="text-center">${e.name}</div>
+                                                            </div>
+                                                        `;
+                                                        if (e.price) {
+                                                            gameBox[i].innerHTML += `
+                                                                <div class="d-flex align-items-end h-50">
+                                                                  <div>$${e.price}</div>
+                                                                </div>
+                                                             `;
+                                                        }
                                                         if (prev === playersData[1].boxId) {
                                                             gameBox[i].innerHTML += `
-                                                        <div class="player player2">
-                                                            <img src="${playersData[1].img}" alt="">
-                                                        </div>
-                                                    `;
+                                                                <div class="player player2">
+                                                                    <img src="${playersData[1].img}" alt="">
+                                                                </div>
+                                                            `;
                                                         }
                                                     }
                                                     else if (index === 0) {
                                                         gameBox[i].innerHTML = `
-                                                    <div class="h-50">
-                                                        <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
-                                                        <div class="text-center">${e.name}</div>
-                                                    </div>
-                                                `;
+                                                            <div class="h-50">
+                                                                <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
+                                                                <div class="text-center">${e.name}</div>
+                                                            </div>
+                                                        `;
+                                                        if (e.price) {
+                                                            gameBox[i].innerHTML += `
+                                                                <div class="d-flex align-items-end h-50">
+                                                                  <div>$${e.price}</div>
+                                                                </div>
+                                                             `;
+                                                        }
                                                         if (prev === playersData[0].boxId) {
                                                             gameBox[i].innerHTML += `
                                                         <div class="player player1">
@@ -424,8 +469,6 @@ gameBoardArr.map((box, index) => {
                                     });
                                 }
                             });
-                            console.log(item.turn);
-                            console.log(item.player);
                             // UPDATE PREVIOUS BOX
                             function updatePreviousBox() {
                                 gameBoardArr.map((box, i) => {
@@ -439,6 +482,13 @@ gameBoardArr.map((box, index) => {
                                                         <div class="text-center">${e.name}</div>
                                                     </div>
                                                 `;
+                                                    if (e.price) {
+                                                        gameBox[i].innerHTML += `
+                                                                <div class="d-flex align-items-end h-50">
+                                                                  <div>$${e.price}</div>
+                                                                </div>
+                                                             `;
+                                                    }
                                                     if (box === playersData[1].boxId) {
                                                         gameBox[i].innerHTML += `
                                                         <div class="player player2">
@@ -454,6 +504,13 @@ gameBoardArr.map((box, index) => {
                                                         <div class="text-center">${e.name}</div>
                                                     </div>
                                                 `;
+                                                    if (e.price) {
+                                                        gameBox[i].innerHTML += `
+                                                                <div class="d-flex align-items-end h-50">
+                                                                  <div>$${e.price}</div>
+                                                                </div>
+                                                             `;
+                                                    }
                                                     if (box === playersData[0].boxId) {
                                                         gameBox[i].innerHTML += `
                                                         <div class="player player1">
@@ -498,7 +555,9 @@ gameBoardArr.map((box, index) => {
                                                                     <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
                                                                      <div class="text-center">${e.name}</div>
                                                                 </div>
-                                                                 
+                                                                 <div class="d-flex align-items-end h-50 justify-content-between">
+                                                                      <div>$${e.price}</div>
+                                                                 </div>
                                                                 <div class="player ${playerClass}">
                                                                     <img src="${playersData[index].img}" alt="">
                                                                 </div>
@@ -510,7 +569,7 @@ gameBoardArr.map((box, index) => {
                                                                         <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
                                                                          <div class="text-center">${e.name}</div>
                                                                     </div>
-                                                                     <div class="d-flex align-items-end h-50 justify-content-around">
+                                                                     <div class="d-flex align-items-end h-50 justify-content-between">
                                                                       <div>$${e.price}</div>
                                                                       <div><button class="buyBtn">Buy</button></div>
                                                                     </div>
@@ -570,6 +629,38 @@ gameBoardArr.map((box, index) => {
                                                                           `;
                                                                 }
                                                             }
+                                                            function pushToColorArr(indx) {
+                                                                if (e.color === 'brown') {
+                                                                    playersData[indx].brownArr.push('brown');
+                                                                }
+                                                                if (e.color === "lightblue") {
+                                                                    playersData[indx].lightblueArr.push("lightblue");
+                                                                }
+                                                                if (e.color === "pink") {
+                                                                    playersData[indx].pinkArr.push("pink");
+                                                                }
+                                                                if (e.color === "orange") {
+                                                                    playersData[indx].orangeArr.push("orange");
+                                                                }
+                                                                if (e.color === "red") {
+                                                                    playersData[indx].redArr.push("red");
+                                                                }
+                                                                if (e.color === "yellow") {
+                                                                    playersData[indx].yellowArr.push("yellow");
+                                                                }
+                                                                if (e.color === "green") {
+                                                                    playersData[indx].greenArr.push("green");
+                                                                }
+                                                                if (e.color === "darkblue") {
+                                                                    playersData[indx].darkblueArr.push("darkblue");
+                                                                }
+                                                                if (e.type === "railroad") {
+                                                                    playersData[indx].railroadArr.push("railroad");
+                                                                }
+                                                                if (e.type === "utility") {
+                                                                    playersData[indx].utilityArr.push("utility");
+                                                                }
+                                                            }
                                                             buyBtn.forEach((btn) => {
                                                                 if (index === 0 && !playersData[0].turn) {
                                                                     btn.onclick = () => {
@@ -579,6 +670,7 @@ gameBoardArr.map((box, index) => {
                                                                         playersData[0].property.push(e.id);
                                                                         // @ts-ignore
                                                                         boughtBoxesArr.push(e.id);
+                                                                        pushToColorArr(0);
                                                                         updatePlayerMoney();
                                                                         innerGameBoxNoButton();
                                                                         innerOnotherPlayerIfNeed();
@@ -594,6 +686,7 @@ gameBoardArr.map((box, index) => {
                                                                         playersData[1].property.push(e.id);
                                                                         // @ts-ignore
                                                                         boughtBoxesArr.push(e.id);
+                                                                        pushToColorArr(1);
                                                                         updatePlayerMoney();
                                                                         innerGameBoxNoButton();
                                                                         innerOnotherPlayerIfNeed();
@@ -619,12 +712,12 @@ gameBoardArr.map((box, index) => {
                                             // pay rent
                                             //@ts-ignore
                                             if (!item.property.includes(box)) {
+                                                // make possible to pay more
                                                 console.log('----------');
                                                 console.log('pay for enemy!');
                                                 console.log('----------');
                                                 monopolyBoardArr.map((box11) => {
                                                     if (box11.id === box) {
-                                                        console.log(box11);
                                                         //@ts-ignore
                                                         item.cash -= box11.rent[0];
                                                         updatePlayerMoney();
@@ -635,8 +728,44 @@ gameBoardArr.map((box, index) => {
                                             // check if I can build house
                                             //@ts-ignore
                                             if (item.property.includes(box)) {
+                                                // make possible to build house
+                                                monopolyBoardArr.map((box22) => {
+                                                    if (box22.id === box) {
+                                                        if (box22.color === 'brown' && item.brownArr.length === 2) {
+                                                            gameBox[i].innerHTML += `lalalalalalal`;
+                                                        }
+                                                        else if (box22.color === 'lightblue' && item.lightblueArr.length === 3) {
+                                                            gameBox[i].innerHTML += `lalalalalalal`;
+                                                        }
+                                                        else if (box22.color === 'pink' && item.pinkArr.length === 3) {
+                                                            gameBox[i].innerHTML += `lalalalalalal`;
+                                                        }
+                                                        else if (box22.color === "orange" && item.orangeArr.length === 3) {
+                                                            gameBox[i].innerHTML += `lalalalalalal`;
+                                                        }
+                                                        else if (box22.color === "red" && item.redArr.length === 3) {
+                                                            gameBox[i].innerHTML += `lalalalalalal`;
+                                                        }
+                                                        else if (box22.color === "yellow" && item.yellowArr.length === 3) {
+                                                            gameBox[i].innerHTML += `lalalalalalal`;
+                                                        }
+                                                        else if (box22.color === "green" && item.greenArr.length === 3) {
+                                                            gameBox[i].innerHTML += `lalalalalalal`;
+                                                        }
+                                                        else if (box22.color === "darkblue" && item.darkblueArr.length === 2) {
+                                                            gameBox[i].innerHTML += `lalalalalalal`;
+                                                        }
+                                                        else if (box22.type === "railroad" && item.railroadArr.length === 3) {
+                                                            gameBox[i].innerHTML += `lalalalalalal`;
+                                                        }
+                                                        else if (box22.type === "utility" && item.utilityArr.length === 2) {
+                                                            gameBox[i].innerHTML += `lalalalalalal`;
+                                                        }
+                                                        updatePlayerMoney();
+                                                    }
+                                                });
                                                 console.log('----------');
-                                                console.log(`my box ${item.cash}`);
+                                                console.log(`my box ${box}`);
                                                 console.log('----------');
                                             }
                                             //     // pinigai i minusa
