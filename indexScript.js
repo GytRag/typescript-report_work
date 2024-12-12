@@ -345,6 +345,8 @@ gameBoardArr.map((box, index) => {
         const cardPlayer2 = document.querySelector('.cardPlayer2');
         const playerMoney1 = document.querySelector('.cardPlayer1 h5');
         const playerMoney2 = document.querySelector('.cardPlayer2 h5');
+        const cardPlayer1Boxes = document.querySelector('.cardPlayer1Boxes');
+        const cardPlayer2Boxes = document.querySelector('.cardPlayer2Boxes');
         // FUNCTION UPDATE PLAYERS MONEY
         function updatePlayerMoney() {
             playerMoney1.innerText = `Money: ${playersData[0].cash}`;
@@ -536,7 +538,7 @@ gameBoardArr.map((box, index) => {
                                                                         innerGameBoxNoButton();
                                                                         innerOnotherPlayerIfNeed();
                                                                         //@ts-ignore
-                                                                        innerPlayerField(cardPlayer1);
+                                                                        innerPlayerField(cardPlayer1Boxes);
                                                                     };
                                                                 }
                                                                 else if (index === 1 && !playersData[1].turn) {
@@ -551,7 +553,7 @@ gameBoardArr.map((box, index) => {
                                                                         innerGameBoxNoButton();
                                                                         innerOnotherPlayerIfNeed();
                                                                         //@ts-ignore
-                                                                        innerPlayerField(cardPlayer2);
+                                                                        innerPlayerField(cardPlayer2Boxes);
                                                                     };
                                                                 }
                                                             });
@@ -565,21 +567,36 @@ gameBoardArr.map((box, index) => {
                                         //@ts-ignore
                                         if (!boughtBoxesArr.includes(item.boxId)) {
                                             // if one have some box, add BUY button to other
-                                            if (item.property.length === 0) {
-                                                buyAndUpdate();
-                                            }
-                                            else {
-                                                item.property.forEach((property) => {
-                                                    playersData[playerNum].property.forEach((prop) => {
-                                                        if (prop.propertyId === property.propertyId) {
-                                                            console.log('oponent have this property');
-                                                        }
-                                                        else if (box === property.propertyId) {
-                                                            console.log('I have this property');
-                                                        }
-                                                    });
-                                                });
-                                            }
+                                            buyAndUpdate();
+                                            // if(item.property.length === 0){
+                                            //
+                                            // }
+                                            // else {
+                                            //    console.log('')
+                                            // }
+                                        }
+                                        else {
+                                            // if both have boxes
+                                            item.property.forEach((property) => {
+                                                // console.log(property)
+                                                //@ts-ignore
+                                                if (boughtBoxesArr.includes(property)) {
+                                                    console.log(boughtBoxesArr);
+                                                    console.log(item.player);
+                                                }
+                                                else {
+                                                    console.log('asdasdsd' + property);
+                                                }
+                                                // BUGGAI LIKO: galima ta pati du kartus pirkt,
+                                                // pinigai i minusa
+                                                // playersData[playerNum].property.forEach((prop) => {
+                                                //     if (prop.propertyId === property.propertyId) {
+                                                //         console.log('oponent have this property');
+                                                //     } else if (box === property.propertyId) {
+                                                //         console.log('I have this property');
+                                                //     }
+                                                // })
+                                            });
                                         }
                                     }
                                     else {
