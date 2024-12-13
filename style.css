@@ -6,6 +6,15 @@
     font-style: normal;
 }
 
+.h27 {
+    height: 27%;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+}
+
 .h33 {
     height: 33%;
 }

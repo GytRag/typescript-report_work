@@ -12,9 +12,8 @@ interface MonopolyCardInterface {
     amount?: number,
     rentMultiplier?: number[],
     id?: number,
-    numberOfHouses?: number
+    numberOfHouses: number[]
 }
-
 interface PlayerDataInterface {
     player: string,
     turn: boolean,
@@ -34,12 +33,12 @@ interface PlayerDataInterface {
     utilityArr: string[]
 }
 
-
 let monopolyBoardArr: MonopolyCardInterface[] = [
     {
         "name": "GO",
         "type": "special",
-        "description": "Collect $200 when you pass."
+        "description": "Collect $200 when you pass.",
+        numberOfHouses: []
     },
     {
         "name": "Mediterranean Avenue",
@@ -48,12 +47,14 @@ let monopolyBoardArr: MonopolyCardInterface[] = [
         "price": 60,
         "rent": [2, 10, 30, 90, 160, 250],
         "houseCost": 50,
-        "hotelCost": 50
+        "hotelCost": 50,
+        numberOfHouses: []
     },
     {
         "name": "Community Chest",
         "type": "special",
-        "description": "Draw a Community Chest card."
+        "description": "Draw a Community Chest card.",
+        numberOfHouses: []
     },
     {
         "name": "Baltic Avenue",
@@ -62,18 +63,21 @@ let monopolyBoardArr: MonopolyCardInterface[] = [
         "price": 60,
         "rent": [4, 20, 60, 180, 320, 450],
         "houseCost": 50,
-        "hotelCost": 50
+        "hotelCost": 50,
+        numberOfHouses: []
     },
     {
         "name": "Income Tax",
         "type": "tax",
-        "amount": 200
+        "amount": 200,
+        numberOfHouses: []
     },
     {
         "name": "Reading Railroad",
         "type": "railroad",
         "price": 200,
-        "rent": [25, 50, 100, 200]
+        "rent": [25, 50, 100, 200],
+        numberOfHouses: []
     },
     {
         "name": "Oriental Avenue",
@@ -82,12 +86,14 @@ let monopolyBoardArr: MonopolyCardInterface[] = [
         "price": 100,
         "rent": [6, 30, 90, 270, 400, 550],
         "houseCost": 50,
-        "hotelCost": 50
+        "hotelCost": 50,
+        numberOfHouses: []
     },
     {
         "name": "Chance",
         "type": "special",
-        "description": "Draw a Chance card."
+        "description": "Draw a Chance card.",
+        numberOfHouses: []
     },
     {
         "name": "Vermont Avenue",
@@ -96,7 +102,8 @@ let monopolyBoardArr: MonopolyCardInterface[] = [
         "price": 100,
         "rent": [6, 30, 90, 270, 400, 550],
         "houseCost": 50,
-        "hotelCost": 50
+        "hotelCost": 50,
+        numberOfHouses: []
     },
     {
         "name": "Connecticut Avenue",
@@ -105,12 +112,14 @@ let monopolyBoardArr: MonopolyCardInterface[] = [
         "price": 120,
         "rent": [8, 40, 100, 300, 450, 600],
         "houseCost": 50,
-        "hotelCost": 50
+        "hotelCost": 50,
+        numberOfHouses: []
     },
     {
         "name": "Jail",
         "type": "special",
-        "description": "Just visiting or in jail."
+        "description": "Just visiting or in jail.",
+        numberOfHouses: []
     },
     {
         "name": "St. Charles Place",
@@ -119,13 +128,15 @@ let monopolyBoardArr: MonopolyCardInterface[] = [
         "price": 140,
         "rent": [10, 50, 150, 450, 625, 750],
         "houseCost": 100,
-        "hotelCost": 100
+        "hotelCost": 100,
+        numberOfHouses: []
     },
     {
         "name": "Electric Company",
         "type": "utility",
         "price": 150,
-        "rent": [4, 10]
+        "rent": [4, 10],
+        numberOfHouses: []
     },
     {
         "name": "States Avenue",
@@ -134,7 +145,8 @@ let monopolyBoardArr: MonopolyCardInterface[] = [
         "price": 140,
         "rent": [10, 50, 150, 450, 625, 750],
         "houseCost": 100,
-        "hotelCost": 100
+        "hotelCost": 100,
+        numberOfHouses: []
     },
     {
         "name": "Virginia Avenue",
@@ -143,7 +155,8 @@ let monopolyBoardArr: MonopolyCardInterface[] = [
         "price": 160,
         "rent": [12, 60, 180, 500, 700, 900],
         "houseCost": 100,
-        "hotelCost": 100
+        "hotelCost": 100,
+        numberOfHouses: []
     },
     {
         "name": "St. James Place",
@@ -152,7 +165,8 @@ let monopolyBoardArr: MonopolyCardInterface[] = [
         "price": 180,
         "rent": [14, 70, 200, 550, 750, 950],
         "houseCost": 100,
-        "hotelCost": 100
+        "hotelCost": 100,
+        numberOfHouses: []
     },
     {
         "name": "Tennessee Avenue",
@@ -161,7 +175,8 @@ let monopolyBoardArr: MonopolyCardInterface[] = [
         "price": 180,
         "rent": [14, 70, 200, 550, 750, 950],
         "houseCost": 100,
-        "hotelCost": 100
+        "hotelCost": 100,
+        numberOfHouses: []
     },
     {
         "name": "New York Avenue",
@@ -170,12 +185,14 @@ let monopolyBoardArr: MonopolyCardInterface[] = [
         "price": 200,
         "rent": [16, 80, 220, 600, 800, 1000],
         "houseCost": 100,
-        "hotelCost": 100
+        "hotelCost": 100,
+        numberOfHouses: []
     },
     {
         "name": "Free Parking",
         "type": "special",
-        "description": "No action."
+        "description": "No action.",
+        numberOfHouses: []
     },
     {
         "name": "Kentucky Avenue",
@@ -184,12 +201,14 @@ let monopolyBoardArr: MonopolyCardInterface[] = [
         "price": 220,
         "rent": [18, 90, 250, 700, 875, 1050],
         "houseCost": 150,
-        "hotelCost": 150
+        "hotelCost": 150,
+        numberOfHouses: []
     },
     {
         "name": "Chance",
         "type": "special",
-        "description": "Draw a Chance card."
+        "description": "Draw a Chance card.",
+        numberOfHouses: []
     },
     {
         "name": "Indiana Avenue",
@@ -198,7 +217,8 @@ let monopolyBoardArr: MonopolyCardInterface[] = [
         "price": 220,
         "rent": [18, 90, 250, 700, 875, 1050],
         "houseCost": 150,
-        "hotelCost": 150
+        "hotelCost": 150,
+        numberOfHouses: []
     },
     {
         "name": "Illinois Avenue",
@@ -207,13 +227,15 @@ let monopolyBoardArr: MonopolyCardInterface[] = [
         "price": 240,
         "rent": [20, 100, 300, 750, 925, 1100],
         "houseCost": 150,
-        "hotelCost": 150
+        "hotelCost": 150,
+        numberOfHouses: []
     },
     {
         "name": "B&O Railroad",
         "type": "railroad",
         "price": 200,
-        "rent": [25, 50, 100, 200]
+        "rent": [25, 50, 100, 200],
+        numberOfHouses: []
     },
     {
         "name": "Atlantic Avenue",
@@ -222,7 +244,8 @@ let monopolyBoardArr: MonopolyCardInterface[] = [
         "price": 260,
         "rent": [22, 110, 330, 800, 975, 1150],
         "houseCost": 150,
-        "hotelCost": 150
+        "hotelCost": 150,
+        numberOfHouses: []
     },
     {
         "name": "Ventnor Avenue",
@@ -231,13 +254,15 @@ let monopolyBoardArr: MonopolyCardInterface[] = [
         "price": 260,
         "rent": [22, 110, 330, 800, 975, 1150],
         "houseCost": 150,
-        "hotelCost": 150
+        "hotelCost": 150,
+        numberOfHouses: []
     },
     {
         "name": "Water Works",
         "type": "utility",
         "price": 150,
-        "rent": [4, 10]
+        "rent": [4, 10],
+        numberOfHouses: []
     },
     {
         "name": "Marvin Gardens",
@@ -246,12 +271,14 @@ let monopolyBoardArr: MonopolyCardInterface[] = [
         "price": 280,
         "rent": [24, 120, 360, 850, 1025, 1200],
         "houseCost": 150,
-        "hotelCost": 150
+        "hotelCost": 150,
+        numberOfHouses: []
     },
     {
         "name": "Go to Jail",
         "type": "special",
-        "description": "Move directly to Jail. Do not pass GO, do not collect $200."
+        "description": "Move directly to Jail. Do not pass GO, do not collect $200.",
+        numberOfHouses: []
     },
     {
         "name": "Pacific Avenue",
@@ -260,7 +287,8 @@ let monopolyBoardArr: MonopolyCardInterface[] = [
         "price": 300,
         "rent": [26, 130, 390, 900, 1100, 1275],
         "houseCost": 200,
-        "hotelCost": 200
+        "hotelCost": 200,
+        numberOfHouses: []
     },
     {
         "name": "North Carolina Avenue",
@@ -269,7 +297,8 @@ let monopolyBoardArr: MonopolyCardInterface[] = [
         "price": 300,
         "rent": [26, 130, 390, 900, 1100, 1275],
         "houseCost": 200,
-        "hotelCost": 200
+        "hotelCost": 200,
+        numberOfHouses: []
     },
     {
         "name": "Pennsylvania Avenue",
@@ -278,13 +307,15 @@ let monopolyBoardArr: MonopolyCardInterface[] = [
         "price": 320,
         "rent": [28, 150, 450, 1000, 1200, 1400],
         "houseCost": 200,
-        "hotelCost": 200
+        "hotelCost": 200,
+        numberOfHouses: []
     },
     {
         "name": "Short Line",
         "type": "railroad",
         "price": 200,
-        "rent": [25, 50, 100, 200]
+        "rent": [25, 50, 100, 200],
+        numberOfHouses: []
     },
     {
         "name": "Park Place",
@@ -293,12 +324,14 @@ let monopolyBoardArr: MonopolyCardInterface[] = [
         "price": 350,
         "rent": [35, 175, 500, 1100, 1300, 1500],
         "houseCost": 200,
-        "hotelCost": 200
+        "hotelCost": 200,
+        numberOfHouses: []
     },
     {
         "name": "Luxury Tax",
         "type": "tax",
-        "amount": 100
+        "amount": 100,
+        numberOfHouses: []
     },
     {
         "name": "Boardwalk",
@@ -307,9 +340,11 @@ let monopolyBoardArr: MonopolyCardInterface[] = [
         "price": 400,
         "rent": [50, 200, 600, 1400, 1700, 2000],
         "houseCost": 200,
-        "hotelCost": 200
+        "hotelCost": 200,
+        numberOfHouses: []
     }
 ]
+
 monopolyBoardArr.map((item, index) => {
     item.id = index
     if (item.color?.includes(' ')) {
@@ -369,19 +404,6 @@ let playersData: PlayerDataInterface[] = [
         utilityArr: []
     },
 ];
-
-// // array of color street id
-// const brownArr: number[] = [1, 3];
-// const lightblueArr: number[] = [6, 8, 9];
-// const pinkArr: number[] = [11, 13, 14];
-// const orangeArr: number[] = [15, 16, 17];
-// const redArr: number[] = [19, 21, 22];
-// const yellowArr: number[] = [24, 25, 27];
-// const greenArr: number[] = [29, 30, 31];
-// const darkblueArr: number[] = [33, 35];
-// const railroadArr: number[] = [5, 23, 32];
-// const utilityArr: number[] = [12, 26];
-
 
 // array of bought boxes
 let boughtBoxesArr: number[] = [];
@@ -463,9 +485,279 @@ gameBoardArr.map((box, index) => {
             function playerTurn() {
                 playersData.map((item, index) => {
 
+
                     if (item.turn) {
                         whichPlayer.innerHTML = `<img src="${item.img}" alt="">`
                         rollDiceBtn.onclick = () => {
+
+                            // FUNCTION TO UPDATE PLAYER FIELD
+                            function updatePlayerField() {
+                                cardPlayer1Boxes.innerHTML = '';
+                                playersData[0].property.sort(function(a, b) {return a-b})
+                                playersData[0].property.forEach((propId) => {
+                                        monopolyBoardArr.map((monoId) => {
+                                            if(propId === monoId.id){
+                                                // @ts-ignore
+                                                if (monoId.type === 'property' && monoId.numberOfHouses.length === 0) {
+                                                    //@ts-ignore
+                                                    cardPlayer1Boxes.innerHTML += `
+                                                        <div class="box gameCard">
+                                                            <div class="h40">
+                                                                <div class="rounded-1 w-100" style="background-color: ${monoId.color}; height: 10px"></div>
+                                                                <div class="text-center" style="font-size: 10px" >${monoId.name}</div>
+                                                            </div>
+                                                            <div class="h33">
+                                                                <div style="font-size: 10px">House cost: $${monoId.houseCost}</div>
+                                                                <div style="font-size: 10px">Hotel cost: $${monoId.hotelCost}</div>
+                                                            </div>
+                                                        </div>
+                                                    `;
+                                                }
+                                                // @ts-ignore
+                                                else if (monoId.type === 'property' && monoId.numberOfHouses.length === 1) {
+                                                    //@ts-ignore
+                                                    cardPlayer1Boxes.innerHTML += `
+                                                        <div class="box gameCard">
+                                                            <div class="h40">
+                                                                <div class="rounded-1 w-100" style="background-color: ${monoId.color}; height: 10px"></div>
+                                                                <div class="text-center" style="font-size: 10px" >${monoId.name}</div>
+                                                            </div>
+                                                            <div class="h33">
+                                                                <div style="font-size: 10px">House cost: $${monoId.houseCost}</div>
+                                                                <div style="font-size: 10px">Hotel cost: $${monoId.hotelCost}</div>
+                                                            </div>
+                                                            <div class="h27">
+                                                                <div>🏠</div>
+                                                            </div>
+                                                        </div>
+                                                    `;
+                                                }
+                                                // @ts-ignore
+                                                else if (monoId.type === 'property' && monoId.numberOfHouses.length === 2) {
+                                                    //@ts-ignore
+                                                    cardPlayer1Boxes.innerHTML += `
+                                                        <div class="box gameCard">
+                                                            <div class="h40">
+                                                                <div class="rounded-1 w-100" style="background-color: ${monoId.color}; height: 10px"></div>
+                                                                <div class="text-center" style="font-size: 10px" >${monoId.name}</div>
+                                                            </div>
+                                                            <div class="h33">
+                                                                <div style="font-size: 10px">House cost: $${monoId.houseCost}</div>
+                                                                <div style="font-size: 10px">Hotel cost: $${monoId.hotelCost}</div>
+                                                            </div>
+                                                            <div class="h27">
+                                                                <div>🏠🏠</div>
+                                                            </div>
+                                                        </div>
+                                                    `;
+                                                }
+                                                // @ts-ignore
+                                                else if (monoId.type === 'property' && monoId.numberOfHouses.length === 3) {
+                                                    //@ts-ignore
+                                                    cardPlayer1Boxes.innerHTML += `
+                                                        <div class="box gameCard">
+                                                            <div class="h40">
+                                                                <div class="rounded-1 w-100" style="background-color: ${monoId.color}; height: 10px"></div>
+                                                                <div class="text-center" style="font-size: 10px" >${monoId.name}</div>
+                                                            </div>
+                                                            <div class="h33">
+                                                                <div style="font-size: 10px">House cost: $${monoId.houseCost}</div>
+                                                                <div style="font-size: 10px">Hotel cost: $${monoId.hotelCost}</div>
+                                                            </div>
+                                                            <div class="h27">
+                                                                <div>🏠🏠🏠</div>
+                                                            </div>
+                                                        </div>
+                                                    `;
+                                                }
+                                                // @ts-ignore
+                                                else if (monoId.type === 'property' && monoId.numberOfHouses.length === 4) {
+                                                    //@ts-ignore
+                                                    cardPlayer1Boxes.innerHTML += `
+                                                        <div class="box gameCard">
+                                                            <div class="h40">
+                                                                <div class="rounded-1 w-100" style="background-color: ${monoId.color}; height: 10px"></div>
+                                                                <div class="text-center" style="font-size: 10px" >${monoId.name}</div>
+                                                            </div>
+                                                            <div class="h33">
+                                                                <div style="font-size: 10px">House cost: $${monoId.houseCost}</div>
+                                                                <div style="font-size: 10px">Hotel cost: $${monoId.hotelCost}</div>
+                                                            </div>
+                                                            <div class="h27">
+                                                                <div>🏠🏠🏠🏠</div>
+                                                            </div>
+                                                        </div>
+                                                    `;
+                                                }
+                                                // @ts-ignore
+                                                else if (monoId.type === 'property' && monoId.numberOfHouses.length === 5) {
+                                                    //@ts-ignore
+                                                    cardPlayer1Boxes.innerHTML += `
+                                                    <div class="box gameCard">
+                                                        <div class="h40">
+                                                            <div class="rounded-1 w-100" style="background-color: ${monoId.color}; height: 10px"></div>
+                                                            <div class="text-center" style="font-size: 10px" >${monoId.name}</div>
+                                                        </div>
+                                                        <div class="h33">
+                                                            <div style="font-size: 10px">House cost: $${monoId.houseCost}</div>
+                                                            <div style="font-size: 10px">Hotel cost: $${monoId.hotelCost}</div>
+                                                        </div>
+                                                        <div class="h27">
+                                                            <div>🏨</div>
+                                                        </div>
+                                                    </div>
+                                                `;
+                                                }
+                                                else {
+                                                    //@ts-ignore
+                                                    cardPlayer1Boxes.innerHTML += `
+                                                        <div class="box gameCard">
+                                                            <div class="h40">
+                                                                <div class="rounded-1 w-100" style="background-color: ${monoId.color}; height: 10px"></div>
+                                                                <div class="text-center" style="font-size: 10px" >${monoId.name}</div>
+                                                            </div>
+                                                            <div class="h33">
+                                                            </div>
+                                                        </div>
+                                                    `;
+                                                }
+                                            }
+                                        })
+                                    })
+
+                                cardPlayer2Boxes.innerHTML = '';
+                                playersData[1].property.sort(function(a, b) {return a-b})
+                                playersData[1].property.forEach((propId) => {
+                                    monopolyBoardArr.map((monoId) => {
+                                        if(propId === monoId.id){
+                                            // @ts-ignore
+                                            if (monoId.type === 'property' && monoId.numberOfHouses.length === 0) {
+                                                //@ts-ignore
+                                                cardPlayer2Boxes.innerHTML += `
+                                                        <div class="box gameCard">
+                                                            <div class="h40">
+                                                                <div class="rounded-1 w-100" style="background-color: ${monoId.color}; height: 10px"></div>
+                                                                <div class="text-center" style="font-size: 10px" >${monoId.name}</div>
+                                                            </div>
+                                                            <div class="h33">
+                                                                <div style="font-size: 10px">House cost: $${monoId.houseCost}</div>
+                                                                <div style="font-size: 10px">Hotel cost: $${monoId.hotelCost}</div>
+                                                            </div>
+                                                        </div>
+                                                    `;
+                                            }
+                                            // @ts-ignore
+                                            else if (monoId.type === 'property' && monoId.numberOfHouses.length === 1) {
+                                                //@ts-ignore
+                                                cardPlayer2Boxes.innerHTML += `
+                                                        <div class="box gameCard">
+                                                            <div class="h40">
+                                                                <div class="rounded-1 w-100" style="background-color: ${monoId.color}; height: 10px"></div>
+                                                                <div class="text-center" style="font-size: 10px" >${monoId.name}</div>
+                                                            </div>
+                                                            <div class="h33">
+                                                                <div style="font-size: 10px">House cost: $${monoId.houseCost}</div>
+                                                                <div style="font-size: 10px">Hotel cost: $${monoId.hotelCost}</div>
+                                                            </div>
+                                                            <div class="h27">
+                                                                <div>🏠</div>
+                                                            </div>
+                                                        </div>
+                                                    `;
+                                            }
+                                            // @ts-ignore
+                                            else if (monoId.type === 'property' && monoId.numberOfHouses.length === 2) {
+                                                //@ts-ignore
+                                                cardPlayer2Boxes.innerHTML += `
+                                                        <div class="box gameCard">
+                                                            <div class="h40">
+                                                                <div class="rounded-1 w-100" style="background-color: ${monoId.color}; height: 10px"></div>
+                                                                <div class="text-center" style="font-size: 10px" >${monoId.name}</div>
+                                                            </div>
+                                                            <div class="h33">
+                                                                <div style="font-size: 10px">House cost: $${monoId.houseCost}</div>
+                                                                <div style="font-size: 10px">Hotel cost: $${monoId.hotelCost}</div>
+                                                            </div>
+                                                            <div class="h27">
+                                                                <div>🏠🏠</div>
+                                                            </div>
+                                                        </div>
+                                                    `;
+                                            }
+                                            // @ts-ignore
+                                            else if (monoId.type === 'property' && monoId.numberOfHouses.length === 3) {
+                                                //@ts-ignore
+                                                cardPlayer2Boxes.innerHTML += `
+                                                        <div class="box gameCard">
+                                                            <div class="h40">
+                                                                <div class="rounded-1 w-100" style="background-color: ${monoId.color}; height: 10px"></div>
+                                                                <div class="text-center" style="font-size: 10px" >${monoId.name}</div>
+                                                            </div>
+                                                            <div class="h33">
+                                                                <div style="font-size: 10px">House cost: $${monoId.houseCost}</div>
+                                                                <div style="font-size: 10px">Hotel cost: $${monoId.hotelCost}</div>
+                                                            </div>
+                                                            <div class="h27">
+                                                                <div>🏠🏠🏠</div>
+                                                            </div>
+                                                        </div>
+                                                    `;
+                                            }
+                                            // @ts-ignore
+                                            else if (monoId.type === 'property' && monoId.numberOfHouses.length === 4) {
+                                                //@ts-ignore
+                                                cardPlayer2Boxes.innerHTML += `
+                                                        <div class="box gameCard">
+                                                            <div class="h40">
+                                                                <div class="rounded-1 w-100" style="background-color: ${monoId.color}; height: 10px"></div>
+                                                                <div class="text-center" style="font-size: 10px" >${monoId.name}</div>
+                                                            </div>
+                                                            <div class="h33">
+                                                                <div style="font-size: 10px">House cost: $${monoId.houseCost}</div>
+                                                                <div style="font-size: 10px">Hotel cost: $${monoId.hotelCost}</div>
+                                                            </div>
+                                                            <div class="h27">
+                                                                <div>🏠🏠🏠🏠</div>
+                                                            </div>
+                                                        </div>
+                                                    `;
+                                            }
+                                            // @ts-ignore
+                                            else if (monoId.type === 'property' && monoId.numberOfHouses.length === 5) {
+                                                //@ts-ignore
+                                                cardPlayer2Boxes.innerHTML += `
+                                                    <div class="box gameCard">
+                                                        <div class="h40">
+                                                            <div class="rounded-1 w-100" style="background-color: ${monoId.color}; height: 10px"></div>
+                                                            <div class="text-center" style="font-size: 10px" >${monoId.name}</div>
+                                                        </div>
+                                                        <div class="h33">
+                                                            <div style="font-size: 10px">House cost: $${monoId.houseCost}</div>
+                                                            <div style="font-size: 10px">Hotel cost: $${monoId.hotelCost}</div>
+                                                        </div>
+                                                        <div class="h27">
+                                                            <div>🏨</div>
+                                                        </div>
+                                                    </div>
+                                                `;
+                                            }
+                                            else {
+                                                //@ts-ignore
+                                                cardPlayer2Boxes.innerHTML += `
+                                                        <div class="box gameCard">
+                                                            <div class="h40">
+                                                                <div class="rounded-1 w-100" style="background-color: ${monoId.color}; height: 10px"></div>
+                                                                <div class="text-center" style="font-size: 10px" >${monoId.name}</div>
+                                                            </div>
+                                                            <div class="h33">
+                                                            </div>
+                                                        </div>
+                                                    `;
+                                            }
+                                        }
+                                    })
+                                })
+                            }
 
                             // if item.turn = false, innerHTML without button
                             playersData.map((item, index) => {
@@ -581,10 +873,12 @@ gameBoardArr.map((box, index) => {
 
                             updatePreviousBox()
 
+                            // -------PLAYERS MOVE-----------
                             // DICE ROLLED NUMBER, UPDATE MONEY IF MOVES THROUGH "GO"
-                            item.boxId += rndCeil(6)
-                            if (item.boxId > 35) {
-                                item.boxId -= 35;
+                            // item.boxId += rndCeil(6)
+                            item.boxId++;
+                            if (item.boxId >= 36) {
+                                item.boxId -= 36;
                                 item.cash += 200;
                                 updatePlayerMoney()
 
@@ -662,66 +956,35 @@ gameBoardArr.map((box, index) => {
 
                                                             let buyBtn = document.querySelectorAll('.buyBtn') as NodeListOf<HTMLButtonElement>;
 
-                                                            // FUNCTION TO BUY BOX AND UPDATE PLAYER FIELD
-                                                            function innerPlayerField(playerField: string) {
-                                                                if (e.type === 'property') {
-                                                                    //@ts-ignore
-                                                                    playerField.innerHTML += `
-                                                                            <div class="box gameCard">
-                                                                                <div class="h40">
-                                                                                    <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
-                                                                                     <div class="text-center" style="font-size: 10px" >${e.name}</div>
-                                                                                </div>
-                                                                                 <div class="h33">
-                                                                                  <div style="font-size: 10px">House cost: $${e.houseCost}</div>
-                                                                                  <div style="font-size: 10px">Hotel cost: $${e.hotelCost}</div>
-                                                                                </div>
-                                                                           </div>
-                                                                          `;
-                                                                } else {
-                                                                    //@ts-ignore
-                                                                    playerField.innerHTML += `
-                                                                            <div class="box gameCard">
-                                                                                <div class="h40">
-                                                                                    <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
-                                                                                     <div class="text-center" style="font-size: 10px" >${e.name}</div>
-                                                                                </div>
-                                                                                 <div class="h33">
-                                                                                </div>
-                                                                           </div>
-                                                                          `;
-                                                                }
-                                                            }
-
                                                             function pushToColorArr(indx: number) {
-                                                                if(e.color === 'brown'){
+                                                                if (e.color === 'brown') {
                                                                     playersData[indx].brownArr.push('brown')
                                                                 }
-                                                                if(e.color === "lightblue"){
+                                                                if (e.color === "lightblue") {
                                                                     playersData[indx].lightblueArr.push("lightblue")
                                                                 }
-                                                                if(e.color === "pink"){
+                                                                if (e.color === "pink") {
                                                                     playersData[indx].pinkArr.push("pink")
                                                                 }
-                                                                if(e.color === "orange"){
+                                                                if (e.color === "orange") {
                                                                     playersData[indx].orangeArr.push("orange")
                                                                 }
-                                                                if(e.color === "red"){
+                                                                if (e.color === "red") {
                                                                     playersData[indx].redArr.push("red")
                                                                 }
-                                                                if(e.color === "yellow"){
+                                                                if (e.color === "yellow") {
                                                                     playersData[indx].yellowArr.push("yellow")
                                                                 }
-                                                                if(e.color === "green"){
+                                                                if (e.color === "green") {
                                                                     playersData[indx].greenArr.push("green")
                                                                 }
-                                                                if(e.color === "darkblue"){
+                                                                if (e.color === "darkblue") {
                                                                     playersData[indx].darkblueArr.push("darkblue")
                                                                 }
-                                                                if(e.type === "railroad"){
+                                                                if (e.type === "railroad") {
                                                                     playersData[indx].railroadArr.push("railroad")
                                                                 }
-                                                                if(e.type === "utility"){
+                                                                if (e.type === "utility") {
                                                                     playersData[indx].utilityArr.push("utility")
                                                                 }
                                                             }
@@ -739,10 +1002,10 @@ gameBoardArr.map((box, index) => {
                                                                         updatePlayerMoney()
                                                                         innerGameBoxNoButton()
                                                                         innerOnotherPlayerIfNeed()
-                                                                        //@ts-ignore
-                                                                        innerPlayerField(cardPlayer1Boxes)
+                                                                        updatePlayerField()
                                                                     }
-                                                                } else if (index === 1 && !playersData[1].turn) {
+                                                                }
+                                                                else if (index === 1 && !playersData[1].turn) {
                                                                     btn.onclick = () => {
                                                                         //@ts-ignore
                                                                         playersData[1].cash -= e.price;
@@ -754,8 +1017,7 @@ gameBoardArr.map((box, index) => {
                                                                         updatePlayerMoney()
                                                                         innerGameBoxNoButton()
                                                                         innerOnotherPlayerIfNeed()
-                                                                        //@ts-ignore
-                                                                        innerPlayerField(cardPlayer2Boxes)
+                                                                        updatePlayerField()
                                                                     }
                                                                 }
                                                             })
@@ -768,94 +1030,273 @@ gameBoardArr.map((box, index) => {
                                     }
 
                                     if (boughtBoxesArr.length > 0) {
-
                                         //@ts-ignore
                                         if (!boughtBoxesArr.includes(item.boxId)) {
                                             // if one have some box, add BUY button to other
                                             buyAndUpdate()
+                                        }
+                                        else {
 
-                                        } else {
-
-                                            // if it is not my
-                                            // pay rent
+                                            // PAY RENT FOR ENEMY
                                             //@ts-ignore
                                             if (!item.property.includes(box)) {
 
                                                 // make possible to pay more
 
-                                                console.log('----------')
-                                                console.log('pay for enemy!')
-                                                console.log('----------')
-
                                                 monopolyBoardArr.map((box11) => {
                                                     if (box11.id === box) {
-                                                        //@ts-ignore
-                                                        item.cash -= box11.rent[0]
+
+                                                        function payForEnemy(num: number) {
+                                                            if (box11.type === "railroad") {
+                                                                if (playersData[num].railroadArr.length === 3) {
+                                                                    //@ts-ignore
+                                                                    item.cash -= box11.rent[2]
+                                                                } else if (playersData[num].railroadArr.length === 2) {
+                                                                    //@ts-ignore
+                                                                    item.cash -= box11.rent[1]
+                                                                }else {
+                                                                    //@ts-ignore
+                                                                    item.cash -= box11.rent[0]
+                                                                }
+                                                            } else if (box11.type === "utility") {
+                                                                if (playersData[num].utilityArr.length === 2){
+                                                                    //@ts-ignore
+                                                                    item.cash -= box11.rent[1]
+                                                                }else {
+                                                                    //@ts-ignore
+                                                                    item.cash -= box11.rent[0]
+                                                                }
+
+                                                            } else if(box11.type === "property") {
+                                                                if(box11.numberOfHouses.length === 0){
+                                                                    //@ts-ignore
+                                                                    item.cash -= box11.rent[0]
+                                                                }
+                                                                else if(box11.numberOfHouses.length === 1){
+                                                                    //@ts-ignore
+                                                                    item.cash -= box11.rent[1]
+                                                                }
+                                                                else if(box11.numberOfHouses.length === 2){
+                                                                    //@ts-ignore
+                                                                    item.cash -= box11.rent[2]
+                                                                }
+                                                                else if(box11.numberOfHouses.length === 3){
+                                                                    //@ts-ignore
+                                                                    item.cash -= box11.rent[3]
+                                                                }
+                                                                else if(box11.numberOfHouses.length === 4){
+                                                                    //@ts-ignore
+                                                                    item.cash -= box11.rent[4]
+                                                                }
+                                                                else if(box11.numberOfHouses.length === 5){
+                                                                    //@ts-ignore
+                                                                    item.cash -= box11.rent[5]
+                                                                }
+
+                                                            }
+                                                        }
+
+                                                        if (index === 0) {
+                                                            payForEnemy(1)
+                                                        } else if (index === 1) {
+                                                            payForEnemy(0)
+                                                        }
                                                         updatePlayerMoney()
                                                     }
                                                 })
                                             }
 
-
-                                            // if it is my?
-                                            // check if I can build house
+                                            // MY PROPERTY AND BUILD HOUSE
                                             //@ts-ignore
                                             if (item.property.includes(box)) {
-                                                // make possible to build house
                                                 monopolyBoardArr.map((box22) => {
                                                     if (box22.id === box) {
+                                                        let playerClass = '';
+                                                        if (index === 0) {
+                                                            playerClass = 'player1'
+                                                        }
+                                                        else {
+                                                            playerClass = 'player2'
+                                                        }
+                                                        const innerGameBoxNoButton = () => {
+                                                            gameBox[i].innerHTML = `
+                                                                <div class="h-50">
+                                                                    <div class="rounded-1 w-100" style="background-color: ${box22.color}; height: 10px"></div>
+                                                                     <div class="text-center">${box22.name}</div>
+                                                                </div>
+                                                                 <div class="d-flex align-items-end h-50 justify-content-between">
+                                                                      <div>$${box22.price}</div>
+                                                                 </div>
+                                                                <div class="player ${playerClass}">
+                                                                    <img src="${playersData[index].img}" alt="">
+                                                                </div>
+                                                              `;
 
-                                                        if(box22.color === 'brown' && item.brownArr.length === 2){
-                                                            gameBox[i].innerHTML += `lalalalalalal`
                                                         }
-                                                        else if(box22.color === 'lightblue' && item.lightblueArr.length === 3){
-                                                            gameBox[i].innerHTML += `lalalalalalal`
+                                                        const innerGameBoxWithButtonHouse = () => {
+                                                            gameBox[i].innerHTML = `
+                                                                    <div class="h-50">
+                                                                        <div class="rounded-1 w-100" style="background-color: ${box22.color}; height: 10px"></div>
+                                                                         <div class="text-center">${box22.name}</div>
+                                                                    </div>
+                                                                     <div class="d-flex align-items-end h-50 justify-content-between">
+                                                                      <div><button class="buyHouseBtn" style="font-size: 10px">Buy House</button></div>
+                                                                    </div>
+                                                                    <div class="player ${playerClass}">
+                                                                        <img src="${playersData[index].img}" alt="">
+                                                                    </div>
+                                                                `
                                                         }
-                                                        else if(box22.color === 'pink' && item.pinkArr.length === 3){
-                                                            gameBox[i].innerHTML += `lalalalalalal`
+                                                        const innerGameBoxWithButtonHotel = () => {
+                                                            gameBox[i].innerHTML = `
+                                                                    <div class="h-50">
+                                                                        <div class="rounded-1 w-100" style="background-color: ${box22.color}; height: 10px"></div>
+                                                                         <div class="text-center">${box22.name}</div>
+                                                                    </div>
+                                                                     <div class="d-flex align-items-end h-50 justify-content-between">
+                                                                      <div><button class="buyHouseBtn" style="font-size: 10px">Buy Hotel</button></div>
+                                                                    </div>
+                                                                    <div class="player ${playerClass}">
+                                                                        <img src="${playersData[index].img}" alt="">
+                                                                    </div>
+                                                                `
                                                         }
-                                                        else if(box22.color === "orange" && item.orangeArr.length === 3){
-                                                            gameBox[i].innerHTML += `lalalalalalal`
-                                                        }
-                                                        else if(box22.color === "red" && item.redArr.length === 3){
-                                                            gameBox[i].innerHTML += `lalalalalalal`
-                                                        }
-                                                        else  if(box22.color === "yellow" && item.yellowArr.length === 3){
-                                                            gameBox[i].innerHTML += `lalalalalalal`
-                                                        }
-                                                        else if(box22.color === "green" && item.greenArr.length === 3){
-                                                            gameBox[i].innerHTML += `lalalalalalal`
-                                                        }
-                                                        else if(box22.color === "darkblue" && item.darkblueArr.length === 2){
-                                                            gameBox[i].innerHTML += `lalalalalalal`
-                                                        }
-                                                        else if(box22.type === "railroad" && item.railroadArr.length === 3){
-                                                            gameBox[i].innerHTML += `lalalalalalal`
-                                                        }
-                                                        else  if(box22.type === "utility" && item.utilityArr.length === 2){
-                                                            gameBox[i].innerHTML += `lalalalalalal`
+                                                        const innerOnotherPlayerIfNeed = () => {
+                                                            if (index === 0 && playersData[1].boxId === item.boxId) {
+                                                                gameBox[i].innerHTML += `
+                                                                    <div class="player player2">
+                                                                        <img src="${playersData[1].img}" alt="">
+                                                                    </div>
+                                                                `
+                                                            } else if (index === 1 && playersData[0].boxId === item.boxId) {
+                                                                gameBox[i].innerHTML += `
+                                                                    <div class="player player1">
+                                                                        <img src="${playersData[0].img}" alt="">
+                                                                    </div>
+                                                                `
+                                                            }
                                                         }
 
+                                                        function buyHouse() {
+                                                            if (box22.numberOfHouses.length <= 4){
+                                                                const buyHouseBtn = document.querySelector('.buyHouseBtn') as HTMLButtonElement;
+                                                                buyHouseBtn.onclick = () => {
+                                                                    //@ts-ignore
+                                                                    box22.numberOfHouses?.push(1)
+                                                                    // @ts-ignore
+                                                                    item.cash -= box22.houseCost
+                                                                    updatePlayerMoney()
+                                                                    innerGameBoxNoButton()
+                                                                    innerOnotherPlayerIfNeed()
+                                                                    updatePlayerField()
+                                                                }
+                                                            }
+
+                                                        }
+                                                        if (box22.color === 'brown' && item.brownArr.length === 2) {
+                                                            if (box22.numberOfHouses.length <= 4){}
+                                                                    if(box22.numberOfHouses.length === 4){
+                                                                        innerGameBoxWithButtonHotel()
+                                                                    }
+                                                                    else if (box22.numberOfHouses.length <= 3) {
+                                                                        innerGameBoxWithButtonHouse()
+                                                                    }
+                                                                    innerOnotherPlayerIfNeed()
+                                                                    buyHouse()
+                                                        }
+                                                        else if (box22.color === 'lightblue' && item.lightblueArr.length === 3) {
+                                                            if (box22.numberOfHouses.length <= 4){
+                                                                if(box22.numberOfHouses.length === 4 ){
+                                                                    innerGameBoxWithButtonHotel()
+                                                                }
+                                                                else if (box22.numberOfHouses.length <= 3) {
+                                                                    innerGameBoxWithButtonHouse()
+                                                                }
+                                                                innerOnotherPlayerIfNeed()
+                                                                buyHouse()
+                                                            }
+                                                        }
+                                                        else if (box22.color === 'pink' && item.pinkArr.length === 3) {
+                                                            if (box22.numberOfHouses.length <= 4){
+                                                                if(box22.numberOfHouses.length === 4 ){
+                                                                    innerGameBoxWithButtonHotel()
+                                                                }
+                                                                else if (box22.numberOfHouses.length <= 3) {
+                                                                    innerGameBoxWithButtonHouse()
+                                                                }
+                                                                innerOnotherPlayerIfNeed()
+                                                                buyHouse()
+                                                            }
+                                                        }
+                                                        else if (box22.color === "orange" && item.orangeArr.length === 3) {
+                                                            if (box22.numberOfHouses.length <= 4){
+                                                                if(box22.numberOfHouses.length === 4 ){
+                                                                    innerGameBoxWithButtonHotel()
+                                                                }
+                                                                else if (box22.numberOfHouses.length <= 3) {
+                                                                    innerGameBoxWithButtonHouse()
+                                                                }
+                                                                innerOnotherPlayerIfNeed()
+                                                                buyHouse()
+                                                            }
+                                                        }
+                                                        else if (box22.color === "red" && item.redArr.length === 3) {
+                                                            if (box22.numberOfHouses.length <= 4){
+                                                                if(box22.numberOfHouses.length === 4 ){
+                                                                    innerGameBoxWithButtonHotel()
+                                                                }
+                                                                else if (box22.numberOfHouses.length <= 3) {
+                                                                    innerGameBoxWithButtonHouse()
+                                                                }
+                                                                innerOnotherPlayerIfNeed()
+                                                                buyHouse()
+                                                            }
+                                                        }
+                                                        else if (box22.color === "yellow" && item.yellowArr.length === 3) {
+                                                            if (box22.numberOfHouses.length <= 4){
+                                                                if(box22.numberOfHouses.length === 4 ){
+                                                                    innerGameBoxWithButtonHotel()
+                                                                }
+                                                                else if (box22.numberOfHouses.length <= 3) {
+                                                                    innerGameBoxWithButtonHouse()
+                                                                }
+                                                                innerOnotherPlayerIfNeed()
+                                                                buyHouse()
+                                                            }
+
+                                                        }
+                                                        else if (box22.color === "green" && item.greenArr.length === 3) {
+                                                            if (box22.numberOfHouses.length <= 4){
+                                                                if(box22.numberOfHouses.length === 4 ){
+                                                                    innerGameBoxWithButtonHotel()
+                                                                }
+                                                                else if (box22.numberOfHouses.length <= 3) {
+                                                                    innerGameBoxWithButtonHouse()
+                                                                }
+                                                                innerOnotherPlayerIfNeed()
+                                                                buyHouse()
+                                                            }
+                                                        }
+                                                        else if (box22.color === "darkblue" && item.darkblueArr.length === 2) {
+                                                            if (box22.numberOfHouses.length <= 4){
+                                                                if(box22.numberOfHouses.length === 4 ){
+                                                                    innerGameBoxWithButtonHotel()
+                                                                }
+                                                                else if (box22.numberOfHouses.length <= 3) {
+                                                                    innerGameBoxWithButtonHouse()
+                                                                }
+                                                                innerOnotherPlayerIfNeed()
+                                                                buyHouse()
+                                                            }
+                                                        }
                                                         updatePlayerMoney()
                                                     }
                                                 })
-                                                console.log('----------')
-                                                console.log(`my box ${box}`)
-                                                console.log('----------')
-
                                             }
-
-
-                                            //     // pinigai i minusa
-
-                                            //reikia tikrinti kiek kokiu koreteliu turi ar
-                                            // galima pirkti namus ir kompaniju ar turi
-
                                         }
-
-                                    } else {
+                                    }
+                                    else {
                                         // ------UPDATE IF NO ONE HAVE THIS BOX
-
                                         buyAndUpdate()
                                     }
                                 }
