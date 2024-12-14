@@ -370,6 +370,8 @@ let playersData = [
 ];
 // array of bought boxes
 let boughtBoxesArr = [];
+let boughtRailroadArr = [];
+let boughtUtilityArr = [];
 const rndCeil = (num) => Math.ceil(Math.random() * num);
 //     MAKE BOARD OF GAME
 gameBoardArr.map((box, index) => {
@@ -437,7 +439,7 @@ gameBoardArr.map((box, index) => {
                     if (item.turn) {
                         whichPlayer.innerHTML = `<img src="${item.img}" alt="">`;
                         rollDiceBtn.onclick = () => {
-                            // FUNCTION TO UPDATE PLAYER FIELD
+                            // FUNCTION TO UPDATE PLAYER FIELD (box card)
                             function updatePlayerField() {
                                 cardPlayer1Boxes.innerHTML = '';
                                 playersData[0].property.sort(function (a, b) { return a - b; });
@@ -704,69 +706,338 @@ gameBoardArr.map((box, index) => {
                                     });
                                 });
                             }
-                            // if item.turn = false, innerHTML without button
-                            playersData.map((item, index) => {
-                                if (!item.turn) {
-                                    gameBoardArr.map((prev, i) => {
-                                        monopolyBoardArr.map((e) => {
-                                            if (prev === e.id) {
-                                                if (prev === item.boxId) {
-                                                    if (index === 1) {
-                                                        gameBox[i].innerHTML = `
+                            // ------------UPDATE THIS BOX
+                            function updateTheBox() {
+                                playersData.map((item, index) => {
+                                    if (!item.turn) {
+                                        gameBoardArr.map((prev, i) => {
+                                            monopolyBoardArr.map((e) => {
+                                                if (prev === e.id) {
+                                                    if (prev === item.boxId) {
+                                                        function updateRailBox() {
+                                                            if (boughtRailroadArr.length > 0) {
+                                                                console.log(boughtRailroadArr);
+                                                                let firstPlayerBought = 0;
+                                                                let secondPlayerBought = 0;
+                                                                boughtRailroadArr.forEach((rail) => {
+                                                                    playersData[0].property.forEach((railFirstPl) => {
+                                                                        // @ts-ignore
+                                                                        if (railFirstPl === rail) {
+                                                                            console.log('aaaaaaaa');
+                                                                        }
+                                                                    });
+                                                                    playersData[1].property.forEach((railSecondPl) => {
+                                                                        // @ts-ignore
+                                                                        if (railSecondPl === rail) {
+                                                                            console.log('nanana');
+                                                                        }
+                                                                    });
+                                                                });
+                                                            }
+                                                            else {
+                                                                console.log('ccccccccc');
+                                                            }
+                                                        }
+                                                        function updateUtilityBox() {
+                                                            if (boughtUtilityArr.length > 0) {
+                                                            }
+                                                            else {
+                                                                gameBox[i].innerHTML += `
+                                                                    <div class="d-flex align-items-end h-50">
+                                                                      <div>$${e.price}</div>
+                                                                    </div>
+                                                                 `;
+                                                            }
+                                                        }
+                                                        function updateTheBoxWithPay() {
+                                                            if (boughtBoxesArr.length > 0 && e.type === 'property') {
+                                                                let boughtTrue = false;
+                                                                boughtBoxesArr.map((bought) => {
+                                                                    if (bought === item.boxId) {
+                                                                        boughtTrue = true;
+                                                                        if (e.numberOfHouses.length === 0) {
+                                                                            gameBox[i].innerHTML += `
+                                                                                <div class="d-flex align-items-end h-50">
+                                                                                  <div>Pay: $${e.rent[0]}</div>
+                                                                                </div>
+                                                                             `;
+                                                                        }
+                                                                        if (e.numberOfHouses.length === 1) {
+                                                                            gameBox[i].innerHTML += `
+                                                                                <div class="d-flex align-items-end h-50">
+                                                                                  <div>Pay: $${e.rent[1]}</div>
+                                                                                </div>
+                                                                             `;
+                                                                        }
+                                                                        if (e.numberOfHouses.length === 2) {
+                                                                            gameBox[i].innerHTML += `
+                                                                                <div class="d-flex align-items-end h-50">
+                                                                                  <div>Pay: $${e.rent[2]}</div>
+                                                                                </div>
+                                                                             `;
+                                                                        }
+                                                                        if (e.numberOfHouses.length === 3) {
+                                                                            gameBox[i].innerHTML += `
+                                                                                <div class="d-flex align-items-end h-50">
+                                                                                  <div>Pay: $${e.rent[3]}</div>
+                                                                                </div>
+                                                                             `;
+                                                                        }
+                                                                        if (e.numberOfHouses.length === 4) {
+                                                                            gameBox[i].innerHTML += `
+                                                                                <div class="d-flex align-items-end h-50">
+                                                                                  <div>Pay: $${e.rent[4]}</div>
+                                                                                </div>
+                                                                             `;
+                                                                        }
+                                                                        if (e.numberOfHouses.length === 5) {
+                                                                            gameBox[i].innerHTML += `
+                                                                                <div class="d-flex align-items-end h-50">
+                                                                                  <div>Pay: $${e.rent[5]}</div>
+                                                                                </div>
+                                                                             `;
+                                                                        }
+                                                                    }
+                                                                });
+                                                                if (!boughtTrue) {
+                                                                    gameBox[i].innerHTML += `
+                                                                    <div class="d-flex align-items-end h-50">
+                                                                      <div>$${e.price}</div>
+                                                                    </div>
+                                                                 `;
+                                                                }
+                                                            }
+                                                            else if (e.type === 'railroad') {
+                                                                if (boughtRailroadArr.length === 1) {
+                                                                    gameBox[i].innerHTML += `
+                                                                    <div class="d-flex align-items-end h-50">
+                                                                      <div>Pay: $${e.rent[0]}</div>
+                                                                    </div>
+                                                                 `;
+                                                                }
+                                                                else if (boughtRailroadArr.length === 2) {
+                                                                    gameBox[i].innerHTML += `
+                                                                    <div class="d-flex align-items-end h-50">
+                                                                      <div>Pay: $${e.rent[1]}</div>
+                                                                    </div>
+                                                                 `;
+                                                                }
+                                                                else if (boughtRailroadArr.length === 3) {
+                                                                    gameBox[i].innerHTML += `
+                                                                    <div class="d-flex align-items-end h-50">
+                                                                      <div>Pay: $${e.rent[2]}</div>
+                                                                    </div>
+                                                                 `;
+                                                                }
+                                                                else {
+                                                                    gameBox[i].innerHTML += `
+                                                                    <div class="d-flex align-items-end h-50">
+                                                                      <div>$${e.price}</div>
+                                                                    </div>
+                                                                 `;
+                                                                }
+                                                            }
+                                                            else if (e.type === 'utility') {
+                                                                if (boughtUtilityArr.length === 1) {
+                                                                    gameBox[i].innerHTML += `
+                                                                    <div class="d-flex align-items-end h-50">
+                                                                      <div>Pay: $${e.rent[0]}</div>
+                                                                    </div>
+                                                                 `;
+                                                                }
+                                                                else if (boughtUtilityArr.length === 2) {
+                                                                    gameBox[i].innerHTML += `
+                                                                    <div class="d-flex align-items-end h-50">
+                                                                      <div>Pay: $${e.rent[1]}</div>
+                                                                    </div>
+                                                                 `;
+                                                                }
+                                                                else {
+                                                                    gameBox[i].innerHTML += `
+                                                                    <div class="d-flex align-items-end h-50">
+                                                                      <div>$${e.price}</div>
+                                                                    </div>
+                                                                 `;
+                                                                }
+                                                            }
+                                                            else {
+                                                                gameBox[i].innerHTML += `
+                                                                    <div class="d-flex align-items-end h-50">
+                                                                      <div>$${e.price}</div>
+                                                                    </div>
+                                                                 `;
+                                                            }
+                                                        }
+                                                        updateRailBox();
+                                                        if (index === 1) {
+                                                            gameBox[i].innerHTML = `
                                                             <div class="h-50">
                                                                 <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
                                                                 <div class="text-center">${e.name}</div>
                                                             </div>
                                                         `;
-                                                        if (e.price) {
-                                                            gameBox[i].innerHTML += `
-                                                                <div class="d-flex align-items-end h-50">
-                                                                  <div>$${e.price}</div>
-                                                                </div>
-                                                             `;
+                                                            if (e.price) {
+                                                                updateTheBoxWithPay();
+                                                            }
+                                                            if (prev === playersData[1].boxId) {
+                                                                gameBox[i].innerHTML += `
+                                                            <div class="player player2">
+                                                                <img src="${playersData[1].img}" alt="">
+                                                            </div>
+                                                        `;
+                                                            }
                                                         }
-                                                        if (prev === playersData[1].boxId) {
-                                                            gameBox[i].innerHTML += `
-                                                                <div class="player player2">
-                                                                    <img src="${playersData[1].img}" alt="">
+                                                        else {
+                                                            gameBox[i].innerHTML = `
+                                                            <div class="h-50">
+                                                                <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
+                                                                <div class="text-center">${e.name}</div>
+                                                            </div>
+                                                        `;
+                                                            if (e.price) {
+                                                                updateTheBoxWithPay();
+                                                            }
+                                                            if (prev === playersData[0].boxId) {
+                                                                gameBox[i].innerHTML += `
+                                                                <div class="player player1">
+                                                                    <img src="${playersData[0].img}" alt="">
                                                                 </div>
                                                             `;
-                                                        }
-                                                    }
-                                                    else if (index === 0) {
-                                                        gameBox[i].innerHTML = `
-                                                            <div class="h-50">
-                                                                <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
-                                                                <div class="text-center">${e.name}</div>
-                                                            </div>
-                                                        `;
-                                                        if (e.price) {
-                                                            gameBox[i].innerHTML += `
-                                                                <div class="d-flex align-items-end h-50">
-                                                                  <div>$${e.price}</div>
-                                                                </div>
-                                                             `;
-                                                        }
-                                                        if (prev === playersData[0].boxId) {
-                                                            gameBox[i].innerHTML += `
-                                                        <div class="player player1">
-                                                            <img src="${playersData[0].img}" alt="">
-                                                        </div>
-                                                    `;
+                                                            }
                                                         }
                                                     }
                                                 }
-                                            }
+                                            });
                                         });
-                                    });
-                                }
-                            });
+                                    }
+                                });
+                            }
+                            updateTheBox();
                             // UPDATE PREVIOUS BOX
                             function updatePreviousBox() {
                                 gameBoardArr.map((box, i) => {
                                     monopolyBoardArr.map((e) => {
                                         if (box === e.id) {
                                             if (box === item.boxId) {
+                                                function updateTheBoxWithPay() {
+                                                    if (boughtBoxesArr.length > 0 && e.type === 'property') {
+                                                        let boughtTrue = false;
+                                                        boughtBoxesArr.map((bought) => {
+                                                            if (bought === item.boxId) {
+                                                                boughtTrue = true;
+                                                                if (e.numberOfHouses.length === 0) {
+                                                                    gameBox[i].innerHTML += `
+                                                                                <div class="d-flex align-items-end h-50">
+                                                                                  <div>Pay: $${e.rent[0]}</div>
+                                                                                </div>
+                                                                             `;
+                                                                }
+                                                                else if (e.numberOfHouses.length === 1) {
+                                                                    gameBox[i].innerHTML += `
+                                                                                <div class="d-flex align-items-end h-50">
+                                                                                  <div>Pay: $${e.rent[1]}</div>
+                                                                                </div>
+                                                                             `;
+                                                                }
+                                                                else if (e.numberOfHouses.length === 2) {
+                                                                    gameBox[i].innerHTML += `
+                                                                                <div class="d-flex align-items-end h-50">
+                                                                                  <div>Pay: $${e.rent[2]}</div>
+                                                                                </div>
+                                                                             `;
+                                                                }
+                                                                else if (e.numberOfHouses.length === 3) {
+                                                                    gameBox[i].innerHTML += `
+                                                                                <div class="d-flex align-items-end h-50">
+                                                                                  <div>Pay: $${e.rent[3]}</div>
+                                                                                </div>
+                                                                             `;
+                                                                }
+                                                                else if (e.numberOfHouses.length === 4) {
+                                                                    gameBox[i].innerHTML += `
+                                                                                <div class="d-flex align-items-end h-50">
+                                                                                  <div>Pay: $${e.rent[4]}</div>
+                                                                                </div>
+                                                                             `;
+                                                                }
+                                                                else if (e.numberOfHouses.length === 5) {
+                                                                    gameBox[i].innerHTML += `
+                                                                                <div class="d-flex align-items-end h-50">
+                                                                                  <div>Pay: $${e.rent[5]}</div>
+                                                                                </div>
+                                                                             `;
+                                                                }
+                                                            }
+                                                        });
+                                                        if (!boughtTrue) {
+                                                            gameBox[i].innerHTML += `
+                                                                    <div class="d-flex align-items-end h-50">
+                                                                      <div>$${e.price}</div>
+                                                                    </div>
+                                                                 `;
+                                                        }
+                                                    }
+                                                    else if (e.type === 'railroad') {
+                                                        if (boughtRailroadArr.length === 1) {
+                                                            gameBox[i].innerHTML += `
+                                                                    <div class="d-flex align-items-end h-50">
+                                                                      <div>Pay: $${e.rent[0]}</div>
+                                                                    </div>
+                                                                 `;
+                                                        }
+                                                        else if (boughtRailroadArr.length === 2) {
+                                                            gameBox[i].innerHTML += `
+                                                                    <div class="d-flex align-items-end h-50">
+                                                                      <div>Pay: $${e.rent[1]}</div>
+                                                                    </div>
+                                                                 `;
+                                                        }
+                                                        else if (boughtRailroadArr.length === 3) {
+                                                            gameBox[i].innerHTML += `
+                                                                    <div class="d-flex align-items-end h-50">
+                                                                      <div>Pay: $${e.rent[2]}</div>
+                                                                    </div>
+                                                                 `;
+                                                        }
+                                                        else {
+                                                            gameBox[i].innerHTML += `
+                                                                    <div class="d-flex align-items-end h-50">
+                                                                      <div>$${e.price}</div>
+                                                                    </div>
+                                                                 `;
+                                                        }
+                                                    }
+                                                    else if (e.type === 'utility') {
+                                                        if (boughtUtilityArr.length === 1) {
+                                                            gameBox[i].innerHTML += `
+                                                                    <div class="d-flex align-items-end h-50">
+                                                                      <div>Pay: $${e.rent[0]}</div>
+                                                                    </div>
+                                                                 `;
+                                                        }
+                                                        else if (boughtUtilityArr.length === 2) {
+                                                            gameBox[i].innerHTML += `
+                                                                    <div class="d-flex align-items-end h-50">
+                                                                      <div>Pay: $${e.rent[1]}</div>
+                                                                    </div>
+                                                                 `;
+                                                        }
+                                                        else {
+                                                            gameBox[i].innerHTML += `
+                                                                    <div class="d-flex align-items-end h-50">
+                                                                      <div>$${e.price}</div>
+                                                                    </div>
+                                                                 `;
+                                                        }
+                                                    }
+                                                    else {
+                                                        gameBox[i].innerHTML += `
+                                                                    <div class="d-flex align-items-end h-50">
+                                                                      <div>$${e.price}</div>
+                                                                    </div>
+                                                                 `;
+                                                    }
+                                                }
                                                 if (index === 0) {
                                                     gameBox[i].innerHTML = `
                                                         <div class="h-50">
@@ -774,93 +1045,26 @@ gameBoardArr.map((box, index) => {
                                                             <div class="text-center">${e.name}</div>
                                                         </div>
                                                     `;
-                                                    // if (e.price) {
-                                                    //
-                                                    //     gameBox[i].innerHTML += `
-                                                    //             <div class="d-flex align-items-end h-50">
-                                                    //               <div>$${e.price}</div>
-                                                    //             </div>
-                                                    //     `
-                                                    // }
                                                     if (e.price) {
-                                                        if (boughtBoxesArr.length > 0) {
-                                                            let boughtTrue = false;
-                                                            boughtBoxesArr.map((bought) => {
-                                                                if (bought === item.boxId) {
-                                                                    boughtTrue = true;
-                                                                    gameBox[i].innerHTML += `
-                                                                    <div class="d-flex align-items-end h-50">
-                                                                      <div>Pay: $${e.rent[0]}</div>
-                                                                    </div>
-                                                                 `;
-                                                                }
-                                                            });
-                                                            if (!boughtTrue) {
-                                                                gameBox[i].innerHTML += `
-                                                                    <div class="d-flex align-items-end h-50">
-                                                                      <div>$${e.price}</div>
-                                                                    </div>
-                                                                 `;
-                                                            }
-                                                        }
-                                                        else {
-                                                            gameBox[i].innerHTML += `
-                                                                    <div class="d-flex align-items-end h-50">
-                                                                      <div>$${e.price}</div>
-                                                                    </div>
-                                                                 `;
-                                                        }
+                                                        updateTheBoxWithPay();
                                                     }
                                                     if (box === playersData[1].boxId) {
                                                         gameBox[i].innerHTML += `
                                                             <div class="player player2">
                                                                 <img src="${playersData[1].img}" alt="">
                                                             </div>
-                                                        `;
+                                                       `;
                                                     }
                                                 }
-                                                else if (index === 1) {
+                                                else {
                                                     gameBox[i].innerHTML = `
-                                                    <div class="h-50">
-                                                        <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
-                                                        <div class="text-center">${e.name}</div>
-                                                    </div>
-                                                `;
-                                                    // if (e.price) {
-                                                    //     gameBox[i].innerHTML += `
-                                                    //             <div class="d-flex align-items-end h-50">
-                                                    //               <div>$${e.price}</div>
-                                                    //             </div>
-                                                    //          `
-                                                    // }
+                                                        <div class="h-50">
+                                                            <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
+                                                            <div class="text-center">${e.name}</div>
+                                                        </div>
+                                                     `;
                                                     if (e.price) {
-                                                        if (boughtBoxesArr.length > 0) {
-                                                            let boughtTrue = false;
-                                                            boughtBoxesArr.map((bought) => {
-                                                                if (bought === item.boxId) {
-                                                                    boughtTrue = true;
-                                                                    gameBox[i].innerHTML += `
-                                                                    <div class="d-flex align-items-end h-50">
-                                                                      <div>Pay: $${e.rent[0]}</div>
-                                                                    </div>
-                                                                 `;
-                                                                }
-                                                            });
-                                                            if (!boughtTrue) {
-                                                                gameBox[i].innerHTML += `
-                                                                    <div class="d-flex align-items-end h-50">
-                                                                      <div>$${e.price}</div>
-                                                                    </div>
-                                                                 `;
-                                                            }
-                                                        }
-                                                        else {
-                                                            gameBox[i].innerHTML += `
-                                                                    <div class="d-flex align-items-end h-50">
-                                                                      <div>$${e.price}</div>
-                                                                    </div>
-                                                                 `;
-                                                        }
+                                                        updateTheBoxWithPay();
                                                     }
                                                     if (box === playersData[0].boxId) {
                                                         gameBox[i].innerHTML += `
@@ -878,8 +1082,7 @@ gameBoardArr.map((box, index) => {
                             updatePreviousBox();
                             // -------PLAYERS MOVE-----------
                             // DICE ROLLED NUMBER, UPDATE MONEY IF MOVES THROUGH "GO"
-                            // item.boxId += rndCeil(6)
-                            item.boxId++;
+                            item.boxId += rndCeil(6);
                             if (item.boxId >= 36) {
                                 item.boxId -= 36;
                                 item.cash += 200;
@@ -902,20 +1105,6 @@ gameBoardArr.map((box, index) => {
                                                             else {
                                                                 playerClass = 'player2';
                                                             }
-                                                            const innerGameBoxNoButton = () => {
-                                                                gameBox[i].innerHTML = `
-                                                                <div class="h-50">
-                                                                    <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
-                                                                     <div class="text-center">${e.name}</div>
-                                                                </div>
-                                                                 <div class="d-flex align-items-end h-50 justify-content-between">
-                                                                      <div>$${e.price}</div>
-                                                                 </div>
-                                                                <div class="player ${playerClass}">
-                                                                    <img src="${playersData[index].img}" alt="">
-                                                                </div>
-                                                              `;
-                                                            };
                                                             const innerGameBoxNoHouse = () => {
                                                                 gameBox[i].innerHTML = `
                                                                 <div class="h-50">
@@ -924,81 +1113,6 @@ gameBoardArr.map((box, index) => {
                                                                 </div>
                                                                  <div class="d-flex align-items-end h-50 justify-content-between">
                                                                       <div>Pay: $${e.rent[0]}</div>
-                                                                 </div>
-                                                                <div class="player ${playerClass}">
-                                                                    <img src="${playersData[index].img}" alt="">
-                                                                </div>
-                                                              `;
-                                                            };
-                                                            const innerGameBox1House = () => {
-                                                                // @ts-ignore
-                                                                gameBox[i].innerHTML = `
-                                                                <div class="h-50">
-                                                                    <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
-                                                                     <div class="text-center">${e.name}</div>
-                                                                </div>
-                                                                 <div class="d-flex align-items-end h-50 justify-content-between">
-                                                                      <div>Pay: $${e.rent[1]}</div>
-                                                                 </div>
-                                                                <div class="player ${playerClass}">
-                                                                    <img src="${playersData[index].img}" alt="">
-                                                                </div>
-                                                              `;
-                                                            };
-                                                            const innerGameBox2House = () => {
-                                                                // @ts-ignore
-                                                                gameBox[i].innerHTML = `
-                                                                <div class="h-50">
-                                                                    <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
-                                                                     <div class="text-center">${e.name}</div>
-                                                                </div>
-                                                                 <div class="d-flex align-items-end h-50 justify-content-between">
-                                                                      <div>Pay: $${e.rent[2]}</div>
-                                                                 </div>
-                                                                <div class="player ${playerClass}">
-                                                                    <img src="${playersData[index].img}" alt="">
-                                                                </div>
-                                                              `;
-                                                            };
-                                                            const innerGameBox3House = () => {
-                                                                // @ts-ignore
-                                                                gameBox[i].innerHTML = `
-                                                                <div class="h-50">
-                                                                    <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
-                                                                     <div class="text-center">${e.name}</div>
-                                                                </div>
-                                                                 <div class="d-flex align-items-end h-50 justify-content-between">
-                                                                      <div>Pay: $${e.rent[3]}</div>
-                                                                 </div>
-                                                                <div class="player ${playerClass}">
-                                                                    <img src="${playersData[index].img}" alt="">
-                                                                </div>
-                                                              `;
-                                                            };
-                                                            const innerGameBox4House = () => {
-                                                                // @ts-ignore
-                                                                gameBox[i].innerHTML = `
-                                                                <div class="h-50">
-                                                                    <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
-                                                                     <div class="text-center">${e.name}</div>
-                                                                </div>
-                                                                 <div class="d-flex align-items-end h-50 justify-content-between">
-                                                                      <div>Pay: $${e.rent[4]}</div>
-                                                                 </div>
-                                                                <div class="player ${playerClass}">
-                                                                    <img src="${playersData[index].img}" alt="">
-                                                                </div>
-                                                              `;
-                                                            };
-                                                            const innerGameBox5House = () => {
-                                                                // @ts-ignore
-                                                                gameBox[i].innerHTML = `
-                                                                <div class="h-50">
-                                                                    <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
-                                                                     <div class="text-center">${e.name}</div>
-                                                                </div>
-                                                                 <div class="d-flex align-items-end h-50 justify-content-between">
-                                                                      <div>Pay: $${e.rent[5]}</div>
                                                                  </div>
                                                                 <div class="player ${playerClass}">
                                                                     <img src="${playersData[index].img}" alt="">
@@ -1081,6 +1195,14 @@ gameBoardArr.map((box, index) => {
                                                                         playersData[0].property.push(e.id);
                                                                         // @ts-ignore
                                                                         boughtBoxesArr.push(e.id);
+                                                                        if (e.type === "utility") {
+                                                                            // @ts-ignore
+                                                                            boughtUtilityArr.push(e.id);
+                                                                        }
+                                                                        if (e.type === "railroad") {
+                                                                            // @ts-ignore
+                                                                            boughtRailroadArr.push(e.id);
+                                                                        }
                                                                         pushToColorArr(0);
                                                                         updatePlayerMoney();
                                                                         innerGameBoxNoHouse();
@@ -1096,6 +1218,14 @@ gameBoardArr.map((box, index) => {
                                                                         playersData[1].property.push(e.id);
                                                                         // @ts-ignore
                                                                         boughtBoxesArr.push(e.id);
+                                                                        if (e.type === "utility") {
+                                                                            // @ts-ignore
+                                                                            boughtUtilityArr.push(e.id);
+                                                                        }
+                                                                        if (e.type === "railroad") {
+                                                                            // @ts-ignore
+                                                                            boughtRailroadArr.push(e.id);
+                                                                        }
                                                                         pushToColorArr(1);
                                                                         updatePlayerMoney();
                                                                         innerGameBoxNoHouse();
@@ -1110,6 +1240,7 @@ gameBoardArr.map((box, index) => {
                                             });
                                         });
                                     }
+                                    // ------CHECKING IF IT IS MY PROPERTY (IF NEEDED PAY FOR ENEMY)
                                     if (boughtBoxesArr.length > 0) {
                                         //@ts-ignore
                                         if (!boughtBoxesArr.includes(item.boxId)) {
@@ -1273,11 +1404,11 @@ gameBoardArr.map((box, index) => {
                                                             // @ts-ignore
                                                             gameBox[i].innerHTML = `
                                                                 <div class="h-50">
-                                                                    <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
-                                                                     <div class="text-center">${e.name}</div>
+                                                                    <div class="rounded-1 w-100" style="background-color: ${box22.color}; height: 10px"></div>
+                                                                     <div class="text-center">${box22.name}</div>
                                                                 </div>
                                                                  <div class="d-flex align-items-end h-50 justify-content-between">
-                                                                      <div>Pay: $${e.rent[1]}</div>
+                                                                      <div>Pay: $${box22.rent[1]}</div>
                                                                  </div>
                                                                 <div class="player ${playerClass}">
                                                                     <img src="${playersData[index].img}" alt="">
@@ -1288,11 +1419,11 @@ gameBoardArr.map((box, index) => {
                                                             // @ts-ignore
                                                             gameBox[i].innerHTML = `
                                                                 <div class="h-50">
-                                                                    <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
-                                                                     <div class="text-center">${e.name}</div>
+                                                                    <div class="rounded-1 w-100" style="background-color: ${box22.color}; height: 10px"></div>
+                                                                     <div class="text-center">${box22.name}</div>
                                                                 </div>
                                                                  <div class="d-flex align-items-end h-50 justify-content-between">
-                                                                      <div>Pay: $${e.rent[2]}</div>
+                                                                      <div>Pay: $${box22.rent[2]}</div>
                                                                  </div>
                                                                 <div class="player ${playerClass}">
                                                                     <img src="${playersData[index].img}" alt="">
@@ -1303,11 +1434,11 @@ gameBoardArr.map((box, index) => {
                                                             // @ts-ignore
                                                             gameBox[i].innerHTML = `
                                                                 <div class="h-50">
-                                                                    <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
-                                                                     <div class="text-center">${e.name}</div>
+                                                                    <div class="rounded-1 w-100" style="background-color: ${box22.color}; height: 10px"></div>
+                                                                     <div class="text-center">${box22.name}</div>
                                                                 </div>
                                                                  <div class="d-flex align-items-end h-50 justify-content-between">
-                                                                      <div>Pay: $${e.rent[3]}</div>
+                                                                      <div>Pay: $${box22.rent[3]}</div>
                                                                  </div>
                                                                 <div class="player ${playerClass}">
                                                                     <img src="${playersData[index].img}" alt="">
@@ -1318,11 +1449,11 @@ gameBoardArr.map((box, index) => {
                                                             // @ts-ignore
                                                             gameBox[i].innerHTML = `
                                                                 <div class="h-50">
-                                                                    <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
-                                                                     <div class="text-center">${e.name}</div>
+                                                                    <div class="rounded-1 w-100" style="background-color: ${box22.color}; height: 10px"></div>
+                                                                     <div class="text-center">${box22.name}</div>
                                                                 </div>
                                                                  <div class="d-flex align-items-end h-50 justify-content-between">
-                                                                      <div>Pay: $${e.rent[4]}</div>
+                                                                      <div>Pay: $${box22.rent[4]}</div>
                                                                  </div>
                                                                 <div class="player ${playerClass}">
                                                                     <img src="${playersData[index].img}" alt="">
@@ -1333,11 +1464,11 @@ gameBoardArr.map((box, index) => {
                                                             // @ts-ignore
                                                             gameBox[i].innerHTML = `
                                                                 <div class="h-50">
-                                                                    <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
-                                                                     <div class="text-center">${e.name}</div>
+                                                                    <div class="rounded-1 w-100" style="background-color: ${box22.color}; height: 10px"></div>
+                                                                     <div class="text-center">${box22.name}</div>
                                                                 </div>
                                                                  <div class="d-flex align-items-end h-50 justify-content-between">
-                                                                      <div>Pay: $${e.rent[5]}</div>
+                                                                      <div>Pay: $${box22.rent[5]}</div>
                                                                  </div>
                                                                 <div class="player ${playerClass}">
                                                                     <img src="${playersData[index].img}" alt="">
@@ -1354,7 +1485,24 @@ gameBoardArr.map((box, index) => {
                                                                     // @ts-ignore
                                                                     item.cash -= box22.houseCost;
                                                                     updatePlayerMoney();
-                                                                    innerGameBoxNoHouse();
+                                                                    if (box22.numberOfHouses.length === 0) {
+                                                                        innerGameBoxNoHouse();
+                                                                    }
+                                                                    else if (box22.numberOfHouses.length === 1) {
+                                                                        innerGameBox1House();
+                                                                    }
+                                                                    else if (box22.numberOfHouses.length === 2) {
+                                                                        innerGameBox2House();
+                                                                    }
+                                                                    else if (box22.numberOfHouses.length === 3) {
+                                                                        innerGameBox3House();
+                                                                    }
+                                                                    else if (box22.numberOfHouses.length === 4) {
+                                                                        innerGameBox4House();
+                                                                    }
+                                                                    else if (box22.numberOfHouses.length === 5) {
+                                                                        innerGameBox5House();
+                                                                    }
                                                                     innerOnotherPlayerIfNeed();
                                                                     updatePlayerField();
                                                                 };
@@ -1467,6 +1615,7 @@ gameBoardArr.map((box, index) => {
                                     }
                                 }
                                 // -----------------------------------------------------
+                                // -----CHANGE PLAYERS MOVE
                                 if (box === item.boxId) {
                                     if (index === 0) {
                                         item.turn = false;
