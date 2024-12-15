@@ -449,6 +449,7 @@ gameBoardArr.map((box, index) => {
         const playerMoney2 = document.querySelector('.cardPlayer2 h5') as HTMLElement;
         const cardPlayer1Boxes = document.querySelector('.cardPlayer1Boxes') as HTMLElement;
         const cardPlayer2Boxes = document.querySelector('.cardPlayer2Boxes') as HTMLElement;
+        const gamePlayComment = document.querySelector('.gamePlayComment') as HTMLElement;
 
         // FUNCTION UPDATE PLAYERS MONEY
         function updatePlayerMoney() {
@@ -487,16 +488,16 @@ gameBoardArr.map((box, index) => {
             function playerTurn() {
                 playersData.map((item, index) => {
 
-
                     if (item.turn) {
                         whichPlayer.innerHTML = `<img src="${item.img}" alt="">`
                         rollDiceBtn.onclick = () => {
 
-                            // FUNCTION TO UPDATE PLAYER FIELD (box card)
-                            function updatePlayerField() {
-                                cardPlayer1Boxes.innerHTML = '';
-                                playersData[0].property.sort(function(a, b) {return a-b})
-                                playersData[0].property.forEach((propId) => {
+                            if(item.cash > 0){
+                                // FUNCTION TO UPDATE PLAYER FIELD (box card)
+                                function updatePlayerField() {
+                                    cardPlayer1Boxes.innerHTML = '';
+                                    playersData[0].property.sort(function(a, b) {return a-b})
+                                    playersData[0].property.forEach((propId) => {
                                         monopolyBoardArr.map((monoId) => {
                                             if(propId === monoId.id){
                                                 // @ts-ignore
@@ -627,15 +628,15 @@ gameBoardArr.map((box, index) => {
                                         })
                                     })
 
-                                cardPlayer2Boxes.innerHTML = '';
-                                playersData[1].property.sort(function(a, b) {return a-b})
-                                playersData[1].property.forEach((propId) => {
-                                    monopolyBoardArr.map((monoId) => {
-                                        if(propId === monoId.id){
-                                            // @ts-ignore
-                                            if (monoId.type === 'property' && monoId.numberOfHouses.length === 0) {
-                                                //@ts-ignore
-                                                cardPlayer2Boxes.innerHTML += `
+                                    cardPlayer2Boxes.innerHTML = '';
+                                    playersData[1].property.sort(function(a, b) {return a-b})
+                                    playersData[1].property.forEach((propId) => {
+                                        monopolyBoardArr.map((monoId) => {
+                                            if(propId === monoId.id){
+                                                // @ts-ignore
+                                                if (monoId.type === 'property' && monoId.numberOfHouses.length === 0) {
+                                                    //@ts-ignore
+                                                    cardPlayer2Boxes.innerHTML += `
                                                         <div class="box gameCard">
                                                             <div class="h40">
                                                                 <div class="rounded-1 w-100" style="background-color: ${monoId.color}; height: 10px"></div>
@@ -647,11 +648,11 @@ gameBoardArr.map((box, index) => {
                                                             </div>
                                                         </div>
                                                     `;
-                                            }
-                                            // @ts-ignore
-                                            else if (monoId.type === 'property' && monoId.numberOfHouses.length === 1) {
-                                                //@ts-ignore
-                                                cardPlayer2Boxes.innerHTML += `
+                                                }
+                                                // @ts-ignore
+                                                else if (monoId.type === 'property' && monoId.numberOfHouses.length === 1) {
+                                                    //@ts-ignore
+                                                    cardPlayer2Boxes.innerHTML += `
                                                         <div class="box gameCard">
                                                             <div class="h40">
                                                                 <div class="rounded-1 w-100" style="background-color: ${monoId.color}; height: 10px"></div>
@@ -666,11 +667,11 @@ gameBoardArr.map((box, index) => {
                                                             </div>
                                                         </div>
                                                     `;
-                                            }
-                                            // @ts-ignore
-                                            else if (monoId.type === 'property' && monoId.numberOfHouses.length === 2) {
-                                                //@ts-ignore
-                                                cardPlayer2Boxes.innerHTML += `
+                                                }
+                                                // @ts-ignore
+                                                else if (monoId.type === 'property' && monoId.numberOfHouses.length === 2) {
+                                                    //@ts-ignore
+                                                    cardPlayer2Boxes.innerHTML += `
                                                         <div class="box gameCard">
                                                             <div class="h40">
                                                                 <div class="rounded-1 w-100" style="background-color: ${monoId.color}; height: 10px"></div>
@@ -685,11 +686,11 @@ gameBoardArr.map((box, index) => {
                                                             </div>
                                                         </div>
                                                     `;
-                                            }
-                                            // @ts-ignore
-                                            else if (monoId.type === 'property' && monoId.numberOfHouses.length === 3) {
-                                                //@ts-ignore
-                                                cardPlayer2Boxes.innerHTML += `
+                                                }
+                                                // @ts-ignore
+                                                else if (monoId.type === 'property' && monoId.numberOfHouses.length === 3) {
+                                                    //@ts-ignore
+                                                    cardPlayer2Boxes.innerHTML += `
                                                         <div class="box gameCard">
                                                             <div class="h40">
                                                                 <div class="rounded-1 w-100" style="background-color: ${monoId.color}; height: 10px"></div>
@@ -704,11 +705,11 @@ gameBoardArr.map((box, index) => {
                                                             </div>
                                                         </div>
                                                     `;
-                                            }
-                                            // @ts-ignore
-                                            else if (monoId.type === 'property' && monoId.numberOfHouses.length === 4) {
-                                                //@ts-ignore
-                                                cardPlayer2Boxes.innerHTML += `
+                                                }
+                                                // @ts-ignore
+                                                else if (monoId.type === 'property' && monoId.numberOfHouses.length === 4) {
+                                                    //@ts-ignore
+                                                    cardPlayer2Boxes.innerHTML += `
                                                         <div class="box gameCard">
                                                             <div class="h40">
                                                                 <div class="rounded-1 w-100" style="background-color: ${monoId.color}; height: 10px"></div>
@@ -723,11 +724,11 @@ gameBoardArr.map((box, index) => {
                                                             </div>
                                                         </div>
                                                     `;
-                                            }
-                                            // @ts-ignore
-                                            else if (monoId.type === 'property' && monoId.numberOfHouses.length === 5) {
-                                                //@ts-ignore
-                                                cardPlayer2Boxes.innerHTML += `
+                                                }
+                                                // @ts-ignore
+                                                else if (monoId.type === 'property' && monoId.numberOfHouses.length === 5) {
+                                                    //@ts-ignore
+                                                    cardPlayer2Boxes.innerHTML += `
                                                     <div class="box gameCard">
                                                         <div class="h40">
                                                             <div class="rounded-1 w-100" style="background-color: ${monoId.color}; height: 10px"></div>
@@ -742,10 +743,10 @@ gameBoardArr.map((box, index) => {
                                                         </div>
                                                     </div>
                                                 `;
-                                            }
-                                            else {
-                                                //@ts-ignore
-                                                cardPlayer2Boxes.innerHTML += `
+                                                }
+                                                else {
+                                                    //@ts-ignore
+                                                    cardPlayer2Boxes.innerHTML += `
                                                         <div class="box gameCard">
                                                             <div class="h40">
                                                                 <div class="rounded-1 w-100" style="background-color: ${monoId.color}; height: 10px"></div>
@@ -755,142 +756,136 @@ gameBoardArr.map((box, index) => {
                                                             </div>
                                                         </div>
                                                     `;
+                                                }
                                             }
-                                        }
+                                        })
                                     })
-                                })
-                            }
+                                }
 
-                            // ------------UPDATE THIS BOX
-                            function updateTheBox() {
-                                playersData.map((item, index) => {
-                                    if (!item.turn) {
-                                        gameBoardArr.map((prev, i) => {
-                                            monopolyBoardArr.map((e) => {
-                                                if (prev === e.id) {
-                                                    if (prev === item.boxId) {
+                                // ------------UPDATE THIS BOX
+                                function updateTheBox() {
+                                    playersData.map((item, index) => {
+                                        if (!item.turn) {
+                                            gameBoardArr.map((prev, i) => {
+                                                monopolyBoardArr.map((e) => {
+                                                    if (prev === e.id) {
+                                                        if (prev === item.boxId) {
 
-                                                        function updateRailBox(){
-                                                            if(boughtRailroadArr.length > 0){
-                                                                console.log(boughtRailroadArr)
-                                                                let firstPlayerBought = 0;
-                                                                let secondPlayerBought = 0;
-                                                                boughtRailroadArr.forEach((rail) => {
-                                                                    playersData[0].property.forEach((railFirstPl) => {
-                                                                        // @ts-ignore
-                                                                        if(railFirstPl === rail){
-                                                                            console.log('aaaaaaaa')
-                                                                        }
-                                                                    })
-                                                                    playersData[1].property.forEach((railSecondPl) => {
-                                                                        // @ts-ignore
-                                                                        if(railSecondPl === rail){
-                                                                            console.log('nanana')
-                                                                        }
-                                                                    })
-                                                                })
+                                                            function updateTheBoxWithPay(){
 
+                                                                if (boughtBoxesArr.length > 0  && e.type === 'property') {
+                                                                    let boughtTrue:boolean = false;
+                                                                    boughtBoxesArr.map((bought) => {
+                                                                        if (bought === item.boxId) {
+                                                                            boughtTrue = true;
 
-                                                            }
-                                                            else {
-                                                                console.log('ccccccccc')
-                                                            }
-                                                        }
-                                                        function updateUtilityBox(){
-                                                            if(boughtUtilityArr.length > 0){
-
-                                                            }
-                                                            else {
-                                                                gameBox[i].innerHTML += `
-                                                                    <div class="d-flex align-items-end h-50">
-                                                                      <div>$${e.price}</div>
-                                                                    </div>
-                                                                 `
-                                                            }
-                                                        }
-                                                        function updateTheBoxWithPay(){
-
-                                                            if (boughtBoxesArr.length > 0  && e.type === 'property') {
-                                                                let boughtTrue:boolean = false;
-                                                                boughtBoxesArr.map((bought) => {
-                                                                    if (bought === item.boxId) {
-                                                                        boughtTrue = true;
-
-                                                                        if(e.numberOfHouses.length === 0){
-                                                                            gameBox[i].innerHTML += `
+                                                                            if(e.numberOfHouses.length === 0){
+                                                                                gameBox[i].innerHTML += `
                                                                                 <div class="d-flex align-items-end h-50">
                                                                                   <div>Pay: $${e.rent[0]}</div>
                                                                                 </div>
                                                                              `
-                                                                        }
-                                                                        if(e.numberOfHouses.length === 1){
-                                                                            gameBox[i].innerHTML += `
+                                                                            }
+                                                                            if(e.numberOfHouses.length === 1){
+                                                                                gameBox[i].innerHTML += `
                                                                                 <div class="d-flex align-items-end h-50">
                                                                                   <div>Pay: $${e.rent[1]}</div>
                                                                                 </div>
                                                                              `
-                                                                        }
-                                                                        if(e.numberOfHouses.length === 2){
-                                                                            gameBox[i].innerHTML += `
+                                                                            }
+                                                                            if(e.numberOfHouses.length === 2){
+                                                                                gameBox[i].innerHTML += `
                                                                                 <div class="d-flex align-items-end h-50">
                                                                                   <div>Pay: $${e.rent[2]}</div>
                                                                                 </div>
                                                                              `
-                                                                        }
-                                                                        if(e.numberOfHouses.length === 3){
-                                                                            gameBox[i].innerHTML += `
+                                                                            }
+                                                                            if(e.numberOfHouses.length === 3){
+                                                                                gameBox[i].innerHTML += `
                                                                                 <div class="d-flex align-items-end h-50">
                                                                                   <div>Pay: $${e.rent[3]}</div>
                                                                                 </div>
                                                                              `
-                                                                        }
-                                                                        if(e.numberOfHouses.length === 4){
-                                                                            gameBox[i].innerHTML += `
+                                                                            }
+                                                                            if(e.numberOfHouses.length === 4){
+                                                                                gameBox[i].innerHTML += `
                                                                                 <div class="d-flex align-items-end h-50">
                                                                                   <div>Pay: $${e.rent[4]}</div>
                                                                                 </div>
                                                                              `
-                                                                        }
-                                                                        if(e.numberOfHouses.length === 5){
-                                                                            gameBox[i].innerHTML += `
+                                                                            }
+                                                                            if(e.numberOfHouses.length === 5){
+                                                                                gameBox[i].innerHTML += `
                                                                                 <div class="d-flex align-items-end h-50">
                                                                                   <div>Pay: $${e.rent[5]}</div>
                                                                                 </div>
                                                                              `
+                                                                            }
+
+
                                                                         }
-
-
+                                                                    })
+                                                                    if(!boughtTrue){
+                                                                        gameBox[i].innerHTML += `
+                                                                    <div class="d-flex align-items-end h-50">
+                                                                      <div>$${e.price}</div>
+                                                                    </div>
+                                                                 `
                                                                     }
-                                                                })
-                                                                if(!boughtTrue){
-                                                                    gameBox[i].innerHTML += `
-                                                                    <div class="d-flex align-items-end h-50">
-                                                                      <div>$${e.price}</div>
-                                                                    </div>
-                                                                 `
                                                                 }
-                                                            }
-                                                            else if(e.type === 'railroad'){
-                                                                if(boughtRailroadArr.length === 1){
-                                                                    gameBox[i].innerHTML += `
-                                                                    <div class="d-flex align-items-end h-50">
-                                                                      <div>Pay: $${e.rent[0]}</div>
-                                                                    </div>
-                                                                 `
+                                                                else if(e.type === 'railroad'){
+                                                                 //    if(boughtRailroadArr.length === 1){
+                                                                 //        gameBox[i].innerHTML += `
+                                                                 //    <div class="d-flex align-items-end h-50">
+                                                                 //      <div>Pay: $${e.rent[0]}</div>
+                                                                 //    </div>
+                                                                 // `
+                                                                 //    }
+                                                                 //    else if(boughtRailroadArr.length === 2){
+                                                                 //        gameBox[i].innerHTML += `
+                                                                 //    <div class="d-flex align-items-end h-50">
+                                                                 //      <div>Pay: $${e.rent[1]}</div>
+                                                                 //    </div>
+                                                                 // `
+                                                                 //    }
+                                                                 //    else if(boughtRailroadArr.length === 3){
+                                                                 //        gameBox[i].innerHTML += `
+                                                                 //    <div class="d-flex align-items-end h-50">
+                                                                 //      <div>Pay: $${e.rent[2]}</div>
+                                                                 //    </div>
+                                                                 // `
+                                                                 //    }
+                                                                 //    else {
+                                                                 //        gameBox[i].innerHTML += `
+                                                                 //    <div class="d-flex align-items-end h-50">
+                                                                 //      <div>$${e.price}</div>
+                                                                 //    </div>
+                                                                 // `
+                                                                 //    }
+
                                                                 }
-                                                                else if(boughtRailroadArr.length === 2){
-                                                                    gameBox[i].innerHTML += `
-                                                                    <div class="d-flex align-items-end h-50">
-                                                                      <div>Pay: $${e.rent[1]}</div>
-                                                                    </div>
-                                                                 `
-                                                                }
-                                                                else if(boughtRailroadArr.length === 3){
-                                                                    gameBox[i].innerHTML += `
-                                                                    <div class="d-flex align-items-end h-50">
-                                                                      <div>Pay: $${e.rent[2]}</div>
-                                                                    </div>
-                                                                 `
+                                                                else if(e.type === 'utility'){
+                                                                 //    if(boughtUtilityArr.length === 1){
+                                                                 //        gameBox[i].innerHTML += `
+                                                                 //    <div class="d-flex align-items-end h-50">
+                                                                 //      <div>Pay: $${e.rent[0]}</div>
+                                                                 //    </div>
+                                                                 // `
+                                                                 //    }
+                                                                 //    else if(boughtUtilityArr.length === 2){
+                                                                 //        gameBox[i].innerHTML += `
+                                                                 //    <div class="d-flex align-items-end h-50">
+                                                                 //      <div>Pay: $${e.rent[1]}</div>
+                                                                 //    </div>
+                                                                 // `
+                                                                 //    }
+                                                                 //    else {
+                                                                 //        gameBox[i].innerHTML += `
+                                                                 //    <div class="d-flex align-items-end h-50">
+                                                                 //      <div>$${e.price}</div>
+                                                                 //    </div>
+                                                                 // `
+                                                                 //    }
                                                                 }
                                                                 else {
                                                                     gameBox[i].innerHTML += `
@@ -901,97 +896,64 @@ gameBoardArr.map((box, index) => {
                                                                 }
 
                                                             }
-                                                            else if(e.type === 'utility'){
-                                                                if(boughtUtilityArr.length === 1){
-                                                                    gameBox[i].innerHTML += `
-                                                                    <div class="d-flex align-items-end h-50">
-                                                                      <div>Pay: $${e.rent[0]}</div>
-                                                                    </div>
-                                                                 `
-                                                                }
-                                                                else if(boughtUtilityArr.length === 2){
-                                                                    gameBox[i].innerHTML += `
-                                                                    <div class="d-flex align-items-end h-50">
-                                                                      <div>Pay: $${e.rent[1]}</div>
-                                                                    </div>
-                                                                 `
-                                                                }
-                                                                else {
-                                                                    gameBox[i].innerHTML += `
-                                                                    <div class="d-flex align-items-end h-50">
-                                                                      <div>$${e.price}</div>
-                                                                    </div>
-                                                                 `
-                                                                }
-                                                            }
-                                                            else {
-                                                                gameBox[i].innerHTML += `
-                                                                    <div class="d-flex align-items-end h-50">
-                                                                      <div>$${e.price}</div>
-                                                                    </div>
-                                                                 `
-                                                            }
 
-                                                        }
-
-                                                        updateRailBox()
-                                                        if (index === 1) {
-                                                            gameBox[i].innerHTML = `
+                                                            if (index === 1) {
+                                                                gameBox[i].innerHTML = `
                                                             <div class="h-50">
                                                                 <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
                                                                 <div class="text-center">${e.name}</div>
                                                             </div>
                                                         `;
-                                                            if(e.price){
-                                                                updateTheBoxWithPay()
-                                                            }
+                                                                if(e.price){
+                                                                    updateTheBoxWithPay()
+                                                                }
 
 
-                                                            if (prev === playersData[1].boxId) {
-                                                                gameBox[i].innerHTML += `
+                                                                if (prev === playersData[1].boxId) {
+                                                                    gameBox[i].innerHTML += `
                                                             <div class="player player2">
                                                                 <img src="${playersData[1].img}" alt="">
                                                             </div>
                                                         `;
-                                                            }
+                                                                }
 
-                                                        }
-                                                        else {
-                                                            gameBox[i].innerHTML = `
+                                                            }
+                                                            else {
+                                                                gameBox[i].innerHTML = `
                                                             <div class="h-50">
                                                                 <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
                                                                 <div class="text-center">${e.name}</div>
                                                             </div>
                                                         `;
 
-                                                            if(e.price) {
-                                                                updateTheBoxWithPay()
-                                                            }
+                                                                if(e.price) {
+                                                                    updateTheBoxWithPay()
+                                                                }
 
-                                                            if (prev === playersData[0].boxId) {
-                                                                gameBox[i].innerHTML += `
+                                                                if (prev === playersData[0].boxId) {
+                                                                    gameBox[i].innerHTML += `
                                                                 <div class="player player1">
                                                                     <img src="${playersData[0].img}" alt="">
                                                                 </div>
                                                             `;
+                                                                }
                                                             }
                                                         }
                                                     }
-                                                }
+                                                })
                                             })
-                                        })
-                                    }
-                                })
-                            }
-                            updateTheBox()
+                                        }
+                                    })
+                                }
+                                updateTheBox()
 
-                            // UPDATE PREVIOUS BOX
-                            function updatePreviousBox() {
-                                gameBoardArr.map((box, i) => {
-                                    monopolyBoardArr.map((e) => {
-                                        if (box === e.id) {
-                                            if (box === item.boxId) {
-                                                function updateTheBoxWithPay(){
+                                // UPDATE PREVIOUS BOX
+                                function updatePreviousBox() {
+                                    gameBoardArr.map((box, i) => {
+                                        monopolyBoardArr.map((e) => {
+                                            if (box === e.id) {
+                                                if (box === item.boxId) {
+                                                    function updateTheBoxWithPay(){
 
                                                         if (boughtBoxesArr.length > 0 && e.type === 'property') {
                                                             let boughtTrue:boolean = false;
@@ -1013,7 +975,7 @@ gameBoardArr.map((box, index) => {
                                                                                 </div>
                                                                              `
                                                                     }
-                                                                   else if(e.numberOfHouses.length === 2){
+                                                                    else if(e.numberOfHouses.length === 2){
                                                                         gameBox[i].innerHTML += `
                                                                                 <div class="d-flex align-items-end h-50">
                                                                                   <div>Pay: $${e.rent[2]}</div>
@@ -1052,57 +1014,57 @@ gameBoardArr.map((box, index) => {
                                                             }
                                                         }
                                                         else if(e.type === 'railroad'){
-                                                            if(boughtRailroadArr.length === 1){
-                                                                gameBox[i].innerHTML += `
-                                                                    <div class="d-flex align-items-end h-50">
-                                                                      <div>Pay: $${e.rent[0]}</div>
-                                                                    </div>
-                                                                 `
-                                                            }
-                                                            else if(boughtRailroadArr.length === 2){
-                                                                gameBox[i].innerHTML += `
-                                                                    <div class="d-flex align-items-end h-50">
-                                                                      <div>Pay: $${e.rent[1]}</div>
-                                                                    </div>
-                                                                 `
-                                                            }
-                                                            else if(boughtRailroadArr.length === 3){
-                                                                gameBox[i].innerHTML += `
-                                                                    <div class="d-flex align-items-end h-50">
-                                                                      <div>Pay: $${e.rent[2]}</div>
-                                                                    </div>
-                                                                 `
-                                                            }else {
-                                                                gameBox[i].innerHTML += `
-                                                                    <div class="d-flex align-items-end h-50">
-                                                                      <div>$${e.price}</div>
-                                                                    </div>
-                                                                 `
-                                                            }
+                                                            // if(boughtRailroadArr.length === 1){
+                                                            //     gameBox[i].innerHTML += `
+                                                            //         <div class="d-flex align-items-end h-50">
+                                                            //           <div>Pay: $${e.rent[0]}</div>
+                                                            //         </div>
+                                                            //      `
+                                                            // }
+                                                            // else if(boughtRailroadArr.length === 2){
+                                                            //     gameBox[i].innerHTML += `
+                                                            //         <div class="d-flex align-items-end h-50">
+                                                            //           <div>Pay: $${e.rent[1]}</div>
+                                                            //         </div>
+                                                            //      `
+                                                            // }
+                                                            // else if(boughtRailroadArr.length === 3){
+                                                            //     gameBox[i].innerHTML += `
+                                                            //         <div class="d-flex align-items-end h-50">
+                                                            //           <div>Pay: $${e.rent[2]}</div>
+                                                            //         </div>
+                                                            //      `
+                                                            // }else {
+                                                            //     gameBox[i].innerHTML += `
+                                                            //         <div class="d-flex align-items-end h-50">
+                                                            //           <div>$${e.price}</div>
+                                                            //         </div>
+                                                            //      `
+                                                            // }
 
                                                         }
                                                         else if(e.type === 'utility'){
-                                                            if(boughtUtilityArr.length === 1){
-                                                                gameBox[i].innerHTML += `
-                                                                    <div class="d-flex align-items-end h-50">
-                                                                      <div>Pay: $${e.rent[0]}</div>
-                                                                    </div>
-                                                                 `
-                                                            }
-                                                            else if(boughtUtilityArr.length === 2){
-                                                                gameBox[i].innerHTML += `
-                                                                    <div class="d-flex align-items-end h-50">
-                                                                      <div>Pay: $${e.rent[1]}</div>
-                                                                    </div>
-                                                                 `
-                                                            }
-                                                            else {
-                                                                gameBox[i].innerHTML += `
-                                                                    <div class="d-flex align-items-end h-50">
-                                                                      <div>$${e.price}</div>
-                                                                    </div>
-                                                                 `
-                                                            }
+                                                            // if(boughtUtilityArr.length === 1){
+                                                            //     gameBox[i].innerHTML += `
+                                                            //         <div class="d-flex align-items-end h-50">
+                                                            //           <div>Pay: $${e.rent[0]}</div>
+                                                            //         </div>
+                                                            //      `
+                                                            // }
+                                                            // else if(boughtUtilityArr.length === 2){
+                                                            //     gameBox[i].innerHTML += `
+                                                            //         <div class="d-flex align-items-end h-50">
+                                                            //           <div>Pay: $${e.rent[1]}</div>
+                                                            //         </div>
+                                                            //      `
+                                                            // }
+                                                            // else {
+                                                            //     gameBox[i].innerHTML += `
+                                                            //         <div class="d-flex align-items-end h-50">
+                                                            //           <div>$${e.price}</div>
+                                                            //         </div>
+                                                            //      `
+                                                            // }
                                                         }
                                                         else {
                                                             gameBox[i].innerHTML += `
@@ -1111,85 +1073,100 @@ gameBoardArr.map((box, index) => {
                                                                     </div>
                                                                  `
                                                         }
-                                                }
+                                                    }
 
 
-                                                if (index === 0) {
-                                                    gameBox[i].innerHTML = `
+                                                    if (index === 0) {
+                                                        gameBox[i].innerHTML = `
                                                         <div class="h-50">
                                                             <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
                                                             <div class="text-center">${e.name}</div>
                                                         </div>
                                                     `;
-                                                    if(e.price){
-                                                        updateTheBoxWithPay()
-                                                    }
+                                                        if(e.price){
+                                                            updateTheBoxWithPay()
+                                                        }
 
 
-                                                    if (box === playersData[1].boxId) {
+                                                        if (box === playersData[1].boxId) {
                                                             gameBox[i].innerHTML += `
                                                             <div class="player player2">
                                                                 <img src="${playersData[1].img}" alt="">
                                                             </div>
                                                        `;
+                                                        }
                                                     }
-                                                }
-                                                else {
-                                                    gameBox[i].innerHTML = `
+                                                    else {
+                                                        gameBox[i].innerHTML = `
                                                         <div class="h-50">
                                                             <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
                                                             <div class="text-center">${e.name}</div>
                                                         </div>
                                                      `;
 
-                                                    if(e.price){
-                                                        updateTheBoxWithPay()
-                                                    }
+                                                        if(e.price){
+                                                            updateTheBoxWithPay()
+                                                        }
 
-                                                    if (box === playersData[0].boxId) {
-                                                        gameBox[i].innerHTML += `
+                                                        if (box === playersData[0].boxId) {
+                                                            gameBox[i].innerHTML += `
                                                         <div class="player player1">
                                                             <img src="${playersData[0].img}" alt="">
                                                         </div>
                                                     `;
+                                                        }
                                                     }
                                                 }
                                             }
-                                        }
+                                        })
                                     })
-                                })
-                            }
-                            updatePreviousBox()
+                                }
+                                updatePreviousBox()
 
-                            // -------PLAYERS MOVE-----------
-                            // DICE ROLLED NUMBER, UPDATE MONEY IF MOVES THROUGH "GO"
-                            item.boxId += rndCeil(6)
-                            if (item.boxId >= 36) {
-                                item.boxId -= 36;
-                                item.cash += 200;
-                                updatePlayerMoney()
-                            }
+                                // -------PLAYERS MOVE-----------
+                                // DICE ROLLED NUMBER, UPDATE MONEY IF MOVES THROUGH "GO"
+                                item.boxId += rndCeil(6)
+                                if (item.boxId >= 36) {
+                                    item.boxId -= 36;
+                                    item.cash += 200;
+                                    updatePlayerMoney()
+                                }
 
-                            // UPDATE BOX WHERE PLAYER MOVE (SHOW PLAYER ON NEW BOX)
-                            gameBoardArr.map((box, i) => {
+                                // UPDATE BOX WHERE PLAYER MOVE (SHOW PLAYER ON NEW BOX)
+                                gameBoardArr.map((box, i) => {
 
-                                //     need to check, if any player has bought this box
-                                function checkIfAnyHasBox(playerNum: number) {
+                                    //     need to check, if any player has bought this box
+                                    function checkIfAnyHasBox(playerNum: number) {
 
-                                    function buyAndUpdate() {
-                                        gameBoardArr.map((box, i) => {
-                                            let playerClass = '';
-                                            monopolyBoardArr.map((e) => {
-                                                if (e.type === 'property' || e.type === 'railroad' || e.type === 'utility') {
-                                                    if (box === e.id) {
-                                                        if (box === item.boxId) {
-                                                            if (index === 0) {
-                                                                playerClass = 'player1'
-                                                            } else {
-                                                                playerClass = 'player2'
-                                                            }
-                                                            const innerGameBoxNoHouse = () => {
-                                                                gameBox[i].innerHTML = `
+                                        function buyAndUpdate() {
+                                            gameBoardArr.map((box, i) => {
+                                                let playerClass = '';
+                                                monopolyBoardArr.map((e) => {
+                                                    if (e.type === 'property' || e.type === 'railroad' || e.type === 'utility') {
+                                                        if (box === e.id) {
+                                                            if (box === item.boxId) {
+                                                                if (index === 0) {
+                                                                    playerClass = 'player1'
+                                                                } else {
+                                                                    playerClass = 'player2'
+                                                                }
+                                                                const innerGameBoxNoButton = () => {
+                                                                    gameBox[i].innerHTML = `
+                                                                <div class="h-50">
+                                                                    <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
+                                                                     <div class="text-center">${e.name}</div>
+                                                                </div>
+                                                                 <div class="d-flex align-items-end h-50 justify-content-between">
+                                                                      <div>$${e.price}</div>
+                                                                 </div>
+                                                                <div class="player ${playerClass}">
+                                                                    <img src="${playersData[index].img}" alt="">
+                                                                </div>
+                                                              `;
+
+                                                                }
+                                                                const innerGameBoxNoHouse = () => {
+                                                                    gameBox[i].innerHTML = `
                                                                 <div class="h-50">
                                                                     <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
                                                                      <div class="text-center">${e.name}</div>
@@ -1202,9 +1179,9 @@ gameBoardArr.map((box, index) => {
                                                                 </div>
                                                               `;
 
-                                                            }
-                                                            const innerGameBoxWithButton = () => {
-                                                                gameBox[i].innerHTML = `
+                                                                }
+                                                                const innerGameBoxWithButton = () => {
+                                                                    gameBox[i].innerHTML = `
                                                                     <div class="h-50">
                                                                         <div class="rounded-1 w-100" style="background-color: ${e.color}; height: 10px"></div>
                                                                          <div class="text-center">${e.name}</div>
@@ -1212,6 +1189,298 @@ gameBoardArr.map((box, index) => {
                                                                      <div class="d-flex align-items-end h-50 justify-content-between">
                                                                       <div>$${e.price}</div>
                                                                       <div><button class="buyBtn">Buy</button></div>
+                                                                    </div>
+                                                                    <div class="player ${playerClass}">
+                                                                        <img src="${playersData[index].img}" alt="">
+                                                                    </div>
+                                                                `
+                                                                }
+                                                                const innerOnotherPlayerIfNeed = () => {
+                                                                    if (index === 0 && playersData[1].boxId === item.boxId) {
+                                                                        gameBox[i].innerHTML += `
+                                                                    <div class="player player2">
+                                                                        <img src="${playersData[1].img}" alt="">
+                                                                    </div>
+                                                                `
+                                                                    } else if (index === 1 && playersData[0].boxId === item.boxId) {
+                                                                        gameBox[i].innerHTML += `
+                                                                    <div class="player player1">
+                                                                        <img src="${playersData[0].img}" alt="">
+                                                                    </div>
+                                                                `
+                                                                    }
+                                                                }
+
+                                                                // IF PLAYER HAVE ENOUGH MONEY TO BUY A BOX, A "BUY"  BUTTON IS DISPLAYED
+                                                                // @ts-ignore
+                                                                if(item.cash >= e.price){
+                                                                    innerGameBoxWithButton();
+                                                                }
+                                                                else {
+                                                                    innerGameBoxNoButton()
+                                                                }
+
+                                                                innerOnotherPlayerIfNeed()
+
+                                                                //--------------- BUY BUTTON LOGIC------------
+
+                                                                let buyBtn = document.querySelectorAll('.buyBtn') as NodeListOf<HTMLButtonElement>;
+
+                                                                function pushToColorArr(indx: number) {
+                                                                    if (e.color === 'brown') {
+                                                                        playersData[indx].brownArr.push('brown')
+                                                                    }
+                                                                    if (e.color === "lightblue") {
+                                                                        playersData[indx].lightblueArr.push("lightblue")
+                                                                    }
+                                                                    if (e.color === "pink") {
+                                                                        playersData[indx].pinkArr.push("pink")
+                                                                    }
+                                                                    if (e.color === "orange") {
+                                                                        playersData[indx].orangeArr.push("orange")
+                                                                    }
+                                                                    if (e.color === "red") {
+                                                                        playersData[indx].redArr.push("red")
+                                                                    }
+                                                                    if (e.color === "yellow") {
+                                                                        playersData[indx].yellowArr.push("yellow")
+                                                                    }
+                                                                    if (e.color === "green") {
+                                                                        playersData[indx].greenArr.push("green")
+                                                                    }
+                                                                    if (e.color === "darkblue") {
+                                                                        playersData[indx].darkblueArr.push("darkblue")
+                                                                    }
+                                                                    if (e.type === "railroad") {
+                                                                        playersData[indx].railroadArr.push("railroad")
+                                                                    }
+                                                                    if (e.type === "utility") {
+                                                                        playersData[indx].utilityArr.push("utility")
+                                                                    }
+                                                                }
+
+                                                                buyBtn.forEach((btn) => {
+                                                                    if (index === 0 && !playersData[0].turn) {
+                                                                        btn.onclick = () => {
+                                                                            //@ts-ignore
+                                                                            playersData[0].cash -= e.price;
+                                                                            //@ts-ignore
+                                                                            playersData[0].property.push(e.id);
+                                                                            // @ts-ignore
+                                                                            boughtBoxesArr.push(e.id)
+                                                                            if(e.type === "utility") {
+                                                                                // @ts-ignore
+                                                                                boughtUtilityArr.push(e.id)
+                                                                            }
+                                                                            if(e.type === "railroad") {
+                                                                                // @ts-ignore
+                                                                                boughtRailroadArr.push(e.id)
+                                                                            }
+                                                                            gamePlayComment.innerHTML += `
+                                                                            <div>>${playersData[0].player} buy ${e.name}</div>
+                                                                            `;
+                                                                            pushToColorArr(0)
+                                                                            updatePlayerMoney()
+                                                                            innerGameBoxNoHouse()
+                                                                            innerOnotherPlayerIfNeed()
+                                                                            updatePlayerField()
+                                                                        }
+                                                                    }
+                                                                    else if (index === 1 && !playersData[1].turn) {
+                                                                        btn.onclick = () => {
+                                                                            //@ts-ignore
+                                                                            playersData[1].cash -= e.price;
+                                                                            //@ts-ignore
+                                                                            playersData[1].property.push(e.id);
+                                                                            // @ts-ignore
+                                                                            boughtBoxesArr.push(e.id)
+                                                                            if(e.type === "utility") {
+                                                                                // @ts-ignore
+                                                                                boughtUtilityArr.push(e.id)
+                                                                            }
+                                                                            if(e.type === "railroad") {
+                                                                                // @ts-ignore
+                                                                                boughtRailroadArr.push(e.id)
+                                                                            }
+                                                                            gamePlayComment.innerHTML += `
+                                                                            <div>>${playersData[1].player} buy ${e.name}</div>
+                                                                            `;
+                                                                            pushToColorArr(1)
+                                                                            updatePlayerMoney()
+                                                                            innerGameBoxNoHouse()
+                                                                            innerOnotherPlayerIfNeed()
+                                                                            updatePlayerField()
+                                                                        }
+                                                                    }
+                                                                })
+                                                            }
+                                                        }
+                                                    }
+
+                                                })
+                                            })
+                                        }
+
+                                        // ------CHECKING IF IT IS MY PROPERTY (IF NEEDED PAY FOR ENEMY)
+                                        if (boughtBoxesArr.length > 0) {
+                                            //@ts-ignore
+                                            if (!boughtBoxesArr.includes(item.boxId)) {
+                                                // if one have some box, add BUY button to other
+                                                buyAndUpdate()
+                                            }
+                                            else {
+
+                                                // PAY RENT FOR ENEMY
+                                                //@ts-ignore
+                                                if (!item.property.includes(box)) {
+
+                                                    // make possible to pay more
+
+                                                    monopolyBoardArr.map((box11) => {
+                                                        if (box11.id === box) {
+
+                                                            function payForEnemy(num: number) {
+                                                                if (box11.type === "railroad") {
+                                                                    if (playersData[num].railroadArr.length === 3) {
+                                                                        //@ts-ignore
+                                                                        item.cash -= box11.rent[2]
+                                                                        gamePlayComment.innerHTML += `
+                                                                            <div>>${item.player} pay ${box11.rent[2]}</div>
+                                                                            `;
+                                                                    } else if (playersData[num].railroadArr.length === 2) {
+                                                                        //@ts-ignore
+                                                                        item.cash -= box11.rent[1]
+                                                                        gamePlayComment.innerHTML += `
+                                                                            <div>>${item.player} pay ${box11.rent[1]}</div>
+                                                                            `;
+                                                                    }else {
+                                                                        //@ts-ignore
+                                                                        item.cash -= box11.rent[0]
+                                                                        gamePlayComment.innerHTML += `
+                                                                            <div>>${item.player} pay ${box11.rent[0]}</div>
+                                                                            `;
+                                                                    }
+                                                                } else if (box11.type === "utility") {
+                                                                    if (playersData[num].utilityArr.length === 2){
+                                                                        //@ts-ignore
+                                                                        item.cash -= box11.rent[1]
+                                                                        gamePlayComment.innerHTML += `
+                                                                            <div>>${item.player} pay ${box11.rent[1]}</div>
+                                                                            `;
+                                                                    }else {
+                                                                        //@ts-ignore
+                                                                        item.cash -= box11.rent[0]
+                                                                        gamePlayComment.innerHTML += `
+                                                                            <div>>${item.player} pay ${box11.rent[0]}</div>
+                                                                            `;
+                                                                    }
+
+                                                                } else if(box11.type === "property") {
+                                                                    if(box11.numberOfHouses.length === 0){
+                                                                        //@ts-ignore
+                                                                        item.cash -= box11.rent[0]
+                                                                        gamePlayComment.innerHTML += `
+                                                                            <div>>${item.player} pay ${box11.rent[0]}</div>
+                                                                            `;
+                                                                    }
+                                                                    else if(box11.numberOfHouses.length === 1){
+                                                                        //@ts-ignore
+                                                                        item.cash -= box11.rent[1]
+                                                                        gamePlayComment.innerHTML += `
+                                                                            <div>>${item.player} pay ${box11.rent[1]}</div>
+                                                                            `;
+                                                                    }
+                                                                    else if(box11.numberOfHouses.length === 2){
+                                                                        //@ts-ignore
+                                                                        item.cash -= box11.rent[2]
+                                                                        gamePlayComment.innerHTML += `
+                                                                            <div>>${item.player} pay ${box11.rent[2]}</div>
+                                                                            `;
+                                                                    }
+                                                                    else if(box11.numberOfHouses.length === 3){
+                                                                        //@ts-ignore
+                                                                        item.cash -= box11.rent[3]
+                                                                        gamePlayComment.innerHTML += `
+                                                                            <div>>${item.player} pay ${box11.rent[3]}</div>
+                                                                            `;
+                                                                    }
+                                                                    else if(box11.numberOfHouses.length === 4){
+                                                                        //@ts-ignore
+                                                                        item.cash -= box11.rent[4]
+                                                                        gamePlayComment.innerHTML += `
+                                                                            <div>>${item.player} pay ${box11.rent[4]}</div>
+                                                                            `;
+                                                                    }
+                                                                    else if(box11.numberOfHouses.length === 5){
+                                                                        //@ts-ignore
+                                                                        item.cash -= box11.rent[5]
+                                                                        gamePlayComment.innerHTML += `
+                                                                            <div>>${item.player} pay ${box11.rent[5]}</div>
+                                                                            `;
+                                                                    }
+
+                                                                }
+                                                            }
+
+                                                            if (index === 0) {
+                                                                payForEnemy(1)
+                                                            } else if (index === 1) {
+                                                                payForEnemy(0)
+                                                            }
+                                                            updatePlayerMoney()
+                                                        }
+                                                    })
+                                                }
+
+                                                // MY PROPERTY AND BUILD HOUSE
+                                                //@ts-ignore
+                                                if (item.property.includes(box)) {
+                                                    monopolyBoardArr.map((box22) => {
+                                                        if (box22.id === box) {
+                                                            let playerClass = '';
+                                                            if (index === 0) {
+                                                                playerClass = 'player1'
+                                                            }
+                                                            else {
+                                                                playerClass = 'player2'
+                                                            }
+                                                            const innerGameBoxNoButton = () => {
+                                                                gameBox[i].innerHTML = `
+                                                                <div class="h-50">
+                                                                    <div class="rounded-1 w-100" style="background-color: ${box22.color}; height: 10px"></div>
+                                                                     <div class="text-center">${box22.name}</div>
+                                                                </div>
+                                                                 <div class="d-flex align-items-end h-50 justify-content-between">
+                                                                      <div>$${box22.price}</div>
+                                                                 </div>
+                                                                <div class="player ${playerClass}">
+                                                                    <img src="${playersData[index].img}" alt="">
+                                                                </div>
+                                                              `;
+
+                                                            }
+                                                            const innerGameBoxWithButtonHouse = () => {
+                                                                gameBox[i].innerHTML = `
+                                                                    <div class="h-50">
+                                                                        <div class="rounded-1 w-100" style="background-color: ${box22.color}; height: 10px"></div>
+                                                                         <div class="text-center">${box22.name}</div>
+                                                                    </div>
+                                                                     <div class="d-flex align-items-end h-50 justify-content-between">
+                                                                      <div><button class="buyHouseBtn" style="font-size: 10px">Buy House</button></div>
+                                                                    </div>
+                                                                    <div class="player ${playerClass}">
+                                                                        <img src="${playersData[index].img}" alt="">
+                                                                    </div>
+                                                                `
+                                                            }
+                                                            const innerGameBoxWithButtonHotel = () => {
+                                                                gameBox[i].innerHTML = `
+                                                                    <div class="h-50">
+                                                                        <div class="rounded-1 w-100" style="background-color: ${box22.color}; height: 10px"></div>
+                                                                         <div class="text-center">${box22.name}</div>
+                                                                    </div>
+                                                                     <div class="d-flex align-items-end h-50 justify-content-between">
+                                                                      <div><button class="buyHouseBtn" style="font-size: 10px">Buy Hotel</button></div>
                                                                     </div>
                                                                     <div class="player ${playerClass}">
                                                                         <img src="${playersData[index].img}" alt="">
@@ -1233,253 +1502,8 @@ gameBoardArr.map((box, index) => {
                                                                 `
                                                                 }
                                                             }
-
-                                                            innerGameBoxWithButton();
-                                                            innerOnotherPlayerIfNeed()
-
-                                                            //--------------- BUY BUTTON LOGIC------------
-
-                                                            let buyBtn = document.querySelectorAll('.buyBtn') as NodeListOf<HTMLButtonElement>;
-
-                                                            function pushToColorArr(indx: number) {
-                                                                if (e.color === 'brown') {
-                                                                    playersData[indx].brownArr.push('brown')
-                                                                }
-                                                                if (e.color === "lightblue") {
-                                                                    playersData[indx].lightblueArr.push("lightblue")
-                                                                }
-                                                                if (e.color === "pink") {
-                                                                    playersData[indx].pinkArr.push("pink")
-                                                                }
-                                                                if (e.color === "orange") {
-                                                                    playersData[indx].orangeArr.push("orange")
-                                                                }
-                                                                if (e.color === "red") {
-                                                                    playersData[indx].redArr.push("red")
-                                                                }
-                                                                if (e.color === "yellow") {
-                                                                    playersData[indx].yellowArr.push("yellow")
-                                                                }
-                                                                if (e.color === "green") {
-                                                                    playersData[indx].greenArr.push("green")
-                                                                }
-                                                                if (e.color === "darkblue") {
-                                                                    playersData[indx].darkblueArr.push("darkblue")
-                                                                }
-                                                                if (e.type === "railroad") {
-                                                                    playersData[indx].railroadArr.push("railroad")
-                                                                }
-                                                                if (e.type === "utility") {
-                                                                    playersData[indx].utilityArr.push("utility")
-                                                                }
-                                                            }
-
-                                                            buyBtn.forEach((btn) => {
-                                                                if (index === 0 && !playersData[0].turn) {
-                                                                    btn.onclick = () => {
-                                                                        //@ts-ignore
-                                                                        playersData[0].cash -= e.price;
-                                                                        //@ts-ignore
-                                                                        playersData[0].property.push(e.id);
-                                                                        // @ts-ignore
-                                                                        boughtBoxesArr.push(e.id)
-                                                                        if(e.type === "utility") {
-                                                                            // @ts-ignore
-                                                                            boughtUtilityArr.push(e.id)
-                                                                        }
-                                                                        if(e.type === "railroad") {
-                                                                            // @ts-ignore
-                                                                            boughtRailroadArr.push(e.id)
-                                                                        }
-                                                                        pushToColorArr(0)
-                                                                        updatePlayerMoney()
-                                                                        innerGameBoxNoHouse()
-                                                                        innerOnotherPlayerIfNeed()
-                                                                        updatePlayerField()
-                                                                    }
-                                                                }
-                                                                else if (index === 1 && !playersData[1].turn) {
-                                                                    btn.onclick = () => {
-                                                                        //@ts-ignore
-                                                                        playersData[1].cash -= e.price;
-                                                                        //@ts-ignore
-                                                                        playersData[1].property.push(e.id);
-                                                                        // @ts-ignore
-                                                                        boughtBoxesArr.push(e.id)
-                                                                        if(e.type === "utility") {
-                                                                            // @ts-ignore
-                                                                            boughtUtilityArr.push(e.id)
-                                                                        }
-                                                                        if(e.type === "railroad") {
-                                                                            // @ts-ignore
-                                                                            boughtRailroadArr.push(e.id)
-                                                                        }
-                                                                        pushToColorArr(1)
-                                                                        updatePlayerMoney()
-                                                                        innerGameBoxNoHouse()
-                                                                        innerOnotherPlayerIfNeed()
-                                                                        updatePlayerField()
-                                                                    }
-                                                                }
-                                                            })
-                                                        }
-                                                    }
-                                                }
-
-                                            })
-                                        })
-                                    }
-
-                                    // ------CHECKING IF IT IS MY PROPERTY (IF NEEDED PAY FOR ENEMY)
-                                    if (boughtBoxesArr.length > 0) {
-                                        //@ts-ignore
-                                        if (!boughtBoxesArr.includes(item.boxId)) {
-                                            // if one have some box, add BUY button to other
-                                            buyAndUpdate()
-                                        }
-                                        else {
-
-                                            // PAY RENT FOR ENEMY
-                                            //@ts-ignore
-                                            if (!item.property.includes(box)) {
-
-                                                // make possible to pay more
-
-                                                monopolyBoardArr.map((box11) => {
-                                                    if (box11.id === box) {
-
-                                                        function payForEnemy(num: number) {
-                                                            if (box11.type === "railroad") {
-                                                                if (playersData[num].railroadArr.length === 3) {
-                                                                    //@ts-ignore
-                                                                    item.cash -= box11.rent[2]
-                                                                } else if (playersData[num].railroadArr.length === 2) {
-                                                                    //@ts-ignore
-                                                                    item.cash -= box11.rent[1]
-                                                                }else {
-                                                                    //@ts-ignore
-                                                                    item.cash -= box11.rent[0]
-                                                                }
-                                                            } else if (box11.type === "utility") {
-                                                                if (playersData[num].utilityArr.length === 2){
-                                                                    //@ts-ignore
-                                                                    item.cash -= box11.rent[1]
-                                                                }else {
-                                                                    //@ts-ignore
-                                                                    item.cash -= box11.rent[0]
-                                                                }
-
-                                                            } else if(box11.type === "property") {
-                                                                if(box11.numberOfHouses.length === 0){
-                                                                    //@ts-ignore
-                                                                    item.cash -= box11.rent[0]
-                                                                }
-                                                                else if(box11.numberOfHouses.length === 1){
-                                                                    //@ts-ignore
-                                                                    item.cash -= box11.rent[1]
-                                                                }
-                                                                else if(box11.numberOfHouses.length === 2){
-                                                                    //@ts-ignore
-                                                                    item.cash -= box11.rent[2]
-                                                                }
-                                                                else if(box11.numberOfHouses.length === 3){
-                                                                    //@ts-ignore
-                                                                    item.cash -= box11.rent[3]
-                                                                }
-                                                                else if(box11.numberOfHouses.length === 4){
-                                                                    //@ts-ignore
-                                                                    item.cash -= box11.rent[4]
-                                                                }
-                                                                else if(box11.numberOfHouses.length === 5){
-                                                                    //@ts-ignore
-                                                                    item.cash -= box11.rent[5]
-                                                                }
-
-                                                            }
-                                                        }
-
-                                                        if (index === 0) {
-                                                            payForEnemy(1)
-                                                        } else if (index === 1) {
-                                                            payForEnemy(0)
-                                                        }
-                                                        updatePlayerMoney()
-                                                    }
-                                                })
-                                            }
-
-                                            // MY PROPERTY AND BUILD HOUSE
-                                            //@ts-ignore
-                                            if (item.property.includes(box)) {
-                                                monopolyBoardArr.map((box22) => {
-                                                    if (box22.id === box) {
-                                                        let playerClass = '';
-                                                        if (index === 0) {
-                                                            playerClass = 'player1'
-                                                        }
-                                                        else {
-                                                            playerClass = 'player2'
-                                                        }
-                                                        const innerGameBoxNoButton = () => {
-                                                            gameBox[i].innerHTML = `
-                                                                <div class="h-50">
-                                                                    <div class="rounded-1 w-100" style="background-color: ${box22.color}; height: 10px"></div>
-                                                                     <div class="text-center">${box22.name}</div>
-                                                                </div>
-                                                                 <div class="d-flex align-items-end h-50 justify-content-between">
-                                                                      <div>$${box22.price}</div>
-                                                                 </div>
-                                                                <div class="player ${playerClass}">
-                                                                    <img src="${playersData[index].img}" alt="">
-                                                                </div>
-                                                              `;
-
-                                                        }
-                                                        const innerGameBoxWithButtonHouse = () => {
-                                                            gameBox[i].innerHTML = `
-                                                                    <div class="h-50">
-                                                                        <div class="rounded-1 w-100" style="background-color: ${box22.color}; height: 10px"></div>
-                                                                         <div class="text-center">${box22.name}</div>
-                                                                    </div>
-                                                                     <div class="d-flex align-items-end h-50 justify-content-between">
-                                                                      <div><button class="buyHouseBtn" style="font-size: 10px">Buy House</button></div>
-                                                                    </div>
-                                                                    <div class="player ${playerClass}">
-                                                                        <img src="${playersData[index].img}" alt="">
-                                                                    </div>
-                                                                `
-                                                        }
-                                                        const innerGameBoxWithButtonHotel = () => {
-                                                            gameBox[i].innerHTML = `
-                                                                    <div class="h-50">
-                                                                        <div class="rounded-1 w-100" style="background-color: ${box22.color}; height: 10px"></div>
-                                                                         <div class="text-center">${box22.name}</div>
-                                                                    </div>
-                                                                     <div class="d-flex align-items-end h-50 justify-content-between">
-                                                                      <div><button class="buyHouseBtn" style="font-size: 10px">Buy Hotel</button></div>
-                                                                    </div>
-                                                                    <div class="player ${playerClass}">
-                                                                        <img src="${playersData[index].img}" alt="">
-                                                                    </div>
-                                                                `
-                                                        }
-                                                        const innerOnotherPlayerIfNeed = () => {
-                                                            if (index === 0 && playersData[1].boxId === item.boxId) {
-                                                                gameBox[i].innerHTML += `
-                                                                    <div class="player player2">
-                                                                        <img src="${playersData[1].img}" alt="">
-                                                                    </div>
-                                                                `
-                                                            } else if (index === 1 && playersData[0].boxId === item.boxId) {
-                                                                gameBox[i].innerHTML += `
-                                                                    <div class="player player1">
-                                                                        <img src="${playersData[0].img}" alt="">
-                                                                    </div>
-                                                                `
-                                                            }
-                                                        }
-                                                        const innerGameBoxNoHouse = () => {
-                                                            gameBox[i].innerHTML = `
+                                                            const innerGameBoxNoHouse = () => {
+                                                                gameBox[i].innerHTML = `
                                                                 <div class="h-50">
                                                                     <div class="rounded-1 w-100" style="background-color: ${box22.color}; height: 10px"></div>
                                                                      <div class="text-center">${box22.name}</div>
@@ -1492,10 +1516,10 @@ gameBoardArr.map((box, index) => {
                                                                 </div>
                                                               `;
 
-                                                        }
-                                                        const innerGameBox1House = () => {
-                                                            // @ts-ignore
-                                                            gameBox[i].innerHTML = `
+                                                            }
+                                                            const innerGameBox1House = () => {
+                                                                // @ts-ignore
+                                                                gameBox[i].innerHTML = `
                                                                 <div class="h-50">
                                                                     <div class="rounded-1 w-100" style="background-color: ${box22.color}; height: 10px"></div>
                                                                      <div class="text-center">${box22.name}</div>
@@ -1508,10 +1532,10 @@ gameBoardArr.map((box, index) => {
                                                                 </div>
                                                               `;
 
-                                                        }
-                                                        const innerGameBox2House = () => {
-                                                            // @ts-ignore
-                                                            gameBox[i].innerHTML = `
+                                                            }
+                                                            const innerGameBox2House = () => {
+                                                                // @ts-ignore
+                                                                gameBox[i].innerHTML = `
                                                                 <div class="h-50">
                                                                     <div class="rounded-1 w-100" style="background-color: ${box22.color}; height: 10px"></div>
                                                                      <div class="text-center">${box22.name}</div>
@@ -1524,10 +1548,10 @@ gameBoardArr.map((box, index) => {
                                                                 </div>
                                                               `;
 
-                                                        }
-                                                        const innerGameBox3House = () => {
-                                                            // @ts-ignore
-                                                            gameBox[i].innerHTML = `
+                                                            }
+                                                            const innerGameBox3House = () => {
+                                                                // @ts-ignore
+                                                                gameBox[i].innerHTML = `
                                                                 <div class="h-50">
                                                                     <div class="rounded-1 w-100" style="background-color: ${box22.color}; height: 10px"></div>
                                                                      <div class="text-center">${box22.name}</div>
@@ -1540,10 +1564,10 @@ gameBoardArr.map((box, index) => {
                                                                 </div>
                                                               `;
 
-                                                        }
-                                                        const innerGameBox4House = () => {
-                                                            // @ts-ignore
-                                                            gameBox[i].innerHTML = `
+                                                            }
+                                                            const innerGameBox4House = () => {
+                                                                // @ts-ignore
+                                                                gameBox[i].innerHTML = `
                                                                 <div class="h-50">
                                                                     <div class="rounded-1 w-100" style="background-color: ${box22.color}; height: 10px"></div>
                                                                      <div class="text-center">${box22.name}</div>
@@ -1556,10 +1580,10 @@ gameBoardArr.map((box, index) => {
                                                                 </div>
                                                               `;
 
-                                                        }
-                                                        const innerGameBox5House = () => {
-                                                            // @ts-ignore
-                                                            gameBox[i].innerHTML = `
+                                                            }
+                                                            const innerGameBox5House = () => {
+                                                                // @ts-ignore
+                                                                gameBox[i].innerHTML = `
                                                                 <div class="h-50">
                                                                     <div class="rounded-1 w-100" style="background-color: ${box22.color}; height: 10px"></div>
                                                                      <div class="text-center">${box22.name}</div>
@@ -1572,43 +1596,45 @@ gameBoardArr.map((box, index) => {
                                                                 </div>
                                                               `;
 
-                                                        }
-
-                                                        function buyHouse() {
-                                                            if (box22.numberOfHouses.length <= 4){
-                                                                const buyHouseBtn = document.querySelector('.buyHouseBtn') as HTMLButtonElement;
-                                                                buyHouseBtn.onclick = () => {
-                                                                    //@ts-ignore
-                                                                    box22.numberOfHouses?.push(1)
-                                                                    // @ts-ignore
-                                                                    item.cash -= box22.houseCost
-                                                                    updatePlayerMoney()
-                                                                    if(box22.numberOfHouses.length === 0){
-                                                                        innerGameBoxNoHouse()
-                                                                    }
-                                                                    else if (box22.numberOfHouses.length === 1){
-                                                                        innerGameBox1House()
-                                                                    }
-                                                                    else if (box22.numberOfHouses.length === 2){
-                                                                        innerGameBox2House()
-                                                                    }
-                                                                    else if (box22.numberOfHouses.length === 3){
-                                                                        innerGameBox3House()
-                                                                    }
-                                                                    else if (box22.numberOfHouses.length === 4){
-                                                                        innerGameBox4House()
-                                                                    }
-                                                                    else if (box22.numberOfHouses.length === 5){
-                                                                        innerGameBox5House()
-                                                                    }
-                                                                    innerOnotherPlayerIfNeed()
-                                                                    updatePlayerField()
-                                                                }
                                                             }
 
-                                                        }
-                                                        if (box22.color === 'brown' && item.brownArr.length === 2) {
-                                                            if (box22.numberOfHouses.length <= 4){}
+                                                            // @ts-ignore
+                                                            if(item.cash >= box22.houseCost){
+                                                                function buyHouse() {
+                                                                    if (box22.numberOfHouses.length <= 4){
+                                                                        const buyHouseBtn = document.querySelector('.buyHouseBtn') as HTMLButtonElement;
+                                                                        buyHouseBtn.onclick = () => {
+                                                                            //@ts-ignore
+                                                                            box22.numberOfHouses?.push(1)
+                                                                            // @ts-ignore
+                                                                            item.cash -= box22.houseCost
+                                                                            updatePlayerMoney()
+                                                                            if(box22.numberOfHouses.length === 0){
+                                                                                innerGameBoxNoHouse()
+                                                                            }
+                                                                            else if (box22.numberOfHouses.length === 1){
+                                                                                innerGameBox1House()
+                                                                            }
+                                                                            else if (box22.numberOfHouses.length === 2){
+                                                                                innerGameBox2House()
+                                                                            }
+                                                                            else if (box22.numberOfHouses.length === 3){
+                                                                                innerGameBox3House()
+                                                                            }
+                                                                            else if (box22.numberOfHouses.length === 4){
+                                                                                innerGameBox4House()
+                                                                            }
+                                                                            else if (box22.numberOfHouses.length === 5){
+                                                                                innerGameBox5House()
+                                                                            }
+                                                                            innerOnotherPlayerIfNeed()
+                                                                            updatePlayerField()
+                                                                        }
+                                                                    }
+
+                                                                }
+                                                                if (box22.color === 'brown' && item.brownArr.length === 2) {
+                                                                    if (box22.numberOfHouses.length <= 4){}
                                                                     if(box22.numberOfHouses.length === 4){
                                                                         innerGameBoxWithButtonHotel()
                                                                     }
@@ -1617,137 +1643,144 @@ gameBoardArr.map((box, index) => {
                                                                     }
                                                                     innerOnotherPlayerIfNeed()
                                                                     buyHouse()
-                                                        }
-                                                        else if (box22.color === 'lightblue' && item.lightblueArr.length === 3) {
-                                                            if (box22.numberOfHouses.length <= 4){
-                                                                if(box22.numberOfHouses.length === 4 ){
-                                                                    innerGameBoxWithButtonHotel()
                                                                 }
-                                                                else if (box22.numberOfHouses.length <= 3) {
-                                                                    innerGameBoxWithButtonHouse()
+                                                                else if (box22.color === 'lightblue' && item.lightblueArr.length === 3) {
+                                                                    if (box22.numberOfHouses.length <= 4){
+                                                                        if(box22.numberOfHouses.length === 4 ){
+                                                                            innerGameBoxWithButtonHotel()
+                                                                        }
+                                                                        else if (box22.numberOfHouses.length <= 3) {
+                                                                            innerGameBoxWithButtonHouse()
+                                                                        }
+                                                                        innerOnotherPlayerIfNeed()
+                                                                        buyHouse()
+                                                                    }
                                                                 }
-                                                                innerOnotherPlayerIfNeed()
-                                                                buyHouse()
-                                                            }
-                                                        }
-                                                        else if (box22.color === 'pink' && item.pinkArr.length === 3) {
-                                                            if (box22.numberOfHouses.length <= 4){
-                                                                if(box22.numberOfHouses.length === 4 ){
-                                                                    innerGameBoxWithButtonHotel()
+                                                                else if (box22.color === 'pink' && item.pinkArr.length === 3) {
+                                                                    if (box22.numberOfHouses.length <= 4){
+                                                                        if(box22.numberOfHouses.length === 4 ){
+                                                                            innerGameBoxWithButtonHotel()
+                                                                        }
+                                                                        else if (box22.numberOfHouses.length <= 3) {
+                                                                            innerGameBoxWithButtonHouse()
+                                                                        }
+                                                                        innerOnotherPlayerIfNeed()
+                                                                        buyHouse()
+                                                                    }
                                                                 }
-                                                                else if (box22.numberOfHouses.length <= 3) {
-                                                                    innerGameBoxWithButtonHouse()
+                                                                else if (box22.color === "orange" && item.orangeArr.length === 3) {
+                                                                    if (box22.numberOfHouses.length <= 4){
+                                                                        if(box22.numberOfHouses.length === 4 ){
+                                                                            innerGameBoxWithButtonHotel()
+                                                                        }
+                                                                        else if (box22.numberOfHouses.length <= 3) {
+                                                                            innerGameBoxWithButtonHouse()
+                                                                        }
+                                                                        innerOnotherPlayerIfNeed()
+                                                                        buyHouse()
+                                                                    }
                                                                 }
-                                                                innerOnotherPlayerIfNeed()
-                                                                buyHouse()
-                                                            }
-                                                        }
-                                                        else if (box22.color === "orange" && item.orangeArr.length === 3) {
-                                                            if (box22.numberOfHouses.length <= 4){
-                                                                if(box22.numberOfHouses.length === 4 ){
-                                                                    innerGameBoxWithButtonHotel()
+                                                                else if (box22.color === "red" && item.redArr.length === 3) {
+                                                                    if (box22.numberOfHouses.length <= 4){
+                                                                        if(box22.numberOfHouses.length === 4 ){
+                                                                            innerGameBoxWithButtonHotel()
+                                                                        }
+                                                                        else if (box22.numberOfHouses.length <= 3) {
+                                                                            innerGameBoxWithButtonHouse()
+                                                                        }
+                                                                        innerOnotherPlayerIfNeed()
+                                                                        buyHouse()
+                                                                    }
                                                                 }
-                                                                else if (box22.numberOfHouses.length <= 3) {
-                                                                    innerGameBoxWithButtonHouse()
+                                                                else if (box22.color === "yellow" && item.yellowArr.length === 3) {
+                                                                    if (box22.numberOfHouses.length <= 4){
+                                                                        if(box22.numberOfHouses.length === 4 ){
+                                                                            innerGameBoxWithButtonHotel()
+                                                                        }
+                                                                        else if (box22.numberOfHouses.length <= 3) {
+                                                                            innerGameBoxWithButtonHouse()
+                                                                        }
+                                                                        innerOnotherPlayerIfNeed()
+                                                                        buyHouse()
+                                                                    }
+
                                                                 }
-                                                                innerOnotherPlayerIfNeed()
-                                                                buyHouse()
-                                                            }
-                                                        }
-                                                        else if (box22.color === "red" && item.redArr.length === 3) {
-                                                            if (box22.numberOfHouses.length <= 4){
-                                                                if(box22.numberOfHouses.length === 4 ){
-                                                                    innerGameBoxWithButtonHotel()
+                                                                else if (box22.color === "green" && item.greenArr.length === 3) {
+                                                                    if (box22.numberOfHouses.length <= 4){
+                                                                        if(box22.numberOfHouses.length === 4 ){
+                                                                            innerGameBoxWithButtonHotel()
+                                                                        }
+                                                                        else if (box22.numberOfHouses.length <= 3) {
+                                                                            innerGameBoxWithButtonHouse()
+                                                                        }
+                                                                        innerOnotherPlayerIfNeed()
+                                                                        buyHouse()
+                                                                    }
                                                                 }
-                                                                else if (box22.numberOfHouses.length <= 3) {
-                                                                    innerGameBoxWithButtonHouse()
+                                                                else if (box22.color === "darkblue" && item.darkblueArr.length === 2) {
+                                                                    if (box22.numberOfHouses.length <= 4){
+                                                                        if(box22.numberOfHouses.length === 4 ){
+                                                                            innerGameBoxWithButtonHotel()
+                                                                        }
+                                                                        else if (box22.numberOfHouses.length <= 3) {
+                                                                            innerGameBoxWithButtonHouse()
+                                                                        }
+                                                                        innerOnotherPlayerIfNeed()
+                                                                        buyHouse()
+                                                                    }
                                                                 }
-                                                                innerOnotherPlayerIfNeed()
-                                                                buyHouse()
-                                                            }
-                                                        }
-                                                        else if (box22.color === "yellow" && item.yellowArr.length === 3) {
-                                                            if (box22.numberOfHouses.length <= 4){
-                                                                if(box22.numberOfHouses.length === 4 ){
-                                                                    innerGameBoxWithButtonHotel()
-                                                                }
-                                                                else if (box22.numberOfHouses.length <= 3) {
-                                                                    innerGameBoxWithButtonHouse()
-                                                                }
-                                                                innerOnotherPlayerIfNeed()
-                                                                buyHouse()
+                                                                updatePlayerMoney()
                                                             }
 
                                                         }
-                                                        else if (box22.color === "green" && item.greenArr.length === 3) {
-                                                            if (box22.numberOfHouses.length <= 4){
-                                                                if(box22.numberOfHouses.length === 4 ){
-                                                                    innerGameBoxWithButtonHotel()
-                                                                }
-                                                                else if (box22.numberOfHouses.length <= 3) {
-                                                                    innerGameBoxWithButtonHouse()
-                                                                }
-                                                                innerOnotherPlayerIfNeed()
-                                                                buyHouse()
-                                                            }
-                                                        }
-                                                        else if (box22.color === "darkblue" && item.darkblueArr.length === 2) {
-                                                            if (box22.numberOfHouses.length <= 4){
-                                                                if(box22.numberOfHouses.length === 4 ){
-                                                                    innerGameBoxWithButtonHotel()
-                                                                }
-                                                                else if (box22.numberOfHouses.length <= 3) {
-                                                                    innerGameBoxWithButtonHouse()
-                                                                }
-                                                                innerOnotherPlayerIfNeed()
-                                                                buyHouse()
-                                                            }
-                                                        }
-                                                        updatePlayerMoney()
-                                                    }
-                                                })
+                                                    })
+                                                }
                                             }
                                         }
+                                        else {
+                                            // ------UPDATE IF NO ONE HAVE THIS BOX
+                                            buyAndUpdate()
+                                        }
                                     }
-                                    else {
-                                        // ------UPDATE IF NO ONE HAVE THIS BOX
-                                        buyAndUpdate()
-                                    }
-                                }
 
-                                // -----------------------------------------------------
+                                    // -----------------------------------------------------
 
-                                // -----CHANGE PLAYERS MOVE
-                                if (box === item.boxId) {
-                                    if (index === 0) {
-                                        item.turn = false;
-                                        playersData[1].turn = true;
+                                    // -----CHANGE PLAYERS MOVE
+                                    if (box === item.boxId) {
+                                        if (index === 0) {
+                                            item.turn = false;
+                                            playersData[1].turn = true;
 
-                                        gameBox[i].innerHTML += `
+                                            gameBox[i].innerHTML += `
                                              <div class="player player1">
                                                 <img src="${playersData[0].img}" alt="">
                                             </div>
                                           `;
-                                        checkIfAnyHasBox(1)
-                                        playerTurn()
-                                    } else if (index === 1) {
+                                            checkIfAnyHasBox(1)
+                                            playerTurn()
+                                        } else if (index === 1) {
 
-                                        item.turn = false;
-                                        playersData[0].turn = true;
+                                            item.turn = false;
+                                            playersData[0].turn = true;
 
-                                        gameBox[i].innerHTML += `
+                                            gameBox[i].innerHTML += `
                                             <div class="player player2">
                                                 <img src="${playersData[1].img}" alt="">
                                             </div>
                                          `;
-                                        checkIfAnyHasBox(0)
-                                        playerTurn()
+                                            checkIfAnyHasBox(0)
+                                            playerTurn()
+                                        }
                                     }
-                                }
-                            })
+                                })
+                            }
+                            else {
+                                playerTurn()
+                                console.log('lose game ' + item.player)
+                            }
+
 
                         }
-
                     }
                 })
             }
